@@ -5,6 +5,7 @@
  */
 package sokoban;
 
+import java.awt.Point;
 import java.io.*;
 import java.util.*;
 
@@ -18,7 +19,14 @@ public class Grille implements astar.Monde, astar.But {
     // Mettre la représentation d'une grille ici.
     // Indice : tableau pour stocker les obstacles et les buts.
     
+    protected Map<Point, Character> grille;
+    
     public Grille(){
+        grille = new TreeMap<>();
+    }
+    
+    public void addElement(Point p, char nom) {
+        grille.put(p, nom);
     }
     
     @Override

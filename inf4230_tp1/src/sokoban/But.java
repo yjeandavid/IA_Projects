@@ -5,6 +5,10 @@
  */
 package sokoban;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Représente un but.
  */
@@ -12,6 +16,16 @@ public class But implements astar.But, astar.Heuristique {
 
     // À compléter.
     // Indice : les destinations des blocs.
+    
+    protected List<Point> blocsButPosition;
+    
+    public But() {
+        blocsButPosition = new ArrayList<>();
+    }
+    
+    public void addBut(Point p) {
+        blocsButPosition.add(p);
+    }
     
     @Override
     public boolean butSatisfait(astar.Etat e) {

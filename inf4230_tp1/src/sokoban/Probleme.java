@@ -5,6 +5,7 @@
  */
 package sokoban;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,27 +15,6 @@ import java.util.ArrayList;
  */
 public class Probleme {
 
-    private static int calculerTailleX(ArrayList<String> lignes) {
- 
-    ArrayList<Integer> plusGrandTaille = new ArrayList<>();
-    
-    for(int i = 0; i < lignes.size(); i++)
-    {
-        if(plusGrandTaille.isEmpty())plusGrandTaille.add(lignes.get(i).length());
-        else {
-            for(int u = 0 ; u <  plusGrandTaille.size(); u++){
-            if((lignes.get(i).length())< (plusGrandTaille.get(u))){
-             plusGrandTaille.add(u, lignes.get(i).length());
-            }
-        }
-            
-        if((lignes.get(i).length()) > (plusGrandTaille.get(plusGrandTaille.size())))
-            plusGrandTaille.add((lignes.get(i).length()));
-            
-        }
-    }
-    return plusGrandTaille.get(plusGrandTaille.size());
-    }
     public Grille grille;
     public EtatSokoban etatInitial;
     public But but;
@@ -69,14 +49,23 @@ public class Probleme {
         // Certains grilles pourraient contenir des astérisques '*' et plus '+'. 
         // Ces symboles peuvent être ignorés et traités comme des espaces ' '.
         
-        int tailleX = calculerTailleX(lignes);
-        char [][] grille = new char [tailleX][lignes.size()];
-        
         for(int y = 0; y < lignes.size(); y++){
             int tailleLigne = lignes.get(y).length();
             for(int x = 0; x < tailleLigne; x++){
-                
-                grille[x][y] = lignes.get(y).charAt(x);
+                Point p;
+                switch (lignes.get(y).charAt(x)) {
+                    case '#':   p = new Point(x,y);
+                                probleme.grille.addElement(p, '#');
+                                break;
+                    case '$':   //add in EtatSokoban
+                                break;
+                    case '.':   p = new Point(x,y);
+                                probleme.grille.addElement(p, '.');
+                                probleme.but.addBut(p);
+                                break;
+                    case '@':   //add in EtatSokoban
+                    default:  break;
+                }
             }
         }
         

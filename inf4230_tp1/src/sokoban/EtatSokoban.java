@@ -7,6 +7,8 @@
 package sokoban;
 
 import astar.Etat;
+import java.awt.Point;
+import java.util.List;
 
 /**
  * Représente un état d'un monde du jeu Sokoban.
@@ -17,6 +19,8 @@ public class EtatSokoban extends Etat {
     // À compléter ...
     // - Ajoutez la représentation d'un état.
     // - Indice : positions du bonhomme et des blocs.
+    Point bonhomme;
+    List<Point> blocs; //represente l'ensemble des '$'
 
     @Override
     public EtatSokoban clone() {
