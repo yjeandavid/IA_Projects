@@ -19,9 +19,8 @@ public class AStar {
         List<Action> plan = null;
         double cout = Double.POSITIVE_INFINITY;
         
-        nbreEtatGenere = nbreEtatVisite = -1;
-        open = new ArrayList<Etat>();
-        close = new ArrayList<Etat>();
+        open = new ArrayList<>();
+        close = new ArrayList<>();
         
         etatInitial.g = 0;
         etatInitial.h = heuristique.estimerCoutRestant(etatInitial, but);
@@ -74,21 +73,19 @@ public class AStar {
     
     protected static void genererSuccesseur(Monde monde,Etat n, Heuristique heurisitique, ArrayList<Etat> open, ArrayList<Etat> close) {
         Map<Double, Etat> successeurs = new TreeMap<>();
+        ArrayList<Action> actions = (ArrayList<Action>) monde.getActions(n);
 
         if (n.getClass() == chemin.Etat.class) {
             chemin.Etat n1 = (chemin.Etat) n;
-            chemin.Noeud ntemp = n1.getEmplacement();
+            Iterator<Action> it = actions.iterator();
             
-            for(Map.Entry<chemin.Noeud, Double> entry : ntemp.getTroncons().entrySet()) {
-                chemin.Etat n2 = new chemin.Etat(entry.getKey());
-                n2.g = n1.g+n1.getEmplacement().getCoor().distanceTerre(n2.getEmplacement().getCoor());
-                
-                //n2.g = n1.g + ntemp.distanceDeg2(n2.getEmplacement());
+            while (it.hasNext()) {
+                chemin.ActionGoto ag = (chemin.ActionGoto) it.next();
+                chemin.Etat n2 = new chemin.Etat(ag.getProchain());
+                n2.g = n1.g + ag.cout;
                 n2.h = heurisitique.estimerCoutRestant(n2, null);
                 n2.f = n2.g + n2.h;
-                
                 n2.parent = n1;
-               
                 
                 if (open.contains(n2)) {
                     chemin.Etat n3 = (chemin.Etat) getEtatIn(open, n2);
@@ -110,8 +107,8 @@ public class AStar {
                 }
             }
             
-            Collection<Etat> it = successeurs.values();
-            for(Etat e : it) {
+            Collection<Etat> c = successeurs.values();
+            for(Etat e : c) {
                 open.add(e);
             }
         }

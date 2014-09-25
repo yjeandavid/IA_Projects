@@ -20,8 +20,16 @@ public class ActionGoto extends astar.Action {
         Doit être immédiatement accessible.
     */
     protected Noeud prochain;
-
     
+    public Noeud getProchain() {
+        return prochain;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        ActionGoto ag = (ActionGoto) o;
+        return prochain.equals(ag.prochain);
+    }
    
     @Override
     public String toString(){
