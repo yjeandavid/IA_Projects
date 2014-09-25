@@ -11,7 +11,7 @@ import java.util.*;
 
 public class AStar {
 
-    private static int nbreEtatGenere = 0, nbreEtatVisite = 0;
+    private static int nbreEtatGenere = -1, nbreEtatVisite = -1;
     
     public static List<Action> genererPlan(Monde monde, Etat etatInitial, But but, Heuristique heuristique){
         long starttime = System.currentTimeMillis();
