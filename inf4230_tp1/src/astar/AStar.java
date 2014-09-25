@@ -19,7 +19,7 @@ public class AStar {
         List<Action> plan = null;
         double cout = Double.POSITIVE_INFINITY;
         
-        nbreEtatGenere = nbreEtatVisite = 0;
+        nbreEtatGenere = nbreEtatVisite = -1;
         open = new ArrayList<Etat>();
         close = new ArrayList<Etat>();
         
@@ -37,10 +37,16 @@ public class AStar {
                 close.add(n1);
                 ++nbreEtatVisite;
                 if (but.butSatisfait(n1)) {
-                    /*plan = new ArrayList<>();
-                    plan.add(n1.actionDepuisParent);*/
-                    // À Complèter
+                    plan = new ArrayList<>();
                     cout = n1.g;
+                    while(n1.parent!= null)
+                    {
+                        chemin.Etat fromto = (chemin.Etat) n1;
+                        chemin.Noeud temp = fromto.getEmplacement();
+                        plan.add(0,new ActionGoto(0.0,temp));
+                        n1 = n1.parent;
+                    }
+                    
                     break;
                 }
                 genererSuccesseur(monde,n1,heuristique, open, close);
@@ -68,7 +74,6 @@ public class AStar {
     
     protected static void genererSuccesseur(Monde monde,Etat n, Heuristique heurisitique, ArrayList<Etat> open, ArrayList<Etat> close) {
         Map<Double, Etat> successeurs = new TreeMap<>();
-        ArrayList<Action> actions = (ArrayList<Action>) monde.getActions(n);
 
         if (n.getClass() == chemin.Etat.class) {
             chemin.Etat n1 = (chemin.Etat) n;
