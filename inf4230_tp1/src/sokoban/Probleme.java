@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Probleme {
 
-    private static int calculerTailleY(ArrayList<String> lignes) {
+    private static int calculerTailleX(ArrayList<String> lignes) {
  
     ArrayList<Integer> plusGrandTaille = new ArrayList<>();
     
@@ -69,7 +69,7 @@ public class Probleme {
         // Certains grilles pourraient contenir des astérisques '*' et plus '+'. 
         // Ces symboles peuvent être ignorés et traités comme des espaces ' '.
         
-        int tailleX = calculerTailleY(lignes);
+        int tailleX = calculerTailleX(lignes);
         char [][] grille = new char [tailleX][lignes.size()];
         
         for(int y = 0; y < lignes.size(); y++){
