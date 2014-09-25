@@ -8,6 +8,7 @@ package sokoban;
 
 import astar.Etat;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +20,49 @@ public class EtatSokoban extends Etat {
     // À compléter ...
     // - Ajoutez la représentation d'un état.
     // - Indice : positions du bonhomme et des blocs.
-    Point bonhomme;
-    List<Point> blocs; //represente l'ensemble des '$'
+    private Point bonhomme;
+    private List<Point> blocs; //represente l'ensemble des '$'
 
+    
+    public EtatSokoban () {
+        
+        this.bonhomme = new Point();
+        this.blocs = new ArrayList<>();
+        
+    }
+
+    public EtatSokoban ( Point homme) {
+        
+        this(homme,null);
+    }
+     public EtatSokoban (  List<Point> blocs) {
+        
+       this(null,blocs);
+    }
+    
+    public EtatSokoban ( Point homme, List<Point> blocs) {
+        
+         this.bonhomme = homme;
+        this.blocs = blocs;
+        
+    }
+    
+   public Point getBonhomme() {
+        return bonhomme;
+    }
+
+    public List<Point> getBlocs() {
+        return blocs;
+    }
+
+    public void setBonhomme(Point bonhomme) {
+        this.bonhomme = bonhomme;
+    }
+
+    public void setBlocs(List<Point> blocs) {
+        this.blocs = blocs;
+    }
+    
     @Override
     public EtatSokoban clone() {
         EtatSokoban c = new EtatSokoban();
@@ -35,6 +76,25 @@ public class EtatSokoban extends Etat {
         // À compléter.
         // La comparaison est essentielle pour ajouter des EtatSokoban dans un TreeSet open ou close dans l'algorithme A*.
         return 0;
+    }
+    
+    
+    public void addEtatSokoban(EtatSokoban o){
+        
+        
+        
+        if(o.bonhomme != null){
+            setBonhomme(o.getBonhomme());
+        }
+        if(o.blocs != null){
+
+            for(Point eachBloc : o.blocs){
+                this.blocs.add(eachBloc);
+            }
+        
+        }
+        
+        
     }
     
 }
