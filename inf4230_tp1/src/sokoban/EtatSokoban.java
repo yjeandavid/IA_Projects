@@ -67,6 +67,7 @@ public class EtatSokoban extends Etat {
     public EtatSokoban clone() {
         EtatSokoban c = new EtatSokoban();
         // À compléter : vous devez faire une copie complète de l'objet.
+        c.addEtatSokoban(this);
         return c;
     }
 
@@ -75,6 +76,9 @@ public class EtatSokoban extends Etat {
         EtatSokoban es = (EtatSokoban) o;
         // À compléter.
         // La comparaison est essentielle pour ajouter des EtatSokoban dans un TreeSet open ou close dans l'algorithme A*.
+        
+        //if(true)  return -1;
+        //if(true)  return 1;
         return 0;
     }
     
