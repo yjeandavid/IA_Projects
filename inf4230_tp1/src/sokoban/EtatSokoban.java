@@ -73,20 +73,17 @@ public class EtatSokoban extends Etat {
 
     @Override
     public int compareTo(Etat o) {
-        EtatSokoban es = (EtatSokoban) o;
+        EtatSokoban eTmp = (EtatSokoban) o;
         // À compléter.
         // La comparaison est essentielle pour ajouter des EtatSokoban dans un TreeSet open ou close dans l'algorithme A*.
+        if(this.bonhomme.equals(eTmp.getBonhomme())&&this.blocs.equals(eTmp.getBlocs())) return 0;
         
-        //if(true)  return -1;
-        //if(true)  return 1;
-        return 0;
+        return -1;
     }
     
     
     public void addEtatSokoban(EtatSokoban o){
-        
-        
-        
+
         if(o.bonhomme != null){
             setBonhomme(o.getBonhomme());
         }
