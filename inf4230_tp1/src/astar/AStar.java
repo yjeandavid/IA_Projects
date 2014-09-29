@@ -15,7 +15,7 @@ public class AStar {
 
     private static int nbreEtatGenere = -1, nbreEtatVisite = -1;
     
-    public static List<Action> genererPlan(Monde monde, Etat etatInitial, But but, Heuristique heuristique){
+   public static List<Action> genererPlan(Monde monde, Etat etatInitial, But but, Heuristique heuristique){
         long starttime = System.currentTimeMillis();
         ArrayList<Etat> open, close;
         List<Action> plan = null;
@@ -38,17 +38,14 @@ public class AStar {
                 close.add(n1);
                 ++nbreEtatVisite;
                 if (but.butSatisfait(n1)) {
-                    cout = n1.g;
                     plan = new ArrayList<>();
-                    while(n1.parent!= null)
-                    {
-                        chemin.Etat fromto = (chemin.Etat) n1;
-                        chemin.Noeud temp = fromto.getEmplacement();
-                        plan.add(0,new ActionGoto(0.0,temp));
-                        n1 = n1.parent;
-                    }
-                    
+                    cout = n1.g;
+                
+                    plan   = retrouverChemin(n1);
                     break;
+                    
+                    
+                    
                 }
                 genererSuccesseur(monde,n1,heuristique, open, close);
                 open = trier(open);
@@ -117,10 +114,57 @@ public class AStar {
             sokoban.EtatSokoban n1 = (sokoban.EtatSokoban) n;
             
             if (n1.getBlocs().size() == 1) {
-                //EtatSokoban etatBut = generateEtatFromBlockToGoal(monde, n1.getBlocs, heuristique, heuristique)
+                EtatSokoban etatBut = (EtatSokoban)generateEtatFromBlocksToGoal(monde, n1.getBlocs().get(0),(sokoban.But)heurisitique, heurisitique);
                 Iterator<Action> it = actions.iterator();
             
                 while (it.hasNext()) {
+                    
+                    
+                   sokoban.ActionDeplacement ag = (sokoban.ActionDeplacement) it.next();
+                sokoban.EtatSokoban n2 = n1.clone();
+                
+                
+                if(ag.toString() == "N"){
+                    
+                 n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y-1);
+                    
+                }else  if(ag.toString() == "S"){
+                  n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y+1);
+                }else  if(ag.toString() == "W"){
+                    
+                 n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
+                    
+                }else  if(ag.toString() == "E"){
+                 n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
+  
+                }
+                
+                
+                
+                n2.g = n1.g + ag.cout;
+                
+                n2.h = heurisitique.estimerCoutRestant(n2, null);
+                n2.f = n2.g + n2.h;
+                n2.parent = n1;
+                
+                if (open.contains(n2)) {
+                    sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(open, n2);
+                    if (n2.f < n3.f) {
+                        open.remove(n3);
+                        successeurs.put(n2.f, n2);
+                        ++nbreEtatGenere;
+                    }
+                } else if (close.contains(n2)) {
+                    sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(close, n2);
+                    if (n2.f < n3.f) {
+                        open.remove(n3);
+                        successeurs.put(n2.f, n2);
+                        ++nbreEtatGenere;
+                    }
+                } else {
+                    successeurs.put(n2.f, n2);
+                    ++nbreEtatGenere;
+                }
                     
                 }
 
@@ -235,5 +279,33 @@ public class AStar {
         }
         
         return etat;
+    }
+    
+    
+    
+    private static List<Action> retrouverChemin(Etat n1) {
+
+    List<Action> plan = null;
+    
+    
+    if (n1.getClass() == chemin.Etat.class) {
+            plan = new ArrayList<>();
+                    
+                    while(n1.parent!= null)
+                    {
+                        chemin.Etat fromto = (chemin.Etat) n1;
+                        chemin.Noeud temp = fromto.getEmplacement();
+                        plan.add(0,new ActionGoto(0.0,temp));
+                        n1 = n1.parent;
+                    }
+           
+                    
+    }else{
+        
+    }
+        return plan;
+                    
+                   
+    
     }
 }
