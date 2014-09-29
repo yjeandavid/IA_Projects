@@ -38,8 +38,8 @@ public class AStar {
                 close.add(n1);
                 ++nbreEtatVisite;
                 if (but.butSatisfait(n1)) {
-                    plan = new ArrayList<>();
                     cout = n1.g;
+                    plan = new ArrayList<>();
                     while(n1.parent!= null)
                     {
                         chemin.Etat fromto = (chemin.Etat) n1;
@@ -209,7 +209,28 @@ public class AStar {
         }
         
         for(Map.Entry<Double, Etat> entry : possibilite.entrySet()){
-            etat = (EtatSokoban) entry.getValue();
+            EtatSokoban etat2 = (EtatSokoban) entry.getValue();
+            if (etat2.getBlocs().get(0).getX() < p.getX()) {
+                etat = new EtatSokoban();
+                etat.setBonhomme(new Point(p.x+1,p.y));
+                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                etat.setBlocs(etat2.getBlocs());
+            } else if (etat2.getBlocs().get(0).getX() > p.getX()) {
+                etat = new EtatSokoban();
+                etat.setBonhomme(new Point(p.x-1,p.y));
+                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                etat.setBlocs(etat2.getBlocs());
+            } else if (etat2.getBlocs().get(0).getY() > p.getY()) {
+                etat = new EtatSokoban();
+                etat.setBonhomme(new Point(p.x,p.y-1));
+                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                etat.setBlocs(etat2.getBlocs());
+            } else if (etat2.getBlocs().get(0).getY() < p.getY()) {
+                etat = new EtatSokoban();
+                etat.setBonhomme(new Point(p.x,p.y+1));
+                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                etat.setBlocs(etat2.getBlocs());
+            }
             break;
         }
         
