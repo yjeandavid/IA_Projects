@@ -111,6 +111,13 @@ public class AStar {
             for(Etat e : c) {
                 open.add(e);
             }
+        } else {
+            sokoban.EtatSokoban n1 = (sokoban.EtatSokoban) n;
+            
+            if (n1.getBlocs().size() == 1) {
+                //List<Action> actionGoal = generatePathFromBlockToGoal(monde, n1.getBlocs, heuristique)
+                
+            }
         }
     }
     

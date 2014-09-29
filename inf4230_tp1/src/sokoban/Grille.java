@@ -31,7 +31,26 @@ public class Grille implements astar.Monde, astar.But {
     
     @Override
     public List<astar.Action> getActions(astar.Etat e) {
-        return new LinkedList<astar.Action>();
+        EtatSokoban etat = (EtatSokoban) e;
+        ArrayList<astar.Action> actions = new ArrayList<>();
+        Point bonhomme = etat.getBonhomme();
+        
+        if (bonhomme.x > 0) {
+            if (grille.get(new Point(bonhomme.x-1, bonhomme.y)) != null) {
+                actions.add(new ActionDeplacement("W"));
+            } else if (grille.get(new Point(bonhomme.x+1, bonhomme.y)) != null) {
+                actions.add(new ActionDeplacement("E"));
+            }
+        } else if (bonhomme.y > 0) {
+            if (grille.get(new Point(bonhomme.x, bonhomme.y+1)) != null) {
+                actions.add(new ActionDeplacement("S"));
+            } else if (grille.get(new Point(bonhomme.x, bonhomme.y-1)) != null) {
+                actions.add(new ActionDeplacement("N"));
+            }
+        }
+        
+        
+        return actions;
     }
 
     @Override
