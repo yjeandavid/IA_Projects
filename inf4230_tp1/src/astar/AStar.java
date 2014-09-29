@@ -9,6 +9,7 @@ import chemin.ActionGoto;
 import java.awt.Point;
 import java.text.NumberFormat;
 import java.util.*;
+import sokoban.EtatSokoban;
 
 public class AStar {
 
@@ -116,8 +117,17 @@ public class AStar {
             sokoban.EtatSokoban n1 = (sokoban.EtatSokoban) n;
             
             if (n1.getBlocs().size() == 1) {
-                //List<Action> actionGoal = generatePathFromBlockToGoal(monde, n1.getBlocs, heuristique, heuristique)
-                
+                //EtatSokoban etatBut = generateEtatFromBlockToGoal(monde, n1.getBlocs, heuristique, heuristique)
+                Iterator<Action> it = actions.iterator();
+            
+                while (it.hasNext()) {
+                    
+                }
+
+                Collection<Etat> c = successeurs.values();
+                for(Etat e : c) {
+                    open.add(e);
+                }
             }
         }
     }
@@ -163,12 +173,24 @@ public class AStar {
         return n;
     }
     
-    protected static List<Action> generatePathFromBlocksToGoal(Monde m, Point p, But b, Heuristique h) {
-        ArrayList<Action> actions = new ArrayList();
-        ArrayList<Point> open, close;
+    protected static Etat generateEtatFromBlocksToGoal(Monde m, Point p, But b, Heuristique h) {
+        sokoban.Grille monde = (sokoban.Grille) m;
+        Map<Double,Etat> possibilite = new TreeMap<>();
+        EtatSokoban etat = new EtatSokoban();
+        sokoban.But but = (sokoban.But) b;
         
-        if ()
+        if (but.getBlocs().size() == 1) {
+            Point t1 = new Point(p.x-1, p.y);
+            Point t2 = new Point(p.x+1, p.y);
+            if (monde.getGrille().get(t1) == null && monde.getGrille().get(t2) == null) {
+                ArrayList<Point> blocs = new ArrayList<>();
+                blocs.add(t1);
+                etat.setBlocs(blocs);
+                possibilite.put(h.estimerCoutRestant(etat, b), etat);
+                
+            }
+        }
         
-        return actions;
+        return etat;
     }
 }

@@ -80,5 +80,7 @@ public class Grille implements astar.Monde, astar.But {
         return false;
     }
 
-
+    public Map<Point, Character> getGrille() {
+        return this.grille;
+    }
 }

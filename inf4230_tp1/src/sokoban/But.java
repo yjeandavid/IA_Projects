@@ -54,11 +54,14 @@ public class But implements astar.But, astar.Heuristique {
         double cout = 0;
         
         if (blocs.size() == 1) {
-            cout = Math.pow(blocs.get(0).getX()-but.blocsButPosition.get(0).getX(),2) - 
+            cout = Math.pow(blocs.get(0).getX()-but.blocsButPosition.get(0).getX(),2) + 
                     Math.pow(blocs.get(0).getY()-but.blocsButPosition.get(0).getY(),2);
         }
         
         return cout;
     }
     
+    public List<Point> getBlocs() {
+        return blocsButPosition;
+    }
 }
