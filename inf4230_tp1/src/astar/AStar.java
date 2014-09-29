@@ -6,6 +6,7 @@
 package astar;
 
 import chemin.ActionGoto;
+import java.awt.Point;
 import java.text.NumberFormat;
 import java.util.*;
 
@@ -115,25 +116,12 @@ public class AStar {
             sokoban.EtatSokoban n1 = (sokoban.EtatSokoban) n;
             
             if (n1.getBlocs().size() == 1) {
-                //List<Action> actionGoal = generatePathFromBlockToGoal(monde, n1.getBlocs, heuristique)
+                //List<Action> actionGoal = generatePathFromBlockToGoal(monde, n1.getBlocs, heuristique, heuristique)
                 
             }
         }
     }
-    
-    protected static Etat getEtatIn(ArrayList<Etat> search, Etat filter) {
-        Iterator<Etat> it = search.iterator();
-        Etat n = null;
-        
-        while (it.hasNext()) {
-            n = it.next();
-            if (n.equals(filter))
-                break;
-        }
-        
-        return n;
-    }
-    
+ 
     protected static ArrayList<Etat> trier(ArrayList<Etat> treeToSort) {
         
         ArrayList<Etat> result = new ArrayList<>();
@@ -161,6 +149,26 @@ public class AStar {
         
         return result;
     }
-
    
+    protected static Etat getEtatIn(ArrayList<Etat> search, Etat filter) {
+        Iterator<Etat> it = search.iterator();
+        Etat n = null;
+        
+        while (it.hasNext()) {
+            n = it.next();
+            if (n.equals(filter))
+                break;
+        }
+        
+        return n;
+    }
+    
+    protected static List<Action> generatePathFromBlocksToGoal(Monde m, Point p, But b, Heuristique h) {
+        ArrayList<Action> actions = new ArrayList();
+        ArrayList<Point> open, close;
+        
+        if ()
+        
+        return actions;
+    }
 }
