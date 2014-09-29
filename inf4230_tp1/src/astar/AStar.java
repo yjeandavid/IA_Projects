@@ -187,8 +187,30 @@ public class AStar {
                 blocs.add(t1);
                 etat.setBlocs(blocs);
                 possibilite.put(h.estimerCoutRestant(etat, b), etat);
-                
+                blocs.remove(t1);
+                etat = new EtatSokoban();
+                blocs.add(t2);
+                etat.setBlocs(blocs);
+                possibilite.put(h.estimerCoutRestant(etat, b), etat);
             }
+            t1 = new Point(p.x,p.y-1);
+            t2 = new Point(p.x,p.y+1);
+            if (monde.getGrille().get(t1) == null && monde.getGrille().get(t2) == null) {
+                ArrayList<Point> blocs = new ArrayList<>();
+                blocs.add(t1);
+                etat.setBlocs(blocs);
+                possibilite.put(h.estimerCoutRestant(etat, b), etat);
+                blocs.remove(t1);
+                etat = new EtatSokoban();
+                blocs.add(t2);
+                etat.setBlocs(blocs);
+                possibilite.put(h.estimerCoutRestant(etat, b), etat);
+            }
+        }
+        
+        for(Map.Entry<Double, Etat> entry : possibilite.entrySet()){
+            etat = (EtatSokoban) entry.getValue();
+            break;
         }
         
         return etat;
