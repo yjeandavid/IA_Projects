@@ -5,7 +5,7 @@
  */
 package sokoban;
 
-import java.awt.Point;
+//import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,18 +52,17 @@ public class Probleme {
         for(int y = 0; y < lignes.size(); y++){
             int tailleLigne = lignes.get(y).length();
             for(int x = 0; x < tailleLigne; x++){
-                Point p;
+                monPoint p = new monPoint(x,y);
                 switch (lignes.get(y).charAt(x)) {
-                    case '#':   p = new Point(x,y);
-                                probleme.grille.addElement(p, '#');
+                    case '#':   probleme.grille.addElement(p, '#');
                                 break;
-                    case '$':   //add in EtatSokoban
+                    case '$':   probleme.etatInitial.addElement(p);
                                 break;
-                    case '.':   p = new Point(x,y);
-                                probleme.grille.addElement(p, '.');
+                    case '.':   probleme.grille.addElement(p, '.');
                                 probleme.but.addBut(p);
                                 break;
-                    case '@':   //add in EtatSokoban
+                    case '@':   probleme.etatInitial.setBonhomme(p);
+                                break;
                     default:  break;
                 }
             }

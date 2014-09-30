@@ -26,7 +26,7 @@ public class EtatSokoban extends Etat {
     
     public EtatSokoban () {
         
-        this.bonhomme = new Point();
+        this.bonhomme = new monPoint();
         this.blocs = new ArrayList<>();
         
     }

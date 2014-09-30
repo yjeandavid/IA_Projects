@@ -6,7 +6,6 @@
 package sokoban;
 
 import java.awt.Point;
-import java.io.*;
 import java.util.*;
 
 /**
@@ -19,13 +18,13 @@ public class Grille implements astar.Monde, astar.But {
     // Mettre la représentation d'une grille ici.
     // Indice : tableau pour stocker les obstacles et les buts.
     
-    protected Map<Point, Character> grille;
+    protected Map<monPoint, Character> grille;
     
     public Grille(){
         grille = new TreeMap<>();
     }
     
-    public void addElement(Point p, char nom) {
+    public void addElement(monPoint p, char nom) {
         grille.put(p, nom);
     }
     
@@ -33,35 +32,35 @@ public class Grille implements astar.Monde, astar.But {
     public List<astar.Action> getActions(astar.Etat e) {
         EtatSokoban etat = (EtatSokoban) e;
         ArrayList<astar.Action> actions = new ArrayList<>();
-        Point bonhomme = etat.getBonhomme();
+        monPoint bonhomme = (monPoint) etat.getBonhomme();
         ArrayList<Point> blocs = (ArrayList<Point>) etat.getBlocs();
         
         if (bonhomme.x >= 1 && bonhomme.y >= 1) {
-            if (grille.get(new Point(bonhomme.x+1,bonhomme.y)) == null && !blocs.contains(new Point(bonhomme.x+1,bonhomme.y))) {
+            if (grille.get(new monPoint(bonhomme.x+1,bonhomme.y)) == null && !blocs.contains(new monPoint(bonhomme.x+1,bonhomme.y))) {
                 actions.add(new ActionDeplacement("E"));
-            } else if (grille.get(new Point(bonhomme.x+1,bonhomme.y)) == null && blocs.contains(new Point(bonhomme.x+1,bonhomme.y))
-                && grille.get(new Point(bonhomme.x+2,bonhomme.y)) == null && !blocs.contains(new Point(bonhomme.x+2,bonhomme.y))) {
+            } else if (grille.get(new monPoint(bonhomme.x+1,bonhomme.y)) == null && blocs.contains(new monPoint(bonhomme.x+1,bonhomme.y))
+                && grille.get(new monPoint(bonhomme.x+2,bonhomme.y)) == null && !blocs.contains(new monPoint(bonhomme.x+2,bonhomme.y))) {
                 actions.add(new ActionDeplacement("E"));
             }
             
-            if (grille.get(new Point(bonhomme.x-1,bonhomme.y)) == null && !blocs.contains(new Point(bonhomme.x-1,bonhomme.y))) {
+            if (grille.get(new monPoint(bonhomme.x-1,bonhomme.y)) == null && !blocs.contains(new monPoint(bonhomme.x-1,bonhomme.y))) {
                 actions.add(new ActionDeplacement("W"));
-            } else if (grille.get(new Point(bonhomme.x-1,bonhomme.y)) == null && blocs.contains(new Point(bonhomme.x-1,bonhomme.y))
-                && grille.get(new Point(bonhomme.x-2,1)) == null && !blocs.contains(new Point(bonhomme.x-2,1))) {
+            } else if (grille.get(new monPoint(bonhomme.x-1,bonhomme.y)) == null && blocs.contains(new monPoint(bonhomme.x-1,bonhomme.y))
+                && grille.get(new monPoint(bonhomme.x-2,1)) == null && !blocs.contains(new monPoint(bonhomme.x-2,1))) {
                 actions.add(new ActionDeplacement("W"));
             }
             
-            if (grille.get(new Point(bonhomme.x,bonhomme.y+1)) == null && !blocs.contains(new Point(bonhomme.x,bonhomme.y+1))) {
+            if (grille.get(new monPoint(bonhomme.x,bonhomme.y+1)) == null && !blocs.contains(new monPoint(bonhomme.x,bonhomme.y+1))) {
                 actions.add(new ActionDeplacement("S"));
-            } else if (grille.get(new Point(bonhomme.x,bonhomme.y+1)) == null && blocs.contains(new Point(bonhomme.x,bonhomme.y+1))
-                    && grille.get(new Point(bonhomme.x,bonhomme.y+2)) == null && !blocs.contains(new Point(bonhomme.x,bonhomme.y+2))) {
+            } else if (grille.get(new monPoint(bonhomme.x,bonhomme.y+1)) == null && blocs.contains(new monPoint(bonhomme.x,bonhomme.y+1))
+                    && grille.get(new monPoint(bonhomme.x,bonhomme.y+2)) == null && !blocs.contains(new monPoint(bonhomme.x,bonhomme.y+2))) {
                 actions.add(new ActionDeplacement("S"));
             }
             
-            if (grille.get(new Point(bonhomme.x,bonhomme.y-1)) == null && !blocs.contains(new Point(bonhomme.x,bonhomme.y-1))) {
+            if (grille.get(new monPoint(bonhomme.x,bonhomme.y-1)) == null && !blocs.contains(new monPoint(bonhomme.x,bonhomme.y-1))) {
                 actions.add(new ActionDeplacement("N"));
-            } else if (grille.get(new Point(bonhomme.x,bonhomme.y-1)) == null && blocs.contains(new Point(bonhomme.x,bonhomme.y-1))
-                    && grille.get(new Point(bonhomme.x,bonhomme.y-2)) == null && !blocs.contains(new Point(bonhomme.x,bonhomme.y-2))) {
+            } else if (grille.get(new monPoint(bonhomme.x,bonhomme.y-1)) == null && blocs.contains(new monPoint(bonhomme.x,bonhomme.y-1))
+                    && grille.get(new monPoint(bonhomme.x,bonhomme.y-2)) == null && !blocs.contains(new monPoint(bonhomme.x,bonhomme.y-2))) {
                 actions.add(new ActionDeplacement("N"));
             }
         }
@@ -80,7 +79,7 @@ public class Grille implements astar.Monde, astar.But {
         return false;
     }
 
-    public Map<Point, Character> getGrille() {
+    public Map<monPoint, Character> getGrille() {
         return this.grille;
     }
 }
