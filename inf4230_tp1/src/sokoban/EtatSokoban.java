@@ -98,4 +98,9 @@ public class EtatSokoban extends Etat {
         
     }
     
+     public void addElement(Point p ){
+                this.blocs.add(p);
+   
+    }
+    
 }
