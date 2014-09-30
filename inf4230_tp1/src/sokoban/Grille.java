@@ -46,7 +46,7 @@ public class Grille implements astar.Monde, astar.But {
             if (grille.get(new monPoint(bonhomme.x-1,bonhomme.y)) == null && !blocs.contains(new monPoint(bonhomme.x-1,bonhomme.y))) {
                 actions.add(new ActionDeplacement("W"));
             } else if (grille.get(new monPoint(bonhomme.x-1,bonhomme.y)) == null && blocs.contains(new monPoint(bonhomme.x-1,bonhomme.y))
-                && grille.get(new monPoint(bonhomme.x-2,1)) == null && !blocs.contains(new monPoint(bonhomme.x-2,1))) {
+                && grille.get(new monPoint(bonhomme.x-2,bonhomme.y)) == null && !blocs.contains(new monPoint(bonhomme.x-2,bonhomme.y))) {
                 actions.add(new ActionDeplacement("W"));
             }
             

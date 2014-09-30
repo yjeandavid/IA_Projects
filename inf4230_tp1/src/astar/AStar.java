@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.text.NumberFormat;
 import java.util.*;
 import sokoban.EtatSokoban;
+import sokoban.monPoint;
 
 public class AStar {
 
@@ -110,86 +111,92 @@ public class AStar {
             sokoban.EtatSokoban n1 = (sokoban.EtatSokoban) n;
             sokoban.Grille grille = (sokoban.Grille) monde;
             if (n1.getBlocs().size() == 1) {
-                EtatSokoban etatBut = (EtatSokoban) generateEtatFromBlocksToGoal(monde, n1.getBlocs().get(0), (sokoban.But) heurisitique, heurisitique);
-                Iterator<Action> it = actions.iterator();
+                EtatSokoban etatBut = (EtatSokoban) generateEtatFromBlocksToGoal(monde, n1.getBonhomme(), n1.getBlocs().get(0), (sokoban.But) heurisitique, heurisitique);
+                if (etatBut.getBonhomme().x != 0 && etatBut.getBonhomme().y != 0) {
+                    Iterator<Action> it = actions.iterator();
 
-                while (it.hasNext()) {
+                    while (it.hasNext()) {
 
-                    sokoban.ActionDeplacement ag = (sokoban.ActionDeplacement) it.next();
-                    sokoban.EtatSokoban n2 = n1.clone();
+                        sokoban.ActionDeplacement ag = (sokoban.ActionDeplacement) it.next();
+                        sokoban.EtatSokoban n2 = n1.clone();
 
-                    switch (ag.toString()) {
-                        case "N":
-                            if (grille.getGrille().get(new Point(n1.getBonhomme().x, n1.getBonhomme().y-1)) == null
-                                    && n2.getBlocs().contains(new Point(n1.getBonhomme().x, n1.getBonhomme().y - 1))) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
-                                n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y-1);
-                            } else if (grille.getGrille().get(new Point(n1.getBonhomme().x, n1.getBonhomme().y - 1))== null) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
+                        switch (ag.toString()) {
+                            case "N":
+                                if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y-1)) == null
+                                        && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y - 1))) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
+                                    n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y-1);
+                                    close.removeAll(close);
+                                } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y - 1))== null) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
+                                }   break;
+                            case "S":
+                                if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))== null
+                                        && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
+                                    n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y+1);
+                                    close.removeAll(close);
+                                } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))== null) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
+                                }   break;
+                            case "W":
+                                if (grille.getGrille().get(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))== null
+                                        && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
+                                    n2.getBlocs().get(0).setLocation(n1.getBlocs().get(0).x-1, n1.getBlocs().get(0).y);
+                                    close.removeAll(close);
+                                } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))== null) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
+                                }   break;
+                            case "E":
+                                if (grille.getGrille().get(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))== null
+                                        && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
+                                    n2.getBlocs().get(0).setLocation(n1.getBlocs().get(0).x+1, n1.getBlocs().get(0).y);
+                                    close.removeAll(close);
+                                } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))== null) {
+                                    n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
                             }   break;
-                        case "S":
-                            if (grille.getGrille().get(new Point(n1.getBonhomme().x, n1.getBonhomme().y + 1))== null
-                                    && n2.getBlocs().contains(new Point(n1.getBonhomme().x, n1.getBonhomme().y + 1))) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
-                                n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y+1);
-                            } else if (grille.getGrille().get(new Point(n1.getBonhomme().x, n1.getBonhomme().y + 1))== null) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
-                            }   break;
-                        case "W":
-                            if (grille.getGrille().get(new Point(n1.getBonhomme().x-1, n1.getBonhomme().y))== null
-                                    && n2.getBlocs().contains(new Point(n1.getBonhomme().x-1, n1.getBonhomme().y))) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
-                                n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x-1, n2.getBlocs().get(0).y);
-                            } else if (grille.getGrille().get(new Point(n1.getBonhomme().x-1, n1.getBonhomme().y))== null) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
-                            }   break;
-                        case "E":
-                            if (grille.getGrille().get(new Point(n1.getBonhomme().x+1, n1.getBonhomme().y))== null
-                                    && n2.getBlocs().contains(new Point(n1.getBonhomme().x+1, n1.getBonhomme().y))) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
-                                n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x+1, n2.getBlocs().get(0).y);
-                            } else if (grille.getGrille().get(new Point(n1.getBonhomme().x+1, n1.getBonhomme().y))== null) {
-                                n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
-                        }   break;
-                    }
+                        }
 
-                    n2.g = n1.g + ag.cout;
-                    
-                    if (etatBut.getBonhomme().equals(n2.getBonhomme())) {
-                        n2.h = 0;
-                    } else {
-                        n2.h = Math.sqrt( Math.pow(etatBut.getBonhomme().getX() - n2.getBonhomme().getX(), 2) + 
-                                          Math.pow(etatBut.getBonhomme().getY() - n2.getBonhomme().getY(), 2));
-                    }
-                    
-                    n2.f = n2.g + n2.h;
-                    n2.parent = n1;
-                    n2.actionDepuisParent = ag;
+                        n2.g = n1.g + ag.cout;
 
-                    if (open.contains(n2)) {
-                        sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(open, n2);
-                        if (n2.f < n3.f) {
-                            open.remove(n3);
+                        if (etatBut.getBonhomme().equals(n2.getBonhomme())) {
+                            n2.h = 0;
+                        } else {
+                            n2.h = Math.sqrt( (Math.pow(etatBut.getBonhomme().getX() - n2.getBonhomme().getX(), 2) + 
+                                              Math.pow(etatBut.getBonhomme().getY() - n2.getBonhomme().getY(), 2)) );
+                        }
+
+                        n2.f = n2.g + n2.h;
+                        n2.parent = n1;
+                        n2.actionDepuisParent = ag;
+
+                        if (open.contains(n2)) {
+                            sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(open, n2);
+                            if (n2.f < n3.f) {
+                                open.remove(n3);
+                                successeurs.put(n2.f, n2);
+                                ++nbreEtatGenere;
+                            }
+                        } else if (close.contains(n2)) {
+                            sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(close, n2);
+                            if (n2.f < n3.f) {
+                                open.remove(n3);
+                                successeurs.put(n2.f, n2);
+                                ++nbreEtatGenere;
+                            }
+                        } else {
                             successeurs.put(n2.f, n2);
                             ++nbreEtatGenere;
                         }
-                    } else if (close.contains(n2)) {
-                        sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(close, n2);
-                        if (n2.f < n3.f) {
-                            open.remove(n3);
-                            successeurs.put(n2.f, n2);
-                            ++nbreEtatGenere;
-                        }
-                    } else {
-                        successeurs.put(n2.f, n2);
-                        ++nbreEtatGenere;
+
                     }
 
-                }
-
-                Collection<Etat> c = successeurs.values();
-                for (Etat e : c) {
-                    open.add(e);
+                    Collection<Etat> c = successeurs.values();
+                    for (Etat e : c) {
+                        open.add(e);
+                    }
                 }
             }
         }
@@ -238,28 +245,28 @@ public class AStar {
         return n;
     }
 
-    protected static Etat generateEtatFromBlocksToGoal(Monde m, Point p, But b, Heuristique h) {
+    protected static Etat generateEtatFromBlocksToGoal(Monde m, Point bonhomme, Point bloc, But b, Heuristique h) {
         sokoban.Grille monde = (sokoban.Grille) m;
         Map<Double, Etat> possibilite = new TreeMap<>();
         EtatSokoban etat = new EtatSokoban();
         sokoban.But but = (sokoban.But) b;
 
         if (but.getBlocs().size() == 1) {
-            Point t1 = new Point(p.x - 1, p.y);
-            Point t2 = new Point(p.x + 1, p.y);
+            monPoint t1 = new monPoint(bloc.x - 1, bloc.y);
+            monPoint t2 = new monPoint(bloc.x + 1, bloc.y);
             if (monde.getGrille().get(t1) == null && monde.getGrille().get(t2) == null) {
                 ArrayList<Point> blocs = new ArrayList<>();
                 blocs.add(t1);
                 etat.setBlocs(blocs);
                 possibilite.put(h.estimerCoutRestant(etat, b), etat);
-                blocs.remove(t1);
+                blocs = new ArrayList<>();
                 etat = new EtatSokoban();
                 blocs.add(t2);
                 etat.setBlocs(blocs);
                 possibilite.put(h.estimerCoutRestant(etat, b), etat);
             }
-            t1 = new Point(p.x, p.y - 1);
-            t2 = new Point(p.x, p.y + 1);
+            t1 = new monPoint(bloc.x, bloc.y - 1);
+            t2 = new monPoint(bloc.x, bloc.y + 1);
             if (monde.getGrille().get(t1) == null && monde.getGrille().get(t2) == null) {
                 ArrayList<Point> blocs = new ArrayList<>();
                 blocs.add(t1);
@@ -275,25 +282,42 @@ public class AStar {
 
         for (Map.Entry<Double, Etat> entry : possibilite.entrySet()) {
             EtatSokoban etat2 = (EtatSokoban) entry.getValue();
-            if (etat2.getBlocs().get(0).getX() < p.getX()) {
+            if (etat2.getBlocs().get(0).getX() < bloc.getX()) {
                 etat = new EtatSokoban();
-                etat.setBonhomme(new Point(p.x + 1, p.y));
-                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                if (bonhomme.equals(new Point(bloc.x+1,bloc.y))) {
+                    etat.setBonhomme(new Point(bloc.x,bloc.y));
+                    etat2.getBlocs().get(0).setLocation(bloc.x-1, bloc.y);
+                } else {
+                    etat.setBonhomme(new Point(bloc.x + 1, bloc.y));
+                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
+                }
                 etat.setBlocs(etat2.getBlocs());
-            } else if (etat2.getBlocs().get(0).getX() > p.getX()) {
+            } else if (etat2.getBlocs().get(0).getX() > bloc.getX()) {
                 etat = new EtatSokoban();
-                etat.setBonhomme(new Point(p.x - 1, p.y));
-                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                if (bonhomme.equals(new Point(bloc.x-1,bloc.y))) {
+                    etat.setBonhomme(new Point(bloc.x,bloc.y));
+                } else {
+                    etat.setBonhomme(new Point(bloc.x - 1, bloc.y));
+                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
+                }
                 etat.setBlocs(etat2.getBlocs());
-            } else if (etat2.getBlocs().get(0).getY() > p.getY()) {
+            } else if (etat2.getBlocs().get(0).getY() > bloc.getY()) {
                 etat = new EtatSokoban();
-                etat.setBonhomme(new Point(p.x, p.y - 1));
-                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                if (bonhomme.equals(new Point(bloc.x,bloc.y-1))) {
+                    etat.setBonhomme(new Point(bloc.x,bloc.y));
+                } else {
+                    etat.setBonhomme(new Point(bloc.x, bloc.y-1));
+                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
+                }
                 etat.setBlocs(etat2.getBlocs());
-            } else if (etat2.getBlocs().get(0).getY() < p.getY()) {
+            } else if (etat2.getBlocs().get(0).getY() < bloc.getY()) {
                 etat = new EtatSokoban();
-                etat.setBonhomme(new Point(p.x, p.y + 1));
-                etat2.getBlocs().get(0).setLocation(p.x, p.y);
+                if (bonhomme.equals(new Point(bloc.x,bloc.y+1))) {
+                    etat.setBonhomme(new Point(bloc.x,bloc.y));
+                } else {
+                    etat.setBonhomme(new Point(bloc.x, bloc.y+1));
+                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
+                }
                 etat.setBlocs(etat2.getBlocs());
             }
             break;

@@ -76,7 +76,7 @@ public class EtatSokoban extends Etat {
         EtatSokoban eTmp = (EtatSokoban) o;
         // À compléter.
         // La comparaison est essentielle pour ajouter des EtatSokoban dans un TreeSet open ou close dans l'algorithme A*.
-        if(this.bonhomme.equals(eTmp.getBonhomme())&&this.blocs.equals(eTmp.getBlocs())) return 0;
+        if(this.bonhomme.equals(eTmp.getBonhomme()) && this.blocs.equals(eTmp.getBlocs())) return 0;
         
         return -1;
     }
@@ -85,12 +85,12 @@ public class EtatSokoban extends Etat {
     public void addEtatSokoban(EtatSokoban o){
 
         if(o.bonhomme != null){
-            setBonhomme(o.getBonhomme());
+            setBonhomme(new monPoint(o.getBonhomme().x, o.getBonhomme().y));
         }
         if(o.blocs != null){
 
             for(Point eachBloc : o.blocs){
-                this.blocs.add(eachBloc);
+                this.blocs.add(new monPoint(eachBloc.x, eachBloc.y));
             }
         
         }
@@ -102,5 +102,9 @@ public class EtatSokoban extends Etat {
                 this.blocs.add(p);
    
     }
-    
+ 
+     public boolean equals(Object o) {
+         EtatSokoban e = (EtatSokoban) o;
+         return this.compareTo(e) == 0;
+     }
 }
