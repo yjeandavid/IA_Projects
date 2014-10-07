@@ -124,7 +124,7 @@ public class AStar {
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y - 1))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
                             n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y-1);
-                            close.removeAll(close);
+                            //close.removeAll(close);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y - 1))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
                         }   break;
@@ -133,7 +133,7 @@ public class AStar {
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
                             n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y+1);
-                            close.removeAll(close);
+                            //close.removeAll(close);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
                         }   break;
@@ -142,7 +142,7 @@ public class AStar {
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
                             n2.getBlocs().get(0).setLocation(n1.getBlocs().get(0).x-1, n1.getBlocs().get(0).y);
-                            close.removeAll(close);
+                            //close.removeAll(close);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
                         }   break;
@@ -151,7 +151,7 @@ public class AStar {
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
                             n2.getBlocs().get(0).setLocation(n1.getBlocs().get(0).x+1, n1.getBlocs().get(0).y);
-                            close.removeAll(close);
+                            //close.removeAll(close);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
                     }   break;
@@ -213,7 +213,7 @@ public class AStar {
                     if (element.f <= result.get(i).f) {
 
                         result.add(i, element);
-                        break;
+                        i = result.size();
                     }
                 }
                 if (element.f > (result.get((result.size() - 1)).f)) {
