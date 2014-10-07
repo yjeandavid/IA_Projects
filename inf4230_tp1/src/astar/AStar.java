@@ -69,6 +69,7 @@ public class AStar {
 
     protected static void genererSuccesseur(Monde monde, Etat n, Heuristique heurisitique, ArrayList<Etat> open, ArrayList<Etat> close) {
         Map<Double, Etat> successeurs = new TreeMap<>();
+        double i = 1.0;
         ArrayList<Action> actions = (ArrayList<Action>) monde.getActions(n);
 
         if (n.getClass() == chemin.Etat.class) {
@@ -165,18 +166,24 @@ public class AStar {
                     sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(open, n2);
                     if (n2.f < n3.f) {
                         open.remove(n3);
-                        successeurs.put(n2.f, n2);
+                        //successeurs.put(n2.f, n2);
+                        successeurs.put(i, n2);
+                        ++i;
                         ++nbreEtatGenere;
                     }
                 } else if (close.contains(n2)) {
                     sokoban.EtatSokoban n3 = (sokoban.EtatSokoban) getEtatIn(close, n2);
                     if (n2.f < n3.f) {
                         open.remove(n3);
-                        successeurs.put(n2.f, n2);
+                        //successeurs.put(n2.f, n2);
+                        successeurs.put(i, n2);
+                        ++i;
                         ++nbreEtatGenere;
                     }
                 } else {
-                    successeurs.put(n2.f, n2);
+                    //successeurs.put(n2.f, n2);
+                    successeurs.put(i, n2);
+                    ++i;
                     ++nbreEtatGenere;
                 }
 
