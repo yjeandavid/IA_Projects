@@ -25,7 +25,7 @@ public class Probleme {
     
     public static Probleme charger(BufferedReader br) throws IOException{
         // Lire les lignes dans fichiers
-        ArrayList<String> lignes = new ArrayList<String>();
+        ArrayList<String> lignes = new ArrayList<>();
         String ligne;
         
 

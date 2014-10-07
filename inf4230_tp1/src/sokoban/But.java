@@ -48,7 +48,7 @@ public class But implements astar.But, astar.Heuristique {
 
     @Override
     public double estimerCoutRestant(astar.Etat e, astar.But b) {
-        EtatSokoban etat = (EtatSokoban) e;
+        /*EtatSokoban etat = (EtatSokoban) e;
         ArrayList<Point> blocs = (ArrayList<Point>) etat.getBlocs();
         But but = (But) b;
         double cout = 0;
@@ -58,7 +58,8 @@ public class But implements astar.But, astar.Heuristique {
                     Math.pow(blocs.get(0).getY()-but.blocsButPosition.get(0).getY(),2));
         }
         
-        return cout;
+        return cout;*/
+        return 0;
     }
     
     public List<Point> getBlocs() {
