@@ -9,6 +9,7 @@ import chemin.ActionGoto;
 import java.awt.Point;
 import java.text.NumberFormat;
 import java.util.*;
+import sokoban.ActionDeplacement;
 import sokoban.EtatSokoban;
 import sokoban.monPoint;
 
@@ -335,6 +336,14 @@ public class AStar {
             }
 
         } else {
+            
+            plan = new ArrayList<>();
+            
+            while (n1.parent != null) {
+                String temp = n1.actionDepuisParent.toString();
+                plan.add( new ActionDeplacement(temp));
+                n1 = n1.parent;
+            }
 
         }
         return plan;
