@@ -210,7 +210,7 @@ public class AStar {
                 result.add(element);
             } else {
                 for (int i = 0; i < result.size(); i++) {
-                    if (element.f < result.get(i).f) {
+                    if (element.f <= result.get(i).f) {
 
                         result.add(i, element);
                         break;
