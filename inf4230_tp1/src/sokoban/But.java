@@ -7,7 +7,6 @@ package sokoban;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,17 +29,13 @@ public class But implements astar.But, astar.Heuristique {
     
     @Override
     public boolean butSatisfait(astar.Etat e) {
-        boolean result = true, tempResult = false;
+        boolean result = true;
         EtatSokoban etat = (EtatSokoban) e;
         ArrayList<Point> blocs = (ArrayList<Point>) etat.getBlocs();
-        Iterator it = blocs.iterator();
         
-       for (int i = 0; i < blocsButPosition.size() && result; ++i) {
-           while (it.hasNext() && !tempResult) {
-               Point p = (Point) it.next();
-               tempResult = p.equals(blocsButPosition.get(i));
-           }
-           result &= tempResult;
+       for (int i = 0; i < blocsButPosition.size(); ++i) {
+           Point p = blocs.get(i);
+           result &= p.equals(blocsButPosition.get(i));
        }
         
         return result;

@@ -6,11 +6,9 @@
 package astar;
 
 import chemin.ActionGoto;
-import java.awt.Point;
 import java.text.NumberFormat;
 import java.util.*;
 import sokoban.ActionDeplacement;
-import sokoban.EtatSokoban;
 import sokoban.monPoint;
 
 public class AStar {
@@ -123,8 +121,8 @@ public class AStar {
                         if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y-1)) == null
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y - 1))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
-                            n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y-1);
-                            //close.removeAll(close);
+                            int index = n2.getBlocs().indexOf(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y - 1));
+                            n2.getBlocs().get(index).setLocation(n2.getBlocs().get(index).x, n2.getBlocs().get(index).y-1);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y - 1))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y - 1);
                         }   break;
@@ -132,8 +130,8 @@ public class AStar {
                         if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))== null
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
-                            n2.getBlocs().get(0).setLocation(n2.getBlocs().get(0).x, n2.getBlocs().get(0).y+1);
-                            //close.removeAll(close);
+                            int index = n2.getBlocs().indexOf(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1));
+                            n2.getBlocs().get(index).setLocation(n2.getBlocs().get(index).x, n2.getBlocs().get(index).y+1);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x, n1.getBonhomme().y + 1))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x, n1.getBonhomme().y + 1);
                         }   break;
@@ -141,8 +139,8 @@ public class AStar {
                         if (grille.getGrille().get(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))== null
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
-                            n2.getBlocs().get(0).setLocation(n1.getBlocs().get(0).x-1, n1.getBlocs().get(0).y);
-                            //close.removeAll(close);
+                            int index = n2.getBlocs().indexOf(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y));
+                            n2.getBlocs().get(index).setLocation(n2.getBlocs().get(index).x-1, n2.getBlocs().get(index).y);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x-1, n1.getBonhomme().y))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x-1, n1.getBonhomme().y);
                         }   break;
@@ -150,8 +148,8 @@ public class AStar {
                         if (grille.getGrille().get(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))== null
                                 && n2.getBlocs().contains(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
-                            n2.getBlocs().get(0).setLocation(n1.getBlocs().get(0).x+1, n1.getBlocs().get(0).y);
-                            //close.removeAll(close);
+                            int index = n2.getBlocs().indexOf(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y));
+                            n2.getBlocs().get(index).setLocation(n2.getBlocs().get(index).x+1, n2.getBlocs().get(index).y);
                         } else if (grille.getGrille().get(new monPoint(n1.getBonhomme().x+1, n1.getBonhomme().y))== null) {
                             n2.getBonhomme().setLocation(n1.getBonhomme().x+1, n1.getBonhomme().y);
                     }   break;
@@ -240,87 +238,6 @@ public class AStar {
         return n;
     }
 
-    protected static Etat generateEtatFromBlocksToGoal(Monde m, Point bonhomme, Point bloc, But b, Heuristique h) {
-        sokoban.Grille monde = (sokoban.Grille) m;
-        Map<Double, Etat> possibilite = new TreeMap<>();
-        EtatSokoban etat = new EtatSokoban();
-        sokoban.But but = (sokoban.But) b;
-
-        if (but.getBlocs().size() == 1) {
-            monPoint t1 = new monPoint(bloc.x - 1, bloc.y);
-            monPoint t2 = new monPoint(bloc.x + 1, bloc.y);
-            if (monde.getGrille().get(t1) == null && monde.getGrille().get(t2) == null) {
-                ArrayList<Point> blocs = new ArrayList<>();
-                blocs.add(t1);
-                etat.setBlocs(blocs);
-                possibilite.put(h.estimerCoutRestant(etat, b), etat);
-                blocs = new ArrayList<>();
-                etat = new EtatSokoban();
-                blocs.add(t2);
-                etat.setBlocs(blocs);
-                possibilite.put(h.estimerCoutRestant(etat, b), etat);
-            }
-            t1 = new monPoint(bloc.x, bloc.y - 1);
-            t2 = new monPoint(bloc.x, bloc.y + 1);
-            if (monde.getGrille().get(t1) == null && monde.getGrille().get(t2) == null) {
-                ArrayList<Point> blocs = new ArrayList<>();
-                blocs.add(t1);
-                etat.setBlocs(blocs);
-                possibilite.put(h.estimerCoutRestant(etat, b), etat);
-                blocs.remove(t1);
-                etat = new EtatSokoban();
-                blocs.add(t2);
-                etat.setBlocs(blocs);
-                possibilite.put(h.estimerCoutRestant(etat, b), etat);
-            }
-        }
-
-        for (Map.Entry<Double, Etat> entry : possibilite.entrySet()) {
-            EtatSokoban etat2 = (EtatSokoban) entry.getValue();
-            if (etat2.getBlocs().get(0).getX() < bloc.getX()) {
-                etat = new EtatSokoban();
-                if (bonhomme.equals(new Point(bloc.x+1,bloc.y))) {
-                    etat.setBonhomme(new Point(bloc.x,bloc.y));
-                    etat2.getBlocs().get(0).setLocation(bloc.x-1, bloc.y);
-                } else {
-                    etat.setBonhomme(new Point(bloc.x + 1, bloc.y));
-                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
-                }
-                etat.setBlocs(etat2.getBlocs());
-            } else if (etat2.getBlocs().get(0).getX() > bloc.getX()) {
-                etat = new EtatSokoban();
-                if (bonhomme.equals(new Point(bloc.x-1,bloc.y))) {
-                    etat.setBonhomme(new Point(bloc.x,bloc.y));
-                } else {
-                    etat.setBonhomme(new Point(bloc.x - 1, bloc.y));
-                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
-                }
-                etat.setBlocs(etat2.getBlocs());
-            } else if (etat2.getBlocs().get(0).getY() > bloc.getY()) {
-                etat = new EtatSokoban();
-                if (bonhomme.equals(new Point(bloc.x,bloc.y-1))) {
-                    etat.setBonhomme(new Point(bloc.x,bloc.y));
-                } else {
-                    etat.setBonhomme(new Point(bloc.x, bloc.y-1));
-                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
-                }
-                etat.setBlocs(etat2.getBlocs());
-            } else if (etat2.getBlocs().get(0).getY() < bloc.getY()) {
-                etat = new EtatSokoban();
-                if (bonhomme.equals(new Point(bloc.x,bloc.y+1))) {
-                    etat.setBonhomme(new Point(bloc.x,bloc.y));
-                } else {
-                    etat.setBonhomme(new Point(bloc.x, bloc.y+1));
-                    etat2.getBlocs().get(0).setLocation(bloc.x, bloc.y);
-                }
-                etat.setBlocs(etat2.getBlocs());
-            }
-            break;
-        }
-
-        return etat;
-    }
-
     private static List<Action> retrouverChemin(Etat n1) {
 
         List<Action> plan = null;
@@ -341,7 +258,7 @@ public class AStar {
             
             while (n1.parent != null) {
                 String temp = n1.actionDepuisParent.toString();
-                plan.add( new ActionDeplacement(temp));
+                plan.add(0, new ActionDeplacement(temp));
                 n1 = n1.parent;
             }
 

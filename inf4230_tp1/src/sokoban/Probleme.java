@@ -58,8 +58,7 @@ public class Probleme {
                                 break;
                     case '$':   probleme.etatInitial.addElement(p);
                                 break;
-                    case '.':   probleme.grille.addElement(p, '.');
-                                probleme.but.addBut(p);
+                    case '.':   probleme.but.addBut(p);
                                 break;
                     case '@':   probleme.etatInitial.setBonhomme(p);
                                 break;

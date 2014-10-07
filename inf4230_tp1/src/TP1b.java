@@ -23,8 +23,11 @@ public class TP1b {
         if(plan==null)
             System.out.println("<Aucune solution>");
         else
-            for(astar.Action action : plan){
+            /*for(astar.Action action : plan){
                 System.out.println(action + " ");
-            }
+            }*/
+            for(astar.Action action : plan)
+                System.out.print(action.toString()+ " ");
+        System.out.println();
     }
 }
