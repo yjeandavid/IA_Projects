@@ -43,18 +43,25 @@ public class But implements astar.But, astar.Heuristique {
 
     @Override
     public double estimerCoutRestant(astar.Etat e, astar.But b) {
-        /*EtatSokoban etat = (EtatSokoban) e;
+        EtatSokoban etat = (EtatSokoban) e;
         ArrayList<Point> blocs = (ArrayList<Point>) etat.getBlocs();
-        But but = (But) b;
-        double cout = 0;
+        Point bonhomme = etat.getBonhomme();
         
-        if (blocs.size() == 1) {
-            cout = Math.sqrt(Math.pow(blocs.get(0).getX()-but.blocsButPosition.get(0).getX(),2) + 
-                    Math.pow(blocs.get(0).getY()-but.blocsButPosition.get(0).getY(),2));
+        double cout = 0, min = Double.POSITIVE_INFINITY;
+        
+        for (int i = 0; i < blocs.size(); ++i) {
+            double distanceBonhomme = Math.sqrt( Math.pow(bonhomme.getX()-blocs.get(i).getX(), 2) +
+                                                Math.pow(bonhomme.getY()-blocs.get(i).getY(), 2) );
+            if (distanceBonhomme < min)
+                min = distanceBonhomme;
+            
+            cout += Math.sqrt( Math.pow(blocs.get(i).getX()-blocsButPosition.get(i).getX(), 2) +
+                              Math.pow(blocs.get(i).getY()-blocsButPosition.get(i).getY(), 2) );
         }
+        //cout /= blocs.size();
+        cout += min;
         
-        return cout;*/
-        return 0;
+        return cout;
     }
     
     public List<Point> getBlocs() {
