@@ -52,7 +52,7 @@ public class JoueurArtificiel implements Joueur {
 
     @Override
     public String getAuteurs() {
-        return "Prénom1 Nom1 (CODE00000001)  et  Prénom2 Nom2 (CODE00000002)";
+        return "Prénom1 Nom1 (CODE00000001)  et  Claude-Clément YAPO (YAPC01129002)";
     }
 
     public int JoeurIA(Grille grille, int profondeur) {
