@@ -6,7 +6,7 @@ package connect5.ia;
  * Vous pouvez ajouter d'autres classes sous le package connect5.ia.
  *
  * Prénom Nom    (CODE00000001)
- * Prénom Nom    (CODE00000002)
+ * Claude-Clément YAPO    (YAPC01129002)
  */
 import connect5.Grille;
 import connect5.GrilleVerificateur;
