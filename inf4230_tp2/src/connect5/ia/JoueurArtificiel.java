@@ -5,7 +5,7 @@ package connect5.ia;
  *
  * Vous pouvez ajouter d'autres classes sous le package connect5.ia.
  *
- * Prénom Nom    (CODE00000001)
+ * Christian Telemaque    (TELC10058803)
  * Claude-Clément YAPO    (YAPC01129002)
  */
 import connect5.Grille;
@@ -52,7 +52,7 @@ public class JoueurArtificiel implements Joueur {
 
     @Override
     public String getAuteurs() {
-        return "Prénom1 Nom1 (CODE00000001)  et  Claude-Clément YAPO (YAPC01129002)";
+        return "Prénom1 Nom1 (TELC10058803)  et  Claude-Clément YAPO (YAPC01129002)";
     }
 
     public int JoeurIA(Grille grille, int profondeur) {
