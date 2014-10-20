@@ -20,6 +20,16 @@ public class JoueurArtificiel implements Joueur {
     private final Random random = new Random();
     private static int nbrJouer = 0;
     private static int id = 0;
+    
+    
+    
+    
+    public JoueurArtificiel(){
+        ++nbrJouer;
+        id = nbrJouer == 1? 1: nbrJouer == 1 ? 2 : -1;
+    }
+            
+            
     /**
      * Voici la fonction à modifier. Évidemment, vous pouvez ajouter d'autres
      * fonctions dans JoueurArtificiel. Vous pouvez aussi ajouter d'autres
