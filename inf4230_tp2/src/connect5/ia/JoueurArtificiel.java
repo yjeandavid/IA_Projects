@@ -18,7 +18,8 @@ import java.util.Random;
 public class JoueurArtificiel implements Joueur {
 
     private final Random random = new Random();
-
+    private static int nbrJouer = 0;
+    private static int id = 0;
     /**
      * Voici la fonction à modifier. Évidemment, vous pouvez ajouter d'autres
      * fonctions dans JoueurArtificiel. Vous pouvez aussi ajouter d'autres
@@ -43,7 +44,7 @@ public class JoueurArtificiel implements Joueur {
             }
         }
 
-        int choix = JoeurIA(grille, casesvides.size());
+        int choix = Minimax(grille,casesvides.size());
 
         //int choix = random.nextInt(casesvides.size());
         choix = casesvides.get(choix);
@@ -55,7 +56,7 @@ public class JoueurArtificiel implements Joueur {
         return "Prénom1 Nom1 (TELC10058803)  et  Claude-Clément YAPO (YAPC01129002)";
     }
 
-    public int JoeurIA(Grille grille, int profondeur) {
+    public int Minimax(Grille grille,int profondeur) {
 
         int max = -10000;
         int tmp, maxI = -1, maxJ = -1;
@@ -67,7 +68,7 @@ public class JoueurArtificiel implements Joueur {
             for (int j = 0; j < colones; j++) {
                 if (data[i][j] == 0) {
                     data[i][j] = 2;
-                    tmp = Min(data, profondeur - 1);
+                    tmp = Max(data,profondeur);
 
                     if (tmp > max) {
                         max = tmp;
