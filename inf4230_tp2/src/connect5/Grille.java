@@ -15,39 +15,39 @@ package connect5;
 public class Grille {
 
     public Grille(int nblignes, int nbcols){
-        data = new byte[nblignes][nbcols];
+        getData = new byte[nblignes][nbcols];
     }
 
     public Grille(int nblignes, int nbcols, int[] data1d){
-        data = new byte[nblignes][nbcols];
+        getData = new byte[nblignes][nbcols];
         for(int l=0;l<nblignes;l++)
             for(int c=0;c<nbcols;c++){
-                data[l][c] = (byte) (data1d[l*nbcols+c] + 1);
+                getData[l][c] = (byte) (data1d[l*nbcols+c] + 1);
             }
     }
     public void set(int l, int c, int v){
-        data[l][c] = (byte) v;
+        getData[l][c] = (byte) v;
     }
     public void set(Position p, int v){
-        data[p.ligne][p.colonne] = (byte)v;
+        getData[p.ligne][p.colonne] = (byte)v;
     }
     
     public int get(int l, int c){
-        return data[l][c];
+        return getData[l][c];
     }
     public int get(Position p){
-        return data[p.ligne][p.colonne];
+        return getData[p.ligne][p.colonne];
     }
     
     public void reset(){
-        for(byte[] b : data)
+        for(byte[] b : getData)
             for(int i=0;i<b.length;i++)
                 b[i] = 0;
     }
     
     public int nbLibre(){
         int n=0;
-        for(byte[] b : data)
+        for(byte[] b : getData)
             for(byte bb : b)
                 if(bb==0)
                     n++;
@@ -55,14 +55,14 @@ public class Grille {
     }
 
     public int getSize(){
-        return data.length * data[0].length;
+        return getData.length * getData[0].length;
     }
     
     @Override
     public String toString(){
         char[] table = {'0', 'N', 'B' };
-        String result = "" + data.length + " " + data[0].length + "\n";
-        for(byte[] b : data){
+        String result = "" + getData.length + " " + getData[0].length + "\n";
+        for(byte[] b : getData){
             char[] c = new char[b.length];
             for(int i=0;i<b.length;i++)
                 c[i] = table[b[i]];
@@ -73,7 +73,7 @@ public class Grille {
     }
     
     public byte[][] getData(){
-        return data;
+        return getData;
     }
     
     private Grille(){
@@ -82,12 +82,12 @@ public class Grille {
 
     @Override
     public Grille clone(){
-        Grille copie = new Grille(data.length, data[0].length);
-        for(int l=0;l<data.length;l++)
-            System.arraycopy(data[l], 0, copie.data[l], 0, data[l].length);
+        Grille copie = new Grille(getData.length, getData[0].length);
+        for(int l=0;l<getData.length;l++)
+            System.arraycopy(getData[l], 0, copie.getData[l], 0, getData[l].length);
         return copie;
     }
     
-    protected byte[][]     data;
+    protected byte[][]     getData;
     
 }

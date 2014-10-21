@@ -20,13 +20,15 @@ public class JoueurArtificiel implements Joueur {
 
     private final Random random = new Random();
     private static int nbrJouer = 0;
-    private static int id = 0;
+    private  int id = 0;
     
     
     
     
     public JoueurArtificiel(){
         ++nbrJouer;
+        
+         
         id = nbrJouer == 1? 1: nbrJouer == 2 ? 2 : -1;
     }
             
@@ -70,99 +72,70 @@ public class JoueurArtificiel implements Joueur {
     public int Minimax(Grille grille,ArrayList<Integer> casesvides) {
 
         double max = Double.NEGATIVE_INFINITY;
-        int tmp, maxI = -1, maxJ = -1;
-        Grille cloneGrille = grille.clone();
-        byte[][] data = cloneGrille.getData();
-        int lignes = data.length;
-        int colones = data[0].length;
 
-        Vector succ = create_successeur(cloneGrille,casesvides);
+        Vector <Grille> succ = create_successeur(grille,casesvides);
         
         
-        return MinimaxDecision(cloneGrille,succ);
+        return MinimaxDecision(grille,succ);
  
     }
 
-    int Min(Grille grille, Vector succ) {
+    int Min(Grille grille, Vector<Grille> succ) {
         
         GrilleVerificateur terminate_test = new GrilleVerificateur();
         int gagnant = terminate_test.determineGagnant(grille);
         double  min = Double.POSITIVE_INFINITY;
         
-        if( gagnant == 1 || gagnant == 2)    
+        if( gagnant == id)    
             return Utilite(grille,succ);
         
-        Vector tmpSucc = succ;
         
-        for(Object g : succ){
-            int t = Min((Grille) g,succ);
+        
+        for(Grille g : succ){
+            int t = Max( g,succ);
             if(t < min) min = t;
         }
         return (int)min;
 
     }
 
-    int Max(Grille grille, Vector succ) {
+    int Max(Grille grille, Vector<Grille> succ) {
         
+         
         GrilleVerificateur terminate_test = new GrilleVerificateur();
         int gagnant = terminate_test.determineGagnant(grille);
         double  max = Double.NEGATIVE_INFINITY;
         
         
-        if( gagnant == 1 || gagnant == 2)    
+        if( gagnant == id )    
             return Utilite(grille,succ);
         
-        Vector tmpSucc = succ;
         
-        for(Object g : succ){
-            int t = Min((Grille) g,succ);
+        
+        for(Grille g : succ){
+            int t = Min( g,succ);
             if(t > max) max = t;
         }
         return (int)max;
 
     }
 
-    int eval(byte[][] data) {
-        int nb_de_pions = 0;
-        int lignes = data.length;//optimiser en passant en param
-        int colones = data[0].length;// optimiser en passant en param
-        GrilleVerificateur evaluation = new GrilleVerificateur();
-        Grille g = new Grille(lignes, colones);
-        int vainqueur = 0;
+  
 
-        for (int i = 0; i < lignes; i++) {
-            for (int j = 0; j < colones; j++) {
-                g.set(i, j, data[i][j]);
-                if (data[i][j] != 0) {
-                    nb_de_pions++;
-                }
-            }
-        }
+    private Vector<Grille> create_successeur(Grille cloneGrille,ArrayList<Integer> casesvides) {
 
-        if ((vainqueur = evaluation.determineGagnant(g)) != 0) {
-            if (vainqueur == 1) {
-                return 1000 - nb_de_pions;
-            } else if (vainqueur == 2) {
-                return -1000 + nb_de_pions;
-            } else {
-                return 0;
-            }
-        }
-
-        return 0;
-
-    }
-
-    private Vector create_successeur(Grille cloneGrille,ArrayList<Integer> casesvides) {
-
-    Vector chd = new Vector();
-    Grille tmpGrille = cloneGrille.clone();
+    Vector <Grille> chd = new Vector();
+    
     int nbcol = cloneGrille.getData()[0].length;
     int lignes = cloneGrille.getData().length;
+    Grille tmpGrille;
+   
     
     
-    for(int i : casesvides){
-        tmpGrille.getData()[i%lignes][i/nbcol] = (byte) (id == 1 ? 1 : id ==2  ? 2 : -1);
+    for(int i  : casesvides){
+        //System.out.println("id :"+id+"joue à "+i);
+        tmpGrille = cloneGrille.clone();
+        tmpGrille.getData()[i/lignes][i%nbcol] =  (byte) (id == 1 ? 1 : id == 2 ? 2 : -1);
         chd.add(tmpGrille);
     }
     
@@ -175,9 +148,9 @@ public class JoueurArtificiel implements Joueur {
 
      int action = -1;
 
-     if (id == 1)
+     //if (id == 1)
             action = Max(cloneGrille,succ);
-        else action = Min(cloneGrille,succ);
+        //else action = Min(cloneGrille,succ);
     
     
     return action;
@@ -185,7 +158,11 @@ public class JoueurArtificiel implements Joueur {
     }
 
     private int Utilite(Grille grille, Vector succ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Utility u = new Utility();
+        int ut = u.utility(grille);
+       //System.out.println("yooo"+ grille.toString());
+    return ut;
     }
 
 }
