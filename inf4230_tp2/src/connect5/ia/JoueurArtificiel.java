@@ -14,6 +14,7 @@ import connect5.Joueur;
 import connect5.Position;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 public class JoueurArtificiel implements Joueur {
 
@@ -26,7 +27,7 @@ public class JoueurArtificiel implements Joueur {
     
     public JoueurArtificiel(){
         ++nbrJouer;
-        id = nbrJouer == 1? 1: nbrJouer == 1 ? 2 : -1;
+        id = nbrJouer == 1? 1: nbrJouer == 2 ? 2 : -1;
     }
             
             
@@ -54,7 +55,7 @@ public class JoueurArtificiel implements Joueur {
             }
         }
 
-        int choix = Minimax(grille,casesvides.size());
+        int choix = Minimax(grille,casesvides);
 
         //int choix = random.nextInt(casesvides.size());
         choix = casesvides.get(choix);
@@ -66,89 +67,58 @@ public class JoueurArtificiel implements Joueur {
         return "Prénom1 Nom1 (TELC10058803)  et  Claude-Clément YAPO (YAPC01129002)";
     }
 
-    public int Minimax(Grille grille,int profondeur) {
+    public int Minimax(Grille grille,ArrayList<Integer> casesvides) {
 
-        int max = -10000;
+        double max = Double.NEGATIVE_INFINITY;
         int tmp, maxI = -1, maxJ = -1;
-        byte[][] data = grille.getData();
+        Grille cloneGrille = grille.clone();
+        byte[][] data = cloneGrille.getData();
         int lignes = data.length;
         int colones = data[0].length;
 
-        for (int i = 0; i < lignes; i++) {
-            for (int j = 0; j < colones; j++) {
-                if (data[i][j] == 0) {
-                    data[i][j] = 2;
-                    tmp = Max(data,profondeur);
-
-                    if (tmp > max) {
-                        max = tmp;
-                        maxI = i;
-                        maxJ = j;
-                    }
-                    data[i][j] = 0;
-                }
-            }
-        }
-
-        data[maxI][maxJ] = 1;
+        Vector succ = create_successeur(cloneGrille,casesvides);
         
-        System.out.println("--------------------------"+maxI * colones + maxJ);
-        return maxI * colones + maxJ;
+        
+        return MinimaxDecision(cloneGrille,succ);
+ 
     }
 
-    int Min(byte[][] data, int profondeur) {
-        if (profondeur == 0) {
-            return eval(data);
+    int Min(Grille grille, Vector succ) {
+        
+        GrilleVerificateur terminate_test = new GrilleVerificateur();
+        int gagnant = terminate_test.determineGagnant(grille);
+        double  min = Double.POSITIVE_INFINITY;
+        
+        if( gagnant == 1 || gagnant == 2)    
+            return Utilite(grille,succ);
+        
+        Vector tmpSucc = succ;
+        
+        for(Object g : succ){
+            int t = Min((Grille) g,succ);
+            if(t < min) min = t;
         }
-
-        int min = 10000;
-        int tmp;
-        int lignes = data.length;//optimiser en passant en param
-        int colones = data[0].length;// optimiser en passant en param
-
-        for (int i = 0; i < lignes; i++) {
-            for (int j = 0; j < colones; j++) {
-                if (data[i][j] == 0) {
-                    data[i][j] = 1;
-                    tmp = Max(data, profondeur - 1);
-
-                    if (tmp < min) {
-                        min = tmp;
-                    }
-                    data[i][j] = 0;
-                }
-            }
-        }
-
-        return min;
+        return (int)min;
 
     }
 
-    int Max(byte[][] data, int profondeur) {
-        if (profondeur == 0) {
-            return eval(data);
+    int Max(Grille grille, Vector succ) {
+        
+        GrilleVerificateur terminate_test = new GrilleVerificateur();
+        int gagnant = terminate_test.determineGagnant(grille);
+        double  max = Double.NEGATIVE_INFINITY;
+        
+        
+        if( gagnant == 1 || gagnant == 2)    
+            return Utilite(grille,succ);
+        
+        Vector tmpSucc = succ;
+        
+        for(Object g : succ){
+            int t = Min((Grille) g,succ);
+            if(t > max) max = t;
         }
-
-        int max = -10000;
-        int tmp;
-        int lignes = data.length;//optimiser en passant en param
-        int colones = data[0].length;// optimiser en passant en param
-
-        for (int i = 0; i < lignes; i++) {
-            for (int j = 0; j < colones; j++) {
-                if (data[i][j] == 0) {
-                    data[i][j] = 2;
-                    tmp = Min(data, profondeur - 1);
-
-                    if (tmp > max) {
-                        max = tmp;
-                    }
-                    data[i][j] = 0;
-                }
-            }
-        }
-
-        return max;
+        return (int)max;
 
     }
 
@@ -181,6 +151,41 @@ public class JoueurArtificiel implements Joueur {
 
         return 0;
 
+    }
+
+    private Vector create_successeur(Grille cloneGrille,ArrayList<Integer> casesvides) {
+
+    Vector chd = new Vector();
+    Grille tmpGrille = cloneGrille.clone();
+    int nbcol = cloneGrille.getData()[0].length;
+    int lignes = cloneGrille.getData().length;
+    
+    
+    for(int i : casesvides){
+        tmpGrille.getData()[i%lignes][i/nbcol] = (byte) (id == 1 ? 1 : id ==2  ? 2 : -1);
+        chd.add(tmpGrille);
+    }
+    
+    
+    
+     return chd;
+    }
+
+    private int MinimaxDecision(Grille cloneGrille, Vector succ) {
+
+     int action = -1;
+
+     if (id == 1)
+            action = Max(cloneGrille,succ);
+        else action = Min(cloneGrille,succ);
+    
+    
+    return action;
+    
+    }
+
+    private int Utilite(Grille grille, Vector succ) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
