@@ -18,45 +18,45 @@ public class GrilleVerificateur {
         quiGagne = lastValue = 0; // reset status
 
         // horizontal
-        for (int l = 0; l < grille.getData.length; l++) {
-            for (int c = 0; c < grille.getData[0].length; c++) {
-                check(grille.getData[l][c]);
+        for (int l = 0; l < grille.data.length; l++) {
+            for (int c = 0; c < grille.data[0].length; c++) {
+                check(grille.data[l][c]);
             }
             check(0);
         }
 
         // vertical
-        for (int c = 0; c < grille.getData[0].length; c++) {
-            for (int l = 0; l < grille.getData.length; l++) {
-                check(grille.getData[l][c]);
+        for (int c = 0; c < grille.data[0].length; c++) {
+            for (int l = 0; l < grille.data.length; l++) {
+                check(grille.data[l][c]);
             }
             check(0);
         }
 
         // Diagonal \\\\\\\
-        for (int c = -grille.getData.length; c < grille.getData[0].length; c++) {
+        for (int c = -grille.data.length; c < grille.data[0].length; c++) {
             int c2 = c;
             int l = 0;
             if (c2 < 0) {
                 l = -c2;
                 c2 = 0;
             }
-            for (; c2 < grille.getData[0].length && l < grille.getData.length; c2++, l++) {
-                check(grille.getData[l][c2]);
+            for (; c2 < grille.data[0].length && l < grille.data.length; c2++, l++) {
+                check(grille.data[l][c2]);
             }
             check(0);
         }
 
         // Diagonal //////
-        for (int c = -grille.getData.length; c < grille.getData[0].length; c++) {
+        for (int c = -grille.data.length; c < grille.data[0].length; c++) {
             int c2 = c;
-            int l = grille.getData.length - 1;
+            int l = grille.data.length - 1;
             if (c2 < 0) {
                 l += c2;
                 c2 = 0;
             }
-            for (; c2 < grille.getData[0].length && l >= 0; c2++, l--) {
-                check(grille.getData[l][c2]);
+            for (; c2 < grille.data[0].length && l >= 0; c2++, l--) {
+                check(grille.data[l][c2]);
             }
             check(0);
         }

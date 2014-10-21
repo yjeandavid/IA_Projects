@@ -34,8 +34,8 @@ public class GrilleDisplay extends JPanel {
 
     void setGrille(Grille g){
         grille = g;
-        Dimension d = new Dimension(grille.getData[0].length * tailleCase,
-                                    grille.getData.length * tailleCase);
+        Dimension d = new Dimension(grille.data[0].length * tailleCase,
+                                    grille.data.length * tailleCase);
         setMinimumSize(d);
         setPreferredSize(d);
         repaint();
@@ -52,7 +52,7 @@ public class GrilleDisplay extends JPanel {
                 int l = e.getY() / tailleCase;
                 int c = e.getX() / tailleCase;
                 
-                if(l<grille.getData.length && c<grille.getData[0].length)
+                if(l<grille.data.length && c<grille.data[0].length)
                     listener.caseClicked(l, c);
             }
         }
@@ -64,8 +64,8 @@ public class GrilleDisplay extends JPanel {
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         if(grille!=null){
-            int nbligne = grille.getData.length;
-            int nbcol = grille.getData[0].length;
+            int nbligne = grille.data.length;
+            int nbcol = grille.data[0].length;
             
             for(int l=0;l<=nbligne;l++)
                 g.drawLine(0, l*tailleCase, nbcol*tailleCase, l*tailleCase);
@@ -74,7 +74,7 @@ public class GrilleDisplay extends JPanel {
          
             for(int l=0;l<nbligne;l++)
                 for(int c=0;c<nbcol;c++){
-                    switch(grille.getData[l][c]){
+                    switch(grille.data[l][c]){
                         case 0:
                             continue;
                         case 1:
