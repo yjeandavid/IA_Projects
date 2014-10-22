@@ -33,7 +33,7 @@ public class JoueurArtificiel_1 implements Joueur {
      */
     @Override
     public Position getProchainCoup(Grille grille, int delais) {
-        ArrayList<Integer> casesvides = new ArrayList<>();
+        ArrayList<Integer> casesvides = new ArrayList<Integer>();
         int nbcol = grille.getData()[0].length;
         for (int l = 0; l < grille.getData().length; l++) {
             for (int c = 0; c < nbcol; c++) {
@@ -43,9 +43,9 @@ public class JoueurArtificiel_1 implements Joueur {
             }
         }
 
-        double choice = AlphaBetaSearch(grille);
+        int choix = JoeurIA(grille, casesvides.size());
 
-        int choix = random.nextInt(casesvides.size());
+        //int choix = random.nextInt(casesvides.size());
         choix = casesvides.get(choix);
         return new Position(choix / nbcol, choix % nbcol);
     }
@@ -55,101 +55,121 @@ public class JoueurArtificiel_1 implements Joueur {
         return "Christian TÉLÉMAQUE (TELC10058803)  et  Claude-Clément YAPO (YAPC01129002)";
     }
 
-    private int AlphaBetaSearch(Grille grille) {
-        int choix = 0;
-        
-        double v = MaxValue(grille, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-        
-        return choix;
-    }
-    
-    private double MaxValue(Grille grille, Double alpha, Double beta) {
-        GrilleVerificateur verif = new GrilleVerificateur();
-        double v;
-        ArrayList<Grille> etatsSuccesseurs;
-        
-        if (verif.determineGagnant(grille) != 0 || grille.nbLibre() == 0) {
-            v = utility(grille);
-        } else {
-            v = Double.NEGATIVE_INFINITY;
-            etatsSuccesseurs = GenererSuccesseurs(grille);
-            for (Grille g : etatsSuccesseurs) {
-                v = Math.max(v, MinValue(g, alpha, beta));
-                if (v >= beta) {
-                    break;
+    public int JoeurIA(Grille grille, int profondeur) {
+
+        int max = -10000;
+        int tmp, maxI = -1, maxJ = -1;
+        byte[][] data = grille.getData();
+        int lignes = data.length;
+        int colones = data[0].length;
+
+        for (int i = 0; i < lignes; i++) {
+            for (int j = 0; j < colones; j++) {
+                if (data[i][j] == 0) {
+                    data[i][j] = 2;
+                    tmp = Min(data, profondeur - 1);
+
+                    if (tmp > max) {
+                        max = tmp;
+                        maxI = i;
+                        maxJ = j;
+                    }
+                    data[i][j] = 0;
                 }
-                alpha = Math.max(alpha, v);
             }
         }
+
+        data[maxI][maxJ] = 1;
         
-        return v;
-    }
-    
-    private double MinValue(Grille grille, Double alpha, Double beta) {
-        GrilleVerificateur verif = new GrilleVerificateur();
-        double v;
-        ArrayList<Grille> etatsSuccesseurs;
-        
-        if (verif.determineGagnant(grille) != 0 || grille.nbLibre() == 0) {
-            v = utility(grille);
-        } else {
-            v = Double.POSITIVE_INFINITY;
-            etatsSuccesseurs = GenererSuccesseurs(grille);
-            for (Grille g : etatsSuccesseurs) {
-                v = Math.min(v, MaxValue(g, alpha, beta));
-                if (v <= alpha) {
-                    break;
-                }
-                beta = Math.min(beta, v);
-            }
-        }
-        
-        return v;
+        System.out.println("--------------------------"+maxI * colones + maxJ);
+        return maxI * colones + maxJ;
     }
 
-    private ArrayList<Grille> GenererSuccesseurs(Grille grille) {
-        ArrayList<Integer> casesvides = new ArrayList<>();
-        ArrayList<Grille> successeurs = new ArrayList<>();
-        int nbcol = grille.getData()[0].length;
-        int nblig = grille.getData().length;
-        int numJoueur;
-        
-        for (int l = 0; l < nblig; l++) {
-            for (int c = 0; c < nbcol; c++) {
-                if (grille.getData()[l][c] == 0) {
-                    casesvides.add(l * nbcol + c);
+    int Min(byte[][] data, int profondeur) {
+        if (profondeur == 0) {
+            return eval(data);
+        }
+
+        int min = 10000;
+        int tmp;
+        int lignes = data.length;//optimiser en passant en param
+        int colones = data[0].length;// optimiser en passant en param
+
+        for (int i = 0; i < lignes; i++) {
+            for (int j = 0; j < colones; j++) {
+                if (data[i][j] == 0) {
+                    data[i][j] = 1;
+                    tmp = Max(data, profondeur - 1);
+
+                    if (tmp < min) {
+                        min = tmp;
+                    }
+                    data[i][j] = 0;
                 }
             }
         }
-        
-        numJoueur = (nbcol*nblig) % 2 == casesvides.size() % 2 ? 1 : 2;
-        
-        for (int i : casesvides) {
-            Grille copieGrille = grille.clone();
-            int choix = casesvides.get(i);
-            copieGrille.set(new Position(choix / nbcol, choix % nbcol), numJoueur);
-            successeurs.add(copieGrille);
-        }
-        
-        return successeurs;
+
+        return min;
+
     }
 
-    private double utility(Grille grille) {
-        int nbcol = grille.getData()[0].length;
-        int nblig = grille.getData().length;
-        int numJoueur = (nbcol*nblig) % 2 == grille.nbLibre() % 2 ? 1 : 2;
-        GrilleVerificateur verif = new GrilleVerificateur();
-        int gagnant = verif.determineGagnant(grille);
-        double poids;
-        
-        if (gagnant != numJoueur) {
-            poids = (-1.0);
-        } else if (gagnant == 0) {
-            poids = 0.0;
-        } else {
-            poids = 1.0;
+    int Max(byte[][] data, int profondeur) {
+        if (profondeur == 0) {
+            return eval(data);
         }
-        
-        return poids;
+
+        int max = -10000;
+        int tmp;
+        int lignes = data.length;//optimiser en passant en param
+        int colones = data[0].length;// optimiser en passant en param
+
+        for (int i = 0; i < lignes; i++) {
+            for (int j = 0; j < colones; j++) {
+                if (data[i][j] == 0) {
+                    data[i][j] = 2;
+                    tmp = Min(data, profondeur - 1);
+
+                    if (tmp > max) {
+                        max = tmp;
+                    }
+                    data[i][j] = 0;
+                }
+            }
+        }
+
+        return max;
+
     }
+
+    int eval(byte[][] data) {
+        int nb_de_pions = 0;
+        int lignes = data.length;//optimiser en passant en param
+        int colones = data[0].length;// optimiser en passant en param
+        GrilleVerificateur evaluation = new GrilleVerificateur();
+        Grille g = new Grille(lignes, colones);
+        int vainqueur = 0;
+
+        for (int i = 0; i < lignes; i++) {
+            for (int j = 0; j < colones; j++) {
+                g.set(i, j, data[i][j]);
+                if (data[i][j] != 0) {
+                    nb_de_pions++;
+                }
+            }
+        }
+
+        if ((vainqueur = evaluation.determineGagnant(g)) != 0) {
+            if (vainqueur == 1) {
+                return 1000 - nb_de_pions;
+            } else if (vainqueur == 2) {
+                return -1000 + nb_de_pions;
+            } else {
+                return 0;
+            }
+        }
+
+        return 0;
+
+    }
+
 }
