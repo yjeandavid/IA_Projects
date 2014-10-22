@@ -197,10 +197,10 @@ public class JoueurArtificiel implements Joueur {
         for (int i = 0; i < longueurDiagonale; ++i) {
            
             nbIdDiag = (donne[DebutdiagonaleX+i][DebutdiagonaleY+i] == id
-                    || donne[DebutdiagonaleX][DebutdiagonaleY] == 0) ? ++nbIdDiag : 0;
+                    || donne[DebutdiagonaleX+i][DebutdiagonaleY+i] == 0) ? ++nbIdDiag : 0;
             maxDiag = nbIdDiag == 5 ? ++maxDiag : maxDiag;
             i = nbIdDiag == 5 ? longueurDiagonale : i;
-            i = ((DebutdiagonaleX > DebutdiagonaleY)
+            i = (((DebutdiagonaleX+i) > (DebutdiagonaleY+i))
                     ? (DebutdiagonaleX == (lignes - 1) ? longueurDiagonale : i)
                     : (DebutdiagonaleY == (nbcol - 1) ? longueurDiagonale : i));
         }
