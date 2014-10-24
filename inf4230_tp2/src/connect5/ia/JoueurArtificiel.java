@@ -63,7 +63,7 @@ public class JoueurArtificiel implements Joueur {
         int choix = Minimax(grille, casesvides);
 
         //int choix = random.nextInt(casesvides.size());
-        choix = casesvides.get(choix);
+        //choix = casesvides.get(choix);
         return new Position(choix / nbcol, choix % nbcol);
     }
 
@@ -104,37 +104,25 @@ public class JoueurArtificiel implements Joueur {
         int max = -999999999;
         int cmp = -1;
         int posSucc = 0;
-        Vector action = new Vector();
+        int action = -1;
         int meilleur = 0;
 
         for (Grille g : succ) {
 
             cmp = utilite(g, this.casesvides.get(posSucc));
-            System.out.println("utilié = " + cmp);
             if (cmp > max) {
-                action = new Vector();
                 max = cmp;
-                action.add(this.casesvides.get(posSucc));
+                action = this.casesvides.get(posSucc);
             } else if (cmp == max) {
-                action.add(this.casesvides.get(posSucc));
+                //action.add(this.casesvides.get(posSucc));
             }
             ++posSucc;
         }
-        
-        
-        Vector ml =meilleurLigne(action);
-        Vector mc =meilleurColonne(action);
-        Vector md =meilleurDiagonale(action);
-        
-        meilleur = (int) ((ml.size() < mc.size() && mc.size() < md.size() ) 
-                ?  ml.get(0)
-                : (mc.size()<ml.size() && ml.size() < md.size())
-                ?  mc.get(0)
-                : (md.size() < ml.size() && ml.size() < mc.size())
-                ?  md.get(0)
-                : 0);
 
-        return meilleur;
+       
+
+
+        return action;
 
     }
 
@@ -161,11 +149,11 @@ public class JoueurArtificiel implements Joueur {
             for (int j = 0; j < nbcol; ++j) {
 
                 evalLigneMax = (donne[i][j] == 0 || donne[i][j] == id) ? ++evalLigneMax : 0;
-                evalLigneMin = (donne[i][j] == 0||donne[i][j] != id) ? ++evalLigneMin  : 0;
+                evalLigneMin = (donne[i][j] == 0 || donne[i][j] != id) ? ++evalLigneMin : 0;
                 Maxligne = evalLigneMax == 5 ? ++Maxligne : Maxligne;
-                Minligne = evalLigneMin == 5 ? ++Minligne :Minligne;
+                Minligne = evalLigneMin == 5 ? ++Minligne : Minligne;
 
-                j = ((evalLigneMax >= 5)&&(evalLigneMin>=5)) ? nbcol : j;
+                j = ((evalLigneMax >= 5) && (evalLigneMin >= 5)) ? nbcol : j;
 
             }
         }
@@ -177,11 +165,11 @@ public class JoueurArtificiel implements Joueur {
             for (int i = 0; i < lignes; ++i) {
 
                 evalcolonneMax = (donne[i][j] == 0 || donne[i][j] == id) ? ++evalcolonneMax : 0;
-                evalcolonneMin = (donne[i][j] == 0||donne[i][j] != id) ? ++evalcolonneMin : 0;
+                evalcolonneMin = (donne[i][j] == 0 || donne[i][j] != id) ? ++evalcolonneMin : 0;
                 Maxcol = (evalcolonneMax == 5) ? ++Maxcol : Maxcol;
-                Mincol = (evalcolonneMin == 5) ? ++Mincol: Mincol;
+                Mincol = (evalcolonneMin == 5) ? ++Mincol : Mincol;
 
-                i = ((evalcolonneMax >= 5)&&(evalcolonneMin>=5)) ? lignes : i;
+                i = ((evalcolonneMax >= 5) && (evalcolonneMin >= 5)) ? lignes : i;
 
             }
         }
@@ -190,9 +178,12 @@ public class JoueurArtificiel implements Joueur {
         Maxdiag += diagonaleMax(donne, posSucc, lignes, nbcol);
 
         //evaluation min
-         Mindiag+= diagonaleMin(donne,posSucc, lignes, nbcol);
-         
-        return ((Maxligne + Maxcol + Maxdiag)-(Minligne+Mincol+Mindiag));
+
+        Mindiag += diagonaleMin(donne, posSucc, lignes, nbcol);
+        
+                    System.out.println("utilité Max  = " + (Maxligne + Maxcol + Maxdiag)+"- Utilité Min = "+(Minligne + Mincol + Mindiag));
+
+        return ((Maxligne + Maxcol + Maxdiag)- (Minligne + Mincol + Mindiag)) ;
     }
 
     public int diagonaleMax(byte[][] donne, int posSucc, int lignes, int nbcol) {
@@ -237,25 +228,67 @@ public class JoueurArtificiel implements Joueur {
 
         return maxDiag;
     }
-    
-    
+
     public int diagonaleMin(byte[][] donne, int posSucc, int lignes, int nbcol) {
+
+        int nbOppo = 0;
+        int minDiag = 0;
+        int longueurDiagonale = lignes < nbcol ? lignes : nbcol < lignes ? nbcol : nbcol;
+
+        //premiere diagonale
+        for(int c = - lignes; c < nbcol ; ++c){
+            int c2 = c;
+            nbOppo = 0;
+            int l = 0;
+            if (c2 < 0) {
+                l = -c2;
+                c2 = 0;
+            }
+            
+            
+            for (; c2 < nbcol && l < lignes ; ++c2,++l) {
+            nbOppo = (donne[l][c2] != id
+                    || donne[l][c2] == 0) ? ++nbOppo : 0;
+            
+            minDiag = nbOppo == 5 ? ++minDiag : minDiag;
+            c2 = nbOppo == 5 ? nbcol : c2;
+        } 
+            
+        }
         
         
         
-        return 0;
+        
+        // deuxieme diagonale
+        
+         for (int c = -lignes; c < nbcol; c++) {
+            nbOppo = 0;
+             int c2 = c;
+            int l = donne.length - 1;
+            if (c2 < 0) {
+                l += c2;
+                c2 = 0;
+                
+            }
+            for (; c2 < nbcol && l >= 0; c2++, l--) {
+
+            nbOppo = (donne[l][c2] != id
+                    || donne[l][c2] == 0) ? ++nbOppo : 0;
+            minDiag = nbOppo == 5 ? ++minDiag : minDiag;
+            c2 = nbOppo == 5 ? nbcol : c2;
+            
+            }
+
+         }
+
+            
+            
+            
+       
+
+        return minDiag;
     }
 
-    private Vector meilleurLigne(Vector action) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private Vector meilleurColonne(Vector action) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private Vector meilleurDiagonale(Vector action) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }
