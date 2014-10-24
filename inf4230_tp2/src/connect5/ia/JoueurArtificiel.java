@@ -69,7 +69,7 @@ public class JoueurArtificiel implements Joueur {
 
     @Override
     public String getAuteurs() {
-        return "Prénom1 Nom1 (TELC10058803)  et  Claude-Clément YAPO (YAPC01129002)";
+        return "Christian TÉLÉMAQUE (TELC10058803)  et  Claude-Clément YAPO (YAPC01129002)";
     }
 
     public int Minimax(Grille grille, ArrayList<Integer> casesvides) {

@@ -9,6 +9,7 @@
 package connect5;
 
 import connect5.ia.JoueurArtificiel;
+import connect5.ia.JoueurArtificiel_1;
 
 /**
  *
@@ -152,9 +153,14 @@ public class JeuConnect5 implements Runnable {
     private boolean  ignorerRetard = false;
     
     public static void main(String args[]) throws Exception {
-        JoueurArtificiel j1 = new JoueurArtificiel();
+        /*JoueurArtificiel j1 = new JoueurArtificiel();
         JoueurArtificiel j2 = new JoueurArtificiel();
-        JeuConnect5 gp = new JeuConnect5(j1, j2, 14, 14);
+        JeuConnect5 gp = new JeuConnect5(j1, j2, 14, 14);*/
+        
+        JoueurArtificiel_1 j1 = new JoueurArtificiel_1();
+        JoueurArtificiel_1 j2 = new JoueurArtificiel_1();
+        JeuConnect5 gp = new JeuConnect5(j1, j2, 5, 5);
+        
         gp.run();
         System.out.println("Gagnant:" + gp.gagnant);
     }

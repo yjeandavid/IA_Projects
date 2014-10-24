@@ -18,6 +18,7 @@ import java.util.Random;
 public class JoueurArtificiel_1 implements Joueur {
 
     private final Random random = new Random();
+    private int numJoueur = 0;
 
     /**
      * Voici la fonction à modifier. Évidemment, vous pouvez ajouter d'autres
@@ -33,20 +34,22 @@ public class JoueurArtificiel_1 implements Joueur {
      */
     @Override
     public Position getProchainCoup(Grille grille, int delais) {
-        ArrayList<Integer> casesvides = new ArrayList<>();
+        //ArrayList<Integer> casesvides = new ArrayList<>();
         int nbcol = grille.getData()[0].length;
-        for (int l = 0; l < grille.getData().length; l++) {
+        int nblig = grille.getData().length;
+        /*for (int l = 0; l < nblig; l++) {
             for (int c = 0; c < nbcol; c++) {
                 if (grille.getData()[l][c] == 0) {
                     casesvides.add(l * nbcol + c);
                 }
             }
-        }
+        }*/
+        numJoueur = (nbcol*nblig) % 2 == grille.nbLibre() % 2 ? 1 : 2;
 
-        double choice = AlphaBetaSearch(grille);
+        int choix = AlphaBetaSearch(grille);
 
-        int choix = random.nextInt(casesvides.size());
-        choix = casesvides.get(choix);
+        //int choix = random.nextInt(casesvides.size());
+        //choix = casesvides.get(choix);
         return new Position(choix / nbcol, choix % nbcol);
     }
 
@@ -56,14 +59,17 @@ public class JoueurArtificiel_1 implements Joueur {
     }
 
     private int AlphaBetaSearch(Grille grille) {
-        int choix = 0;
+        //int choix = 0;
         
-        double v = MaxValue(grille, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        //double v = MaxValue(grille, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         
-        return choix;
+        EtatSuccesseur g = new EtatSuccesseur(grille);
+        EtatSuccesseur v = MaxValue(g, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        
+        return v.getAction();
     }
     
-    private double MaxValue(Grille grille, Double alpha, Double beta) {
+    /*private double MaxValue(Grille grille, Double alpha, Double beta) {
         GrilleVerificateur verif = new GrilleVerificateur();
         double v;
         ArrayList<Grille> etatsSuccesseurs;
@@ -83,9 +89,41 @@ public class JoueurArtificiel_1 implements Joueur {
         }
         
         return v;
+    }*/
+    
+    private EtatSuccesseur MaxValue(EtatSuccesseur grille, Double alpha, Double beta) {
+        GrilleVerificateur verif = new GrilleVerificateur();
+        EtatSuccesseur gagnant = grille;
+        double v;
+        ArrayList<EtatSuccesseur> etatsSuccesseurs;
+        
+        if (verif.determineGagnant(grille.getGrille()) != 0 || grille.getGrille().nbLibre() == 0) {
+            v = utility(grille.getGrille());
+            grille.setUtilite(v);
+        } else {
+            v = Double.NEGATIVE_INFINITY;
+            etatsSuccesseurs = GenererSuccesseurs(grille.getGrille());
+            for (EtatSuccesseur e : etatsSuccesseurs) {
+                EtatSuccesseur min = MinValue(e, alpha, beta);
+                e.setUtilite(min.getUtilite());
+                v = Math.max(v, min.getUtilite());
+                if (v >= beta) {
+                    break;
+                }   
+                alpha = Math.max(alpha, v);
+            }
+             for (EtatSuccesseur e : etatsSuccesseurs) {
+                if (v == e.getUtilite()) {
+                    gagnant = e;
+                    break;
+                }
+            }
+        }
+        
+        return gagnant;
     }
     
-    private double MinValue(Grille grille, Double alpha, Double beta) {
+    /*private double MinValue(Grille grille, Double alpha, Double beta) {
         GrilleVerificateur verif = new GrilleVerificateur();
         double v;
         ArrayList<Grille> etatsSuccesseurs;
@@ -105,9 +143,41 @@ public class JoueurArtificiel_1 implements Joueur {
         }
         
         return v;
+    }*/
+    
+    private EtatSuccesseur MinValue(EtatSuccesseur grille, Double alpha, Double beta) {
+        GrilleVerificateur verif = new GrilleVerificateur();
+        EtatSuccesseur gagnant = grille;
+        double v;
+        ArrayList<EtatSuccesseur> etatsSuccesseurs;
+        
+        if (verif.determineGagnant(grille.getGrille()) != 0 || grille.getGrille().nbLibre() == 0) {
+            v = utility(grille.getGrille());
+            grille.setUtilite(v);
+        } else {
+            v = Double.POSITIVE_INFINITY;
+            etatsSuccesseurs = GenererSuccesseurs(grille.getGrille());
+            for (EtatSuccesseur e : etatsSuccesseurs) {
+                EtatSuccesseur max = MaxValue(e, alpha, beta);
+                e.setUtilite(max.getUtilite());
+                v = Math.min(v, max.getUtilite());
+                if (v <= alpha) {
+                    break;
+                }
+                beta = Math.min(beta, v);
+            }
+            for (EtatSuccesseur e : etatsSuccesseurs) {
+                if (v == e.getUtilite()) {
+                    gagnant = e;
+                    break;
+                }
+            }
+        }
+        
+        return gagnant;
     }
 
-    private ArrayList<Grille> GenererSuccesseurs(Grille grille) {
+    /*private ArrayList<Grille> GenererSuccesseurs(Grille grille) {
         ArrayList<Integer> casesvides = new ArrayList<>();
         ArrayList<Grille> successeurs = new ArrayList<>();
         int nbcol = grille.getData()[0].length;
@@ -126,18 +196,42 @@ public class JoueurArtificiel_1 implements Joueur {
         
         for (int i : casesvides) {
             Grille copieGrille = grille.clone();
-            int choix = casesvides.get(i);
-            copieGrille.set(new Position(choix / nbcol, choix % nbcol), numJoueur);
+            copieGrille.set(new Position(i / nbcol, i % nbcol), numJoueur);
             successeurs.add(copieGrille);
+        }
+        
+        return successeurs;
+    }*/
+    
+    private ArrayList<EtatSuccesseur> GenererSuccesseurs(Grille grille) {
+        ArrayList<Integer> casesvides = new ArrayList<>();
+        ArrayList<EtatSuccesseur> successeurs = new ArrayList<>();
+        int nbcol = grille.getData()[0].length;
+        int nblig = grille.getData().length;
+        int idJoueur;
+        
+        for (int l = 0; l < nblig; l++) {
+            for (int c = 0; c < nbcol; c++) {
+                if (grille.getData()[l][c] == 0) {
+                    casesvides.add(l * nbcol + c);
+                }
+            }
+        }
+        
+        idJoueur = (nbcol*nblig) % 2 == casesvides.size() % 2 ? 1 : 2;
+        
+        for (int i : casesvides) {
+            Grille copieGrille = grille.clone();
+            copieGrille.set(new Position(i / nbcol, i % nbcol), idJoueur);
+            EtatSuccesseur e = new EtatSuccesseur(copieGrille);
+            e.setAction(i);
+            successeurs.add(e);
         }
         
         return successeurs;
     }
 
     private double utility(Grille grille) {
-        int nbcol = grille.getData()[0].length;
-        int nblig = grille.getData().length;
-        int numJoueur = (nbcol*nblig) % 2 == grille.nbLibre() % 2 ? 1 : 2;
         GrilleVerificateur verif = new GrilleVerificateur();
         int gagnant = verif.determineGagnant(grille);
         double poids;
