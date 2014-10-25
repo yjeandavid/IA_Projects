@@ -33,10 +33,10 @@ public class JoueurArtificiel implements Joueur {
 
     /**
      * Voici la fonction à modifier. Évidemment, vous pouvez ajouter d'autres
-     * fonctions dans JoueurArtificiel. Vous pouvez aussi ajouter d'autres
-     * classes, mais elles doivent être ajoutées dans le package connect5.ia.
-     * Vous de pouvez pas modifier les fichiers directement dans connect., car
-     * ils seront écrasés.
+ fonctions dans JoueurArtificiel. Vous pouvez aussi ajouter d'autres
+ classes, mais elles doivent être ajoutées dans le package connect5.ia.
+ Vous de pouvez pas modifier les fichiers directement dans connect., car
+ ils seront écrasés.
      *
      * @param grille Grille reçu (état courrant). Il faut ajouter le prochain
      * coup.
@@ -57,13 +57,12 @@ public class JoueurArtificiel implements Joueur {
 
         this.casesvides = casesvides;
 
-        this.dernierXJouer = (grille.getData().length / 2);
-        this.dernierYJouer = (nbcol / 2);
-
         int choix = Minimax(grille, casesvides);
 
         //int choix = random.nextInt(casesvides.size());
         //choix = casesvides.get(choix);
+        if(grille.getData().length*grille.getData()[0].length == casesvides.size()) return new Position(nbcol/2,nbcol/2);
+
         return new Position(choix / nbcol, choix % nbcol);
     }
 
@@ -73,7 +72,6 @@ public class JoueurArtificiel implements Joueur {
     }
 
     public int Minimax(Grille grille, ArrayList<Integer> casesvides) {
-
         double max = Double.NEGATIVE_INFINITY;
 
         Vector<Grille> succ = create_successeur(grille, casesvides);
@@ -105,8 +103,7 @@ public class JoueurArtificiel implements Joueur {
         int cmp = -1;
         int posSucc = 0;
         int action = -1;
-        int meilleur = 0;
-
+ 
         for (Grille g : succ) {
 
             cmp = utilite(g, this.casesvides.get(posSucc));
@@ -114,13 +111,12 @@ public class JoueurArtificiel implements Joueur {
                 max = cmp;
                 action = this.casesvides.get(posSucc);
             } else if (cmp == max) {
-                //action.add(this.casesvides.get(posSucc));
+                //meilleur.add(this.casesvides.get(posSucc));
             }
             ++posSucc;
         }
 
-       
-
+         
 
         return action;
 
@@ -178,12 +174,11 @@ public class JoueurArtificiel implements Joueur {
         Maxdiag += diagonaleMax(donne, posSucc, lignes, nbcol);
 
         //evaluation min
-
         Mindiag += diagonaleMin(donne, posSucc, lignes, nbcol);
-        
-                    System.out.println("utilité Max  = " + (Maxligne + Maxcol + Maxdiag)+"- Utilité Min = "+(Minligne + Mincol + Mindiag));
 
-        return ((Maxligne + Maxcol + Maxdiag)- (Minligne + Mincol + Mindiag)) ;
+        System.out.println("utilité Max  = " + (Maxligne + Maxcol + Maxdiag) + "- Utilité Min = " + (Minligne + Mincol + Mindiag));
+
+        return ((Maxligne + Maxcol + Maxdiag) - (Minligne + Mincol + Mindiag));
     }
 
     public int diagonaleMax(byte[][] donne, int posSucc, int lignes, int nbcol) {
@@ -236,7 +231,7 @@ public class JoueurArtificiel implements Joueur {
         int longueurDiagonale = lignes < nbcol ? lignes : nbcol < lignes ? nbcol : nbcol;
 
         //premiere diagonale
-        for(int c = - lignes; c < nbcol ; ++c){
+        for (int c = -lignes; c < nbcol; ++c) {
             int c2 = c;
             nbOppo = 0;
             int l = 0;
@@ -244,51 +239,39 @@ public class JoueurArtificiel implements Joueur {
                 l = -c2;
                 c2 = 0;
             }
-            
-            
-            for (; c2 < nbcol && l < lignes ; ++c2,++l) {
-            nbOppo = (donne[l][c2] != id
-                    || donne[l][c2] == 0) ? ++nbOppo : 0;
-            
-            minDiag = nbOppo == 5 ? ++minDiag : minDiag;
-            c2 = nbOppo == 5 ? nbcol : c2;
-        } 
-            
+
+            for (; c2 < nbcol && l < lignes; ++c2, ++l) {
+                nbOppo = (donne[l][c2] != id
+                        || donne[l][c2] == 0) ? ++nbOppo : 0;
+
+                minDiag = nbOppo == 5 ? ++minDiag : minDiag;
+                c2 = nbOppo == 5 ? nbcol : c2;
+            }
+
         }
-        
-        
-        
-        
+
         // deuxieme diagonale
-        
-         for (int c = -lignes; c < nbcol; c++) {
+        for (int c = -lignes; c < nbcol; c++) {
             nbOppo = 0;
-             int c2 = c;
+            int c2 = c;
             int l = donne.length - 1;
             if (c2 < 0) {
                 l += c2;
                 c2 = 0;
-                
+
             }
             for (; c2 < nbcol && l >= 0; c2++, l--) {
 
-            nbOppo = (donne[l][c2] != id
-                    || donne[l][c2] == 0) ? ++nbOppo : 0;
-            minDiag = nbOppo == 5 ? ++minDiag : minDiag;
-            c2 = nbOppo == 5 ? nbcol : c2;
-            
+                nbOppo = (donne[l][c2] != id
+                        || donne[l][c2] == 0) ? ++nbOppo : 0;
+                minDiag = nbOppo == 5 ? ++minDiag : minDiag;
+                c2 = nbOppo == 5 ? nbcol : c2;
+
             }
 
-         }
-
-            
-            
-            
-       
+        }
 
         return minDiag;
     }
-
-    
 
 }
