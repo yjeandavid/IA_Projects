@@ -20,7 +20,7 @@ public class EtatSuccesseur {
     
     public EtatSuccesseur(Grille grille) {
         action = 0;
-        utilite = 0;
+        utilite = 0.0;
         setGrille(grille);
     }
 

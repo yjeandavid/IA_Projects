@@ -5,7 +5,7 @@ package connect5.ia;
  *
  * Vous pouvez ajouter d'autres classes sous le package connect5.ia.
  *
- * Christian Telemaque    (TELC10058803)
+ * Christian TÉLÉMAQUE    (TELC10058803)
  * Claude-Clément YAPO    (YAPC01129002)
  */
 import connect5.Grille;
@@ -14,29 +14,18 @@ import connect5.Joueur;
 import connect5.Position;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
 
 public class JoueurArtificiel implements Joueur {
 
     private final Random random = new Random();
-    private static int nbrJouer = 0;
-    private int id = 0;
-    private ArrayList<Integer> casesvides;
-    private int dernierXJouer = 0;
-    private int dernierYJouer = 0;
-
-    public JoueurArtificiel() {
-        ++nbrJouer;
-
-        id = nbrJouer == 1 ? 1 : nbrJouer == 2 ? 2 : -1;
-    }
+    private int numJoueur = 0;
 
     /**
      * Voici la fonction à modifier. Évidemment, vous pouvez ajouter d'autres
- fonctions dans JoueurArtificiel. Vous pouvez aussi ajouter d'autres
- classes, mais elles doivent être ajoutées dans le package connect5.ia.
- Vous de pouvez pas modifier les fichiers directement dans connect., car
- ils seront écrasés.
+     * fonctions dans JoueurArtificiel. Vous pouvez aussi ajouter d'autres
+     * classes, mais elles doivent être ajoutées dans le package connect5.ia.
+     * Vous de pouvez pas modifier les fichiers directement dans connect., car
+     * ils seront écrasés.
      *
      * @param grille Grille reçu (état courrant). Il faut ajouter le prochain
      * coup.
@@ -45,24 +34,36 @@ public class JoueurArtificiel implements Joueur {
      */
     @Override
     public Position getProchainCoup(Grille grille, int delais) {
-        ArrayList<Integer> casesvides = new ArrayList<Integer>();
+        //ArrayList<Integer> casesvides = new ArrayList<>();
         int nbcol = grille.getData()[0].length;
-        for (int l = 0; l < grille.getData().length; l++) {
+        int nblig = grille.getData().length;
+        int profondeur = 1, duree = 0;
+        long start, stop;
+        
+        /*for (int l = 0; l < nblig; l++) {
             for (int c = 0; c < nbcol; c++) {
                 if (grille.getData()[l][c] == 0) {
                     casesvides.add(l * nbcol + c);
                 }
             }
+        }*/
+        numJoueur = (nbcol*nblig) % 2 == grille.nbLibre() % 2 ? 1 : 2;
+        
+        start = System.currentTimeMillis();
+        int choix = AlphaBetaSearch(grille, profondeur);
+        stop = System.currentTimeMillis();
+        int temp = (int) (stop - start);
+        duree += temp;
+        while (delais-duree > temp * nbcol) {
+            ++profondeur;
+            start = System.currentTimeMillis();
+            choix = AlphaBetaSearch(grille, profondeur);
+            stop = System.currentTimeMillis();
+            temp = (int) (stop - start);
+            duree += temp;
         }
-
-        this.casesvides = casesvides;
-
-        int choix = Minimax(grille, casesvides);
-
         //int choix = random.nextInt(casesvides.size());
         //choix = casesvides.get(choix);
-        if(grille.getData().length*grille.getData()[0].length == casesvides.size()) return new Position(nbcol/2,nbcol/2);
-
         return new Position(choix / nbcol, choix % nbcol);
     }
 
@@ -71,207 +72,279 @@ public class JoueurArtificiel implements Joueur {
         return "Christian TÉLÉMAQUE (TELC10058803)  et  Claude-Clément YAPO (YAPC01129002)";
     }
 
-    public int Minimax(Grille grille, ArrayList<Integer> casesvides) {
-        double max = Double.NEGATIVE_INFINITY;
-
-        Vector<Grille> succ = create_successeur(grille, casesvides);
-
-        return MinimaxDecision(succ);
-
+    private int AlphaBetaSearch(Grille grille, int profondeur) {
+        //int choix = 0;
+        
+        //double v = MaxValue(grille, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        
+        EtatSuccesseur g = new EtatSuccesseur(grille);
+        EtatSuccesseur v = MaxValue(g, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, profondeur);
+        
+        return v.getAction();
     }
-
-    private Vector<Grille> create_successeur(Grille cloneGrille, ArrayList<Integer> casesvides) {
-
-        Vector<Grille> chd = new Vector();
-
-        int nbcol = cloneGrille.getData()[0].length;
-        int lignes = cloneGrille.getData().length;
-        Grille tmpGrille;
-
-        for (int i : casesvides) {
-            tmpGrille = cloneGrille.clone();
-            tmpGrille.getData()[i / lignes][i % nbcol] = (byte) (id);
-            chd.add(tmpGrille);
-        }
-
-        return chd;
-    }
-
-    private int MinimaxDecision(Vector<Grille> succ) {
-
-        int max = -999999999;
-        int cmp = -1;
-        int posSucc = 0;
-        int action = -1;
- 
-        for (Grille g : succ) {
-
-            cmp = utilite(g, this.casesvides.get(posSucc));
-            if (cmp > max) {
-                max = cmp;
-                action = this.casesvides.get(posSucc);
-            } else if (cmp == max) {
-                //meilleur.add(this.casesvides.get(posSucc));
+    
+    /*private double MaxValue(Grille grille, Double alpha, Double beta) {
+        GrilleVerificateur verif = new GrilleVerificateur();
+        double v;
+        ArrayList<Grille> etatsSuccesseurs;
+        
+        if (verif.determineGagnant(grille) != 0 || grille.nbLibre() == 0) {
+            v = utility(grille);
+        } else {
+            v = Double.NEGATIVE_INFINITY;
+            etatsSuccesseurs = GenererSuccesseurs(grille);
+            for (Grille g : etatsSuccesseurs) {
+                v = Math.max(v, MinValue(g, alpha, beta));
+                if (v >= beta) {
+                    break;
+                }
+                alpha = Math.max(alpha, v);
             }
-            ++posSucc;
         }
-
-         
-
-        return action;
-
+        
+        return v;
+    }*/
+    
+    private EtatSuccesseur MaxValue(EtatSuccesseur grille, Double alpha, Double beta, int profondeur) {
+        GrilleVerificateur verif = new GrilleVerificateur();
+        EtatSuccesseur gagnant = grille;
+        double v;
+        ArrayList<EtatSuccesseur> etatsSuccesseurs;
+        
+        if (verif.determineGagnant(grille.getGrille()) != 0 || grille.getGrille().nbLibre() == 0) {
+            v = utility(grille.getGrille());
+            grille.setUtilite(v);
+        } else if (profondeur == 0) {
+            v = eval(grille.getGrille());
+            grille.setUtilite(v);
+        } else {
+            v = Double.NEGATIVE_INFINITY;
+            etatsSuccesseurs = GenererSuccesseurs(grille.getGrille());
+            for (EtatSuccesseur e : etatsSuccesseurs) {
+                EtatSuccesseur min = MinValue(e, alpha, beta, profondeur-1);
+                e.setUtilite(min.getUtilite());
+                v = Math.max(v, min.getUtilite());
+                if (v >= beta) {
+                    break;
+                }   
+                alpha = Math.max(alpha, v);
+            }
+             for (EtatSuccesseur e : etatsSuccesseurs) {
+                if (v == e.getUtilite()) {
+                    gagnant = e;
+                    break;
+                }
+            }
+        }
+        
+        return gagnant;
+    }
+    
+    /*private double MinValue(Grille grille, Double alpha, Double beta) {
+        GrilleVerificateur verif = new GrilleVerificateur();
+        double v;
+        ArrayList<Grille> etatsSuccesseurs;
+        
+        if (verif.determineGagnant(grille) != 0 || grille.nbLibre() == 0) {
+            v = utility(grille);
+        } else {
+            v = Double.POSITIVE_INFINITY;
+            etatsSuccesseurs = GenererSuccesseurs(grille);
+            for (Grille g : etatsSuccesseurs) {
+                v = Math.min(v, MaxValue(g, alpha, beta));
+                if (v <= alpha) {
+                    break;
+                }
+                beta = Math.min(beta, v);
+            }
+        }
+        
+        return v;
+    }*/
+    
+    private EtatSuccesseur MinValue(EtatSuccesseur grille, Double alpha, Double beta, int profondeur) {
+        GrilleVerificateur verif = new GrilleVerificateur();
+        EtatSuccesseur gagnant = grille;
+        double v;
+        ArrayList<EtatSuccesseur> etatsSuccesseurs;
+        
+        if (verif.determineGagnant(grille.getGrille()) != 0 || grille.getGrille().nbLibre() == 0) {
+            v = utility(grille.getGrille());
+            grille.setUtilite(v);
+        } else if (profondeur == 0) {
+            v = eval(grille.getGrille());
+            grille.setUtilite(v);
+        } else {
+            v = Double.POSITIVE_INFINITY;
+            etatsSuccesseurs = GenererSuccesseurs(grille.getGrille());
+            for (EtatSuccesseur e : etatsSuccesseurs) {
+                EtatSuccesseur max = MaxValue(e, alpha, beta, profondeur-1);
+                e.setUtilite(max.getUtilite());
+                v = Math.min(v, max.getUtilite());
+                if (v <= alpha) {
+                    break;
+                }
+                beta = Math.min(beta, v);
+            }
+            for (EtatSuccesseur e : etatsSuccesseurs) {
+                if (v == e.getUtilite()) {
+                    gagnant = e;
+                    break;
+                }
+            }
+        }
+        
+        return gagnant;
     }
 
-    private int utilite(Grille grille, int posSucc) {
-
-        int Maxligne = 0;
-        int Maxcol = 0;
-        int Maxdiag = 0;
-
-        int Minligne = 0;
-        int Mincol = 0;
-        int Mindiag = 0;
-
+    /*private ArrayList<Grille> GenererSuccesseurs(Grille grille) {
+        ArrayList<Integer> casesvides = new ArrayList<>();
+        ArrayList<Grille> successeurs = new ArrayList<>();
+        int nbcol = grille.getData()[0].length;
+        int nblig = grille.getData().length;
+        int numJoueur;
+        
+        for (int l = 0; l < nblig; l++) {
+            for (int c = 0; c < nbcol; c++) {
+                if (grille.getData()[l][c] == 0) {
+                    casesvides.add(l * nbcol + c);
+                }
+            }
+        }
+        
+        numJoueur = (nbcol*nblig) % 2 == casesvides.size() % 2 ? 1 : 2;
+        
+        for (int i : casesvides) {
+            Grille copieGrille = grille.clone();
+            copieGrille.set(new Position(i / nbcol, i % nbcol), numJoueur);
+            successeurs.add(copieGrille);
+        }
+        
+        return successeurs;
+    }*/
+    
+    private ArrayList<EtatSuccesseur> GenererSuccesseurs(Grille grille) {
+        ArrayList<Integer> casesvides = new ArrayList<>();
+        ArrayList<EtatSuccesseur> successeurs = new ArrayList<>();
+        int nbcol = grille.getData()[0].length;
+        int nblig = grille.getData().length;
+        int idJoueur;
+        
+        for (int l = 0; l < nblig; l++) {
+            for (int c = 0; c < nbcol; c++) {
+                if (grille.getData()[l][c] == 0) {
+                    casesvides.add(l * nbcol + c);
+                }
+            }
+        }
+        
+        idJoueur = (nbcol*nblig) % 2 == casesvides.size() % 2 ? 1 : 2;
+        
+        for (int i : casesvides) {
+            Grille copieGrille = grille.clone();
+            copieGrille.set(new Position(i / nbcol, i % nbcol), idJoueur);
+            EtatSuccesseur e = new EtatSuccesseur(copieGrille);
+            e.setAction(i);
+            successeurs.add(e);
+        }
+        
+        return successeurs;
+    }
+    
+    private double eval(Grille grille) {
+        int Maxligne = 0, Maxcol = 0, Maxdiag = 0;
+        int Minligne = 0, Mincol = 0, Mindiag = 0;
+        int nbIdDiag = 0, nbOppo = 0;
         int nbcol = grille.getData()[0].length;
         int lignes = grille.getData().length;
-        int profondeur = nbcol * lignes;
-
         byte[][] donne = grille.getData();
-
-        //evaluation des lignes
-        for (int i = 0; i < lignes; ++i) {
+        
+        // horizontal
+        for (int l = 0; l < lignes; l++) {
             int evalLigneMax = 0;
             int evalLigneMin = 0;
-            for (int j = 0; j < nbcol; ++j) {
-
-                evalLigneMax = (donne[i][j] == 0 || donne[i][j] == id) ? ++evalLigneMax : 0;
-                evalLigneMin = (donne[i][j] == 0 || donne[i][j] != id) ? ++evalLigneMin : 0;
+            for (int c = 0; c < nbcol; c++) {
+                evalLigneMax = (donne[l][c] == 0 || donne[l][c] == numJoueur) ? ++evalLigneMax : 0;
+                evalLigneMin = (donne[l][c] == 0 || donne[l][c] != numJoueur) ? ++evalLigneMin : 0;
                 Maxligne = evalLigneMax == 5 ? ++Maxligne : Maxligne;
                 Minligne = evalLigneMin == 5 ? ++Minligne : Minligne;
 
-                j = ((evalLigneMax >= 5) && (evalLigneMin >= 5)) ? nbcol : j;
-
+                c = ((evalLigneMax >= 5) && (evalLigneMin >= 5)) ? nbcol : c;
             }
         }
-
-        //evaluation des colonne
-        for (int j = 0; j < nbcol; ++j) {
+        
+        // vertical
+        for (int c = 0; c < nbcol; c++) {
             int evalcolonneMax = 0;
             int evalcolonneMin = 0;
-            for (int i = 0; i < lignes; ++i) {
-
-                evalcolonneMax = (donne[i][j] == 0 || donne[i][j] == id) ? ++evalcolonneMax : 0;
-                evalcolonneMin = (donne[i][j] == 0 || donne[i][j] != id) ? ++evalcolonneMin : 0;
+            for (int l = 0; l < lignes; l++) {
+                evalcolonneMax = (donne[l][c] == 0 || donne[l][c] == numJoueur) ? ++evalcolonneMax : 0;
+                evalcolonneMin = (donne[l][c] == 0 || donne[l][c] != numJoueur) ? ++evalcolonneMin : 0;
                 Maxcol = (evalcolonneMax == 5) ? ++Maxcol : Maxcol;
                 Mincol = (evalcolonneMin == 5) ? ++Mincol : Mincol;
 
-                i = ((evalcolonneMax >= 5) && (evalcolonneMin >= 5)) ? lignes : i;
-
+                l = ((evalcolonneMax >= 5) && (evalcolonneMin >= 5)) ? lignes : l;
             }
         }
-
-        //evaluation diagonale
-        Maxdiag += diagonaleMax(donne, posSucc, lignes, nbcol);
-
-        //evaluation min
-        Mindiag += diagonaleMin(donne, posSucc, lignes, nbcol);
-
-        System.out.println("utilité Max  = " + (Maxligne + Maxcol + Maxdiag) + "- Utilité Min = " + (Minligne + Mincol + Mindiag));
-
-        return ((Maxligne + Maxcol + Maxdiag) - (Minligne + Mincol + Mindiag));
-    }
-
-    public int diagonaleMax(byte[][] donne, int posSucc, int lignes, int nbcol) {
-
-        int x = posSucc / lignes;
-        int y = posSucc % nbcol;
-        int DebutdiagonaleX = x < y ? x - x : x - y;
-        int DebutdiagonaleY = y < x ? y - y : y - x;
-        int maxDiag = 0;
-        int longueurDiagonale = lignes < nbcol ? lignes : nbcol < lignes ? nbcol : nbcol;
-        int nbIdDiag = 0;
-
-        int diagonaleBasX = x < y ? x + x : x + y;
-        int diagonaleBASY = y < x ? y - y : y - x;
-
-        diagonaleBASY = diagonaleBasX >= lignes ? (diagonaleBASY + (diagonaleBasX - (lignes - 1))) : diagonaleBASY;
-        diagonaleBasX = diagonaleBasX >= lignes ? (diagonaleBasX - (diagonaleBasX - (lignes - 1))) : diagonaleBasX;
-
-        // premiere diagonale 
-        for (int i = 0; i < longueurDiagonale; ++i) {
-
-            nbIdDiag = (donne[DebutdiagonaleX + i][DebutdiagonaleY + i] == id
-                    || donne[DebutdiagonaleX + i][DebutdiagonaleY + i] == 0) ? ++nbIdDiag : 0;
-            maxDiag = nbIdDiag == 5 ? ++maxDiag : maxDiag;
-            i = nbIdDiag == 5 ? longueurDiagonale : i;
-            i = (((DebutdiagonaleX + i) > (DebutdiagonaleY + i))
-                    ? ((DebutdiagonaleX + i) == (lignes - 1) ? longueurDiagonale : i)
-                    : ((DebutdiagonaleY + i) == (nbcol - 1) ? longueurDiagonale : i));
-        }
-
-        // deuxieme diagonale
-        nbIdDiag = 0;
-        for (int i = 0; i < longueurDiagonale; ++i) {
-
-            nbIdDiag = (donne[diagonaleBasX - i][diagonaleBASY + i] == id
-                    || donne[diagonaleBasX - i][diagonaleBASY + i] == 0) ? ++nbIdDiag : 0;
-            maxDiag = nbIdDiag == 5 ? ++maxDiag : maxDiag;
-            i = nbIdDiag == 5 ? longueurDiagonale : i;
-            i = ((diagonaleBASY + i) >= (nbcol - 1)) || ((diagonaleBasX - i) <= 0) ? longueurDiagonale : i;
-
-        }
-
-        return maxDiag;
-    }
-
-    public int diagonaleMin(byte[][] donne, int posSucc, int lignes, int nbcol) {
-
-        int nbOppo = 0;
-        int minDiag = 0;
-        int longueurDiagonale = lignes < nbcol ? lignes : nbcol < lignes ? nbcol : nbcol;
-
-        //premiere diagonale
-        for (int c = -lignes; c < nbcol; ++c) {
+        
+        // Diagonal \\\\\\\
+        for (int c = -lignes; c < nbcol; c++) {
             int c2 = c;
-            nbOppo = 0;
+            nbIdDiag = nbOppo = 0;
             int l = 0;
             if (c2 < 0) {
                 l = -c2;
                 c2 = 0;
             }
-
-            for (; c2 < nbcol && l < lignes; ++c2, ++l) {
-                nbOppo = (donne[l][c2] != id
-                        || donne[l][c2] == 0) ? ++nbOppo : 0;
-
-                minDiag = nbOppo == 5 ? ++minDiag : minDiag;
-                c2 = nbOppo == 5 ? nbcol : c2;
+            for (; c2 < nbcol && l < lignes; c2++, l++) {
+                nbOppo = (donne[l][c2] != numJoueur || donne[l][c2] == 0) ? ++nbOppo : 0;
+                nbIdDiag = (donne[l][c2] == numJoueur || donne[l][c2] == 0) ? ++nbIdDiag : 0;
+                Maxdiag = nbIdDiag == 5 ? ++Maxdiag : Maxdiag;
+                Mindiag = nbOppo == 5 ? ++Mindiag : Mindiag;
+                
+                c2 = ((nbIdDiag >= 5) && (nbOppo >= 5)) ? nbcol : c2;
             }
-
+            
         }
-
-        // deuxieme diagonale
+        
+        
+        // Diagonal //////
         for (int c = -lignes; c < nbcol; c++) {
-            nbOppo = 0;
             int c2 = c;
-            int l = donne.length - 1;
+            nbIdDiag = nbOppo = 0;
+            int l = lignes - 1;
             if (c2 < 0) {
                 l += c2;
                 c2 = 0;
-
             }
             for (; c2 < nbcol && l >= 0; c2++, l--) {
-
-                nbOppo = (donne[l][c2] != id
-                        || donne[l][c2] == 0) ? ++nbOppo : 0;
-                minDiag = nbOppo == 5 ? ++minDiag : minDiag;
-                c2 = nbOppo == 5 ? nbcol : c2;
-
+                nbOppo = (donne[l][c2] != numJoueur || donne[l][c2] == 0) ? ++nbOppo : 0;
+                nbIdDiag = (donne[l][c2] == numJoueur || donne[l][c2] == 0) ? ++nbIdDiag : 0;
+                Maxdiag = nbIdDiag == 5 ? ++Maxdiag : Maxdiag;
+                Mindiag = nbOppo == 5 ? ++Mindiag : Mindiag;
+                
+                c2 = ((nbIdDiag >= 5) && (nbOppo >= 5)) ? nbcol : c2; 
             }
-
+            
         }
-
-        return minDiag;
+        
+        
+        return (double) ((Maxligne + Maxcol + Maxdiag) - (Minligne + Mincol + Mindiag));
     }
 
+    private double utility(Grille grille) {
+        GrilleVerificateur verif = new GrilleVerificateur();
+        int gagnant = verif.determineGagnant(grille);
+        double poids;
+        
+        if (gagnant != numJoueur) {
+            poids = (-1.0);
+        } else if (gagnant == 0) {
+            poids = 0.0;
+        } else {
+            poids = 1.0;
+        }
+        
+        return poids;
+    }
 }
