@@ -52,31 +52,31 @@ public class FXSprite extends Sprite {
 
             // load our images
 
-            URL imageURL = FXSprite.class.getClassLoader().getResource("graphics/BreezeSprite.png");
+            URL imageURL = FXSprite.class.getClassLoader().getResource("main/resources/graphics/BreezeSprite.png");
             log.d("FXSprite loading " + imageURL);
             Image breezeSheet = tk.getImage(imageURL);
             breezeSheet = ColorFilters.setTransparentColor(breezeSheet, new Color(0xFF00FF));
             breezeSheet = ColorFilters.setSemiTransparency(breezeSheet, 0.5);
 
-            imageURL = FXSprite.class.getClassLoader().getResource("graphics/StenchSprite.png");
+            imageURL = FXSprite.class.getClassLoader().getResource("main/resources/graphics/StenchSprite.png");
             log.d("FXSprite loading " + imageURL);
             Image stenchSheet = tk.getImage(imageURL);
             stenchSheet = ColorFilters.setTransparentColor(stenchSheet, new Color(0xFF00FF));
             stenchSheet = ColorFilters.setSemiTransparency(stenchSheet, 0.5);
 
-            imageURL = FXSprite.class.getClassLoader().getResource("graphics/MooSprite.png");
+            imageURL = FXSprite.class.getClassLoader().getResource("main/resources/graphics/MooSprite.png");
             log.d("FXSprite loading " + imageURL);
             Image mooSheet = tk.getImage(imageURL);
             mooSheet = ColorFilters.setTransparentColor(mooSheet, new Color(0xFF00FF));
             mooSheet = ColorFilters.setSemiTransparency(mooSheet, 0.5);
 
-            imageURL = FXSprite.class.getClassLoader().getResource("graphics/GlitterSprite.png");
+            imageURL = FXSprite.class.getClassLoader().getResource("main/resources/graphics/GlitterSprite.png");
             log.d("FXSprite loading " + imageURL);
             Image glitterSheet = tk.getImage(imageURL);
             glitterSheet = ColorFilters.setTransparentColor(glitterSheet, new Color(0xFF00FF));
             glitterSheet = ColorFilters.setSemiTransparency(glitterSheet, 0.25);
 
-            imageURL = FXSprite.class.getClassLoader().getResource("graphics/EntranceSprite.png");
+            imageURL = FXSprite.class.getClassLoader().getResource("main/resources/graphics/EntranceSprite.png");
             log.d("FXSprite loading " + imageURL);
             Image entranceImg = tk.getImage(imageURL);
             entranceImg = ColorFilters.setTransparentColor(entranceImg, new Color(0xFF00FF));

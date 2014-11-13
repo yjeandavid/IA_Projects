@@ -265,29 +265,29 @@ public class MainLevel extends Level {
                 }
 
                 if (agentAnimation.equals("BUMP")) {
-                    Sound sound = new Sound("sounds/tok2.wav");
+                    Sound sound = new Sound("main/resources/sounds/tok2.wav");
                     sound.play();
                 }
                 if (agentAnimation.equals("GOLDGET")) {
                     agentSprite.setAnimation("gold");
-                    Sound sound = new Sound("sounds/gold.wav");
+                    Sound sound = new Sound("main/resources/sounds/gold.wav");
                     sound.play();
                 }
                 if (agentAnimation.equals("FOODGET")) {
-                    Sound sound = new Sound("sounds/food.wav");
+                    Sound sound = new Sound("main/resources/sounds/food.wav");
                     sound.play();
                 }
                 if (agentAnimation.equals("SCREAM")) {
                     agentSprite.setAnimation("shoot");
-                    Sound sound = new Sound("sounds/arrow.wav");
+                    Sound sound = new Sound("main/resources/sounds/arrow.wav");
                     sound.play();
-                    sound = new Sound("sounds/wumpusDie.wav");
+                    sound = new Sound("main/resources/sounds/wumpusDie.wav");
                     sound.play();
                     // play monster scream sound
                 }
                 if (agentAnimation.equals("MISS")) {
                     agentSprite.setAnimation("shoot");
-                    Sound sound = new Sound("sounds/arrow.wav");
+                    Sound sound = new Sound("main/resources/sounds/arrow.wav");
                     sound.play();
 
                     // play miss sound
@@ -305,20 +305,20 @@ public class MainLevel extends Level {
             if (soundTimer <= 0) {
                 if (agentNode.hasStench) {
                     int fartNumber = rand.nextInt(5) + 1;
-                    Sound fart = new Sound("sounds/stench" + fartNumber + ".wav");
+                    Sound fart = new Sound("main/resources/sounds/stench" + fartNumber + ".wav");
                     fart.play();
                 }
                 if (agentNode.hasMoo && !wumplusEnvironment.supmuw.isDead) {
                     int fartNumber = rand.nextInt(5) + 1;
-                    Sound fart = new Sound("sounds/moo" + fartNumber + ".wav");
+                    Sound fart = new Sound("main/resources/sounds/moo" + fartNumber + ".wav");
                     fart.play();
                 }
                 if (agentNode.hasBreeze) {
-                    Sound breeze = new Sound("sounds/wind1.wav");
+                    Sound breeze = new Sound("main/resources/sounds/wind1.wav");
                     breeze.play();
                 }
                 if (agentNode.hasGold) {
-                    Sound sparkle = new Sound("sounds/sparkleLoop.wav");
+                    Sound sparkle = new Sound("main/resources/sounds/sparkleLoop.wav");
                     sparkle.play();
                 }
 
@@ -443,7 +443,7 @@ public class MainLevel extends Level {
 
                     victoryCondition = 2;
                     midi.stop();
-                    Sound victory = new Sound("sounds/mmVictory.wav");
+                    Sound victory = new Sound("main/resources/sounds/mmVictory.wav");
                     victory.play();
                     winSprite.isVisible = true;
                 } else {

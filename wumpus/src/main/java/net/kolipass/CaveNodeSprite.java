@@ -61,22 +61,22 @@ public class CaveNodeSprite extends Sprite {
             URL imageURL = null;
 
 
-            imageURL = CaveNodeSprite.class.getClassLoader().getResource("graphics/CaveFloorSprite.png");
+            imageURL = CaveNodeSprite.class.getClassLoader().getResource("main/resources/graphics/CaveFloorSprite.png");
             log.d("CaveNodeSprite loading " + imageURL);
             Image floorImg = tk.getImage(imageURL);
 
 
-            imageURL = CaveNodeSprite.class.getClassLoader().getResource("graphics/BGColor.png");
+            imageURL = CaveNodeSprite.class.getClassLoader().getResource("main/resources/graphics/BGColor.png");
             log.d("CaveNodeSprite loading " + imageURL);
             Image wallImg = tk.getImage(imageURL);
 
 
-            imageURL = CaveNodeSprite.class.getClassLoader().getResource("graphics/PitSprite.png");
+            imageURL = CaveNodeSprite.class.getClassLoader().getResource("main/resources/graphics/PitSprite.png");
             log.d("CaveNodeSprite loading " + imageURL);
             Image pitImg = tk.getImage(imageURL);
             pitImg = ColorFilters.setTransparentColor(pitImg, new Color(0xFF00FF));
 
-            imageURL = CaveNodeSprite.class.getClassLoader().getResource("graphics/WallSprites.png");
+            imageURL = CaveNodeSprite.class.getClassLoader().getResource("main/resources/graphics/WallSprites.png");
             log.d("CaveNodeSprite loading " + imageURL);
             Image wallsImg = tk.getImage(imageURL);
             wallsImg = ColorFilters.setTransparentColor(wallsImg, new Color(0xFF00FF));

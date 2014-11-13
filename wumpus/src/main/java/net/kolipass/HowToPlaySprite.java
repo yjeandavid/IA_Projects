@@ -52,28 +52,28 @@ public class HowToPlaySprite extends Sprite {
 
             // store them into our hashtables
 
-            URL imageURL = HowToPlaySprite.class.getClassLoader().getResource("graphics/HowToPlayBG.png");
+            URL imageURL = HowToPlaySprite.class.getClassLoader().getResource("main/resources/graphics/HowToPlayBG.png");
             log.d("HowToPlaySprite loading " + imageURL);
             img = tk.getImage(imageURL);
             img = ColorFilters.setTransparentColor(img, new Color(0xFF00FF));
             imgLoader.addImage(img);
             imageTable.put("bg", img);
 
-            imageURL = HowToPlaySprite.class.getClassLoader().getResource("graphics/HowToPlay2.png");
+            imageURL = HowToPlaySprite.class.getClassLoader().getResource("main/resources/graphics/HowToPlay2.png");
             log.d("HowToPlaySprite loading " + imageURL);
             img = tk.getImage(imageURL);
             img = ColorFilters.setTransparentColor(img, new Color(0xFF00FF));
             imgLoader.addImage(img);
             imageTable.put("htp2", img);
 
-            imageURL = HowToPlaySprite.class.getClassLoader().getResource("graphics/HowToPlay6.png");
+            imageURL = HowToPlaySprite.class.getClassLoader().getResource("main/resources/graphics/HowToPlay6.png");
             log.d("HowToPlaySprite loading " + imageURL);
             img = tk.getImage(imageURL);
             img = ColorFilters.setTransparentColor(img, new Color(0xFF00FF));
             imgLoader.addImage(img);
             imageTable.put("htp6", img);
 
-            imageURL = HowToPlaySprite.class.getClassLoader().getResource("graphics/PressEnterText.png");
+            imageURL = HowToPlaySprite.class.getClassLoader().getResource("main/resources/graphics/PressEnterText.png");
             log.d("HowToPlaySprite loading " + imageURL);
             img = tk.getImage(imageURL);
             img = ColorFilters.setTransparentColor(img, new Color(0xFF00FF));

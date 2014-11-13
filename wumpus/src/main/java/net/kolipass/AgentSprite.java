@@ -60,7 +60,7 @@ public class AgentSprite extends Sprite {
             URL imageURL = null;
 
 
-            imageURL = AgentSprite.class.getClassLoader().getResource("graphics/AgentSprite.png");
+            imageURL = AgentSprite.class.getClassLoader().getResource("main/resources/graphics/AgentSprite.png");
             log.d("AgentSprite loading " + imageURL);
 
             Image spriteSheet = tk.getImage(imageURL);

@@ -42,7 +42,7 @@ public class MenuBackgroundsSprite extends Sprite {
             Toolkit tk = Toolkit.getDefaultToolkit();
 
             // load our images
-            URL imageURL = MenuBackgroundsSprite.class.getClassLoader().getResource("graphics/MenuBG.png");
+            URL imageURL = MenuBackgroundsSprite.class.getClassLoader().getResource("main/resources/graphics/MenuBG.png");
             log.d("MenuBackgroundsSprite loading " + imageURL);
             Image titleImg = tk.getImage(imageURL);
 

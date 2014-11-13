@@ -197,7 +197,7 @@ public class MenuLevel extends Level {
             if (menuChoice == 0 && keyboard.isTyped(config.getVK_ENTER())) {
 
 
-//                URL mapsUrl = AgentSprite.class.getClassLoader().getResource("maps");
+//                URL mapsUrl = AgentSprite.class.getClassLoader().getResource("main/resources/maps");
                 try {
                     File maps = null;
 //                    if (mapsUrl != null) {

@@ -50,7 +50,7 @@ public class MenuSprite extends Sprite {
 
             // load our images
 
-            URL imageURL = MenuSprite.class.getClassLoader().getResource("graphics/MenuTextSprites.png");
+            URL imageURL = MenuSprite.class.getClassLoader().getResource("main/resources/graphics/MenuTextSprites.png");
             log.d("MenuSprite loading " + imageURL);
             Image menuSpriteSheet = tk.getImage(imageURL);
             menuSpriteSheet = ColorFilters.setTransparentColor(menuSpriteSheet, new Color(0xFF00FF));
@@ -110,7 +110,7 @@ public class MenuSprite extends Sprite {
             imageTable.put("random2", img);
             imgLoader.addImage(img);
 
-            imageURL = MenuSprite.class.getClassLoader().getResource("graphics/TitleSprite.png");
+            imageURL = MenuSprite.class.getClassLoader().getResource("main/resources/graphics/TitleSprite.png");
             log.d("MenuSprite loading " + imageURL);
             img = tk.getImage(imageURL);
             img = ColorFilters.setTransparentColor(img, new Color(0xFF00FF));

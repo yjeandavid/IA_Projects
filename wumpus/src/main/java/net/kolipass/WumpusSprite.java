@@ -52,12 +52,12 @@ public class WumpusSprite extends Sprite {
 
             // load our images
 
-            URL imageURL = WumpusSprite.class.getClassLoader().getResource("graphics/WumpusSprite.png");
+            URL imageURL = WumpusSprite.class.getClassLoader().getResource("main/resources/graphics/WumpusSprite.png");
             log.d("WumpusSprite loading " + imageURL);
             Image wumpusSheet = tk.getImage(imageURL);
             wumpusSheet = ColorFilters.setTransparentColor(wumpusSheet, new Color(0xFF00FF));
 
-            imageURL = WumpusSprite.class.getClassLoader().getResource("graphics/SupmuwSprite.png");
+            imageURL = WumpusSprite.class.getClassLoader().getResource("main/resources/graphics/SupmuwSprite.png");
             log.d("WumpusSprite loading " + imageURL);
             Image supmuwSheet = tk.getImage(imageURL);
             supmuwSheet = ColorFilters.setTransparentColor(supmuwSheet, new Color(0xFF00FF));

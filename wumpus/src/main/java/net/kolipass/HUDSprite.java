@@ -49,15 +49,15 @@ public class HUDSprite extends Sprite {
 
             // load our images
 
-            URL imageURL = HUDSprite.class.getClassLoader().getResource("graphics/hudPanel.png");
+            URL imageURL = HUDSprite.class.getClassLoader().getResource("main/resources/graphics/hudPanel.png");
             log.d("HUDSprite loading " + imageURL);
             Image hudPanel = tk.getImage(imageURL);
 
-            imageURL = HUDSprite.class.getClassLoader().getResource("graphics/HudIconSprites.png");
+            imageURL = HUDSprite.class.getClassLoader().getResource("main/resources/graphics/HudIconSprites.png");
             log.d("HUDSprite loading hudIconSprites.png : " + imageURL);
             Image spriteSheet = tk.getImage(imageURL);
 
-            imageURL = HUDSprite.class.getClassLoader().getResource("graphics/finishSprites.png");
+            imageURL = HUDSprite.class.getClassLoader().getResource("main/resources/graphics/finishSprites.png");
             log.d("HUDSprite loading " + imageURL);
             Image winSheet = tk.getImage(imageURL);
             winSheet = ColorFilters.setTransparentColor(winSheet, new Color(0xFF00FF));
