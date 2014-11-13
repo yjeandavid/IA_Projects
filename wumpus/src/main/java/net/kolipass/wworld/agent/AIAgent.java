@@ -1,10 +1,10 @@
-package net.kolipass.wworld.agent;
+package main.java.net.kolipass.wworld.agent;
 
 import net.kolipass.gameEngine.Keyboard;
-import net.kolipass.wworld.Action;
-import net.kolipass.wworld.CaveNode;
-import net.kolipass.wworld.PriorityCaveNode;
-import net.kolipass.wworld.WumplusEnvironment;
+import main.java.net.kolipass.wworld.Action;
+import main.java.net.kolipass.wworld.CaveNode;
+import main.java.net.kolipass.wworld.PriorityCaveNode;
+import main.java.net.kolipass.wworld.WumplusEnvironment;
 
 import java.awt.*;
 import java.util.Hashtable;

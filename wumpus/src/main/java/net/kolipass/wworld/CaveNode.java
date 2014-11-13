@@ -1,4 +1,4 @@
-package net.kolipass.wworld;
+package main.java.net.kolipass.wworld;
 
 public class CaveNode {
     //////////// player knowledge variables

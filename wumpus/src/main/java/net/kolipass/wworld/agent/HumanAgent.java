@@ -1,21 +1,20 @@
-package net.kolipass.wworld.agent;
+package main.java.net.kolipass.wworld.agent;
 
-import net.kolipass.ConfigWumpus;
+import main.java.net.kolipass.ConfigWumpus;
+import main.java.net.kolipass.gameEngine.*;
+import main.java.net.kolipass.wworld.*;
 import net.kolipass.gameEngine.Keyboard;
-import net.kolipass.wworld.Action;
-import net.kolipass.wworld.WumplusEnvironment;
 
 /**
  * Created by kolipass on 11.12.13.
  */
-public class HumanAgent extends AbstractAgent {
-    private ConfigWumpus config;
+public abstract class HumanAgent extends AbstractAgent {
+    private final ConfigWumpus config;
 
     public HumanAgent(ConfigWumpus config) {
         this.config = config;
     }
 
-    @Override
     public int getNextAction(WumplusEnvironment we, Keyboard keyboard) {
         int action = Action.IDLE;
         if (keyboard.isTyped(config.getVK_LEFT())) {
@@ -38,4 +37,6 @@ public class HumanAgent extends AbstractAgent {
         }
         return action;
     }
+
+    
 }

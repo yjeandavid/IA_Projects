@@ -1,4 +1,4 @@
-package net.kolipass.wworld.agent;
+package main.java.net.kolipass.wworld.agent;
 
 /**
  * Created by kolipass on 12.12.13.

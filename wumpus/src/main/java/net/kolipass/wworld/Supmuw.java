@@ -1,6 +1,6 @@
-package net.kolipass.wworld;
+package main.java.net.kolipass.wworld;
 
-import net.kolipass.wworld.agent.AbstractAgent;
+import main.java.net.kolipass.wworld.agent.AbstractAgent;
 
 public class Supmuw {
     ////////

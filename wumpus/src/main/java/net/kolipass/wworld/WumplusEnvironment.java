@@ -1,8 +1,8 @@
-package net.kolipass.wworld;
+package main.java.net.kolipass.wworld;
 
-import net.kolipass.Log;
-import net.kolipass.MasterPanel;
-import net.kolipass.wworld.agent.*;
+import main.java.net.kolipass.Log;
+import main.java.net.kolipass.MasterPanel;
+import main.java.net.kolipass.wworld.agent.*;
 
 import java.awt.*;
 import java.io.File;
@@ -12,6 +12,11 @@ import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.Vector;
+import main.java.net.kolipass.wworld.agent.AIAgent;
+import main.java.net.kolipass.wworld.agent.AbstractAgent;
+import main.java.net.kolipass.wworld.agent.AgentBlog;
+import main.java.net.kolipass.wworld.agent.FileAgentBlog;
+import main.java.net.kolipass.wworld.agent.MemoAgentBlog;
 
 /**
  * @author Chris Leatherwood

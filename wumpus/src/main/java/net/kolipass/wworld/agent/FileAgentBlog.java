@@ -1,6 +1,6 @@
-package net.kolipass.wworld.agent;
+package main.java.net.kolipass.wworld.agent;
 
-import net.kolipass.Log;
+import main.java.net.kolipass.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
