@@ -1,4 +1,4 @@
-package net.kolipass;
+package main.java.net.kolipass;
 
 import net.kolipass.gameEngine.ImageLoader;
 import net.kolipass.gameEngine.Sprite;

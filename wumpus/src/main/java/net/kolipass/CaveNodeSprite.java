@@ -1,4 +1,4 @@
-package net.kolipass;
+package main.java.net.kolipass;
 
 import net.kolipass.gameEngine.ColorFilters;
 import net.kolipass.gameEngine.ImageBlitter;

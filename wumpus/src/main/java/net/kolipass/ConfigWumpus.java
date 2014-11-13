@@ -1,4 +1,4 @@
-package net.kolipass;
+package main.java.net.kolipass;
 
 import java.awt.event.KeyEvent;
 import java.io.*;

@@ -1,4 +1,4 @@
-package net.kolipass;
+package main.java.net.kolipass;
 
 import net.kolipass.gameEngine.Keyboard;
 import net.kolipass.gameEngine.Level;

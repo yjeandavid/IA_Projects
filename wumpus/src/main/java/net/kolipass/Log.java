@@ -1,4 +1,4 @@
-package net.kolipass;
+package main.java.net.kolipass;
 
 /**
  * Created by kolipass on 09.12.13.
