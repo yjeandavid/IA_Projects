@@ -1,8 +1,8 @@
 package main.java.net.kolipass;
 
-import net.kolipass.gameEngine.Keyboard;
-import net.kolipass.gameEngine.Level;
-import net.kolipass.gameEngine.MidiPlayer;
+import main.java.net.kolipass.gameEngine.Keyboard;
+import main.java.net.kolipass.gameEngine.Level;
+import main.java.net.kolipass.gameEngine.MidiPlayer;
 
 import javax.swing.*;
 import java.awt.*;

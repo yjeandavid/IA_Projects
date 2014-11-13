@@ -1,6 +1,6 @@
-package net.kolipass.gameEngine;
+package main.java.net.kolipass.gameEngine;
 
-import net.kolipass.Log;
+import main.java.net.kolipass.Log;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

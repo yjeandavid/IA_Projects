@@ -1,6 +1,6 @@
 package main.java.net.kolipass.wworld.agent;
 
-import net.kolipass.gameEngine.Keyboard;
+import main.java.net.kolipass.gameEngine.Keyboard;
 import main.java.net.kolipass.wworld.Action;
 import main.java.net.kolipass.wworld.CaveNode;
 import main.java.net.kolipass.wworld.PriorityCaveNode;

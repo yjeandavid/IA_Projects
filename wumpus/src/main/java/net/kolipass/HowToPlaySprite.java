@@ -1,8 +1,8 @@
 package main.java.net.kolipass;
 
-import net.kolipass.gameEngine.ColorFilters;
-import net.kolipass.gameEngine.ImageLoader;
-import net.kolipass.gameEngine.Sprite;
+import main.java.net.kolipass.gameEngine.ColorFilters;
+import main.java.net.kolipass.gameEngine.ImageLoader;
+import main.java.net.kolipass.gameEngine.Sprite;
 
 import java.awt.*;
 import java.net.URL;

@@ -1,14 +1,13 @@
 package main.java.net.kolipass.wworld.agent;
 
 import main.java.net.kolipass.ConfigWumpus;
-import main.java.net.kolipass.gameEngine.*;
 import main.java.net.kolipass.wworld.*;
-import net.kolipass.gameEngine.Keyboard;
+import main.java.net.kolipass.gameEngine.Keyboard;
 
 /**
  * Created by kolipass on 11.12.13.
  */
-public abstract class HumanAgent extends AbstractAgent {
+public class HumanAgent extends AbstractAgent {
     private final ConfigWumpus config;
 
     public HumanAgent(ConfigWumpus config) {

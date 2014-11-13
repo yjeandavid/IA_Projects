@@ -3,8 +3,6 @@ package main.java.net.kolipass;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import net.kolipass.Log;
-import net.kolipass.MasterPanel;
 
 public class WumplusMain extends JFrame implements WindowListener, WindowFocusListener, ComponentListener {
     static private Log log = new Log();

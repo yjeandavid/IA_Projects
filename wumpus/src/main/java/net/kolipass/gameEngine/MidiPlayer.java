@@ -1,8 +1,8 @@
-package net.kolipass.gameEngine;
+package main.java.net.kolipass.gameEngine;
 
 
-import net.kolipass.ConfigWumpus;
-import net.kolipass.Log;
+import main.java.net.kolipass.ConfigWumpus;
+import main.java.net.kolipass.Log;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;

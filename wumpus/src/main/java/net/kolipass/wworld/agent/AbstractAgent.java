@@ -1,7 +1,7 @@
 package main.java.net.kolipass.wworld.agent;
 
 import main.java.net.kolipass.Log;
-import net.kolipass.gameEngine.Keyboard;
+import main.java.net.kolipass.gameEngine.Keyboard;
 import main.java.net.kolipass.wworld.*;
 
 import java.awt.*;

@@ -1,12 +1,12 @@
 package main.java.net.kolipass;
 
-import net.kolipass.gameEngine.Keyboard;
-import net.kolipass.gameEngine.Level;
-import net.kolipass.gameEngine.MidiPlayer;
-import net.kolipass.gameEngine.Sound;
-import net.kolipass.wworld.Action;
-import net.kolipass.wworld.*;
-import net.kolipass.wworld.agent.AbstractAgent;
+import main.java.net.kolipass.gameEngine.Keyboard;
+import main.java.net.kolipass.gameEngine.Level;
+import main.java.net.kolipass.gameEngine.MidiPlayer;
+import main.java.net.kolipass.gameEngine.Sound;
+import main.java.net.kolipass.wworld.Action;
+import main.java.net.kolipass.wworld.*;
+import main.java.net.kolipass.wworld.agent.AbstractAgent;
 
 import javax.swing.*;
 import java.awt.*;

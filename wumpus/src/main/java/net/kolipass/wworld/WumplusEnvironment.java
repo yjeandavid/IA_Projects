@@ -2,7 +2,6 @@ package main.java.net.kolipass.wworld;
 
 import main.java.net.kolipass.Log;
 import main.java.net.kolipass.MasterPanel;
-import main.java.net.kolipass.wworld.agent.*;
 
 import java.awt.*;
 import java.io.File;
@@ -16,6 +15,7 @@ import main.java.net.kolipass.wworld.agent.AIAgent;
 import main.java.net.kolipass.wworld.agent.AbstractAgent;
 import main.java.net.kolipass.wworld.agent.AgentBlog;
 import main.java.net.kolipass.wworld.agent.FileAgentBlog;
+import main.java.net.kolipass.wworld.agent.HumanAgent;
 import main.java.net.kolipass.wworld.agent.MemoAgentBlog;
 
 /**

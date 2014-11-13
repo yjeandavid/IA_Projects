@@ -1,4 +1,4 @@
-package net.kolipass.gameEngine;
+package main.java.net.kolipass.gameEngine;
 
 import java.awt.*;
 
