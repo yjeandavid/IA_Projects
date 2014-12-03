@@ -17,111 +17,34 @@ public class KBPropositionnelle {
     public interface Enonce {}
     
     //Syntaxe: page 259 du livre
-    public class EnonceComplexe implements Enonce{
-        private Enonce a;
-        private Enonce b;
-        
-        public Enonce getA()
-        {
-            return a;
-        }
-        
-        public Enonce getB()
-        {
-            return b;
-        }
-        
-        public void biconditionnel()
-        {
-            if(a instanceof DblImpl)
-            {
-                a=((DblImpl)a).biconditionnel2();
-            }
-        }
-        public void elimineImpl()
-        {
-            if(a instanceof Impl)
-            {
-                a=((Impl)a).elimineImpl2();
-            }
-        }
-        public void commutativite()
-        {
-            if(a instanceof Ou)
-            {
-                a=((Ou)a).commutativite2();
-            }
-            else if(a instanceof Et)
-            {
-                a=((Et)a).commutativite2();
-            }
-        }
-
-        public void distributivite()
-        {
-            if(a instanceof Ou)
-            {
-                a=((Ou)a).distributivite2();
-            }
-            else if(a instanceof Et)
-            {
-                a=((Et)a).distributivite2();
-            }
-        }
-        
-        public void dblNega()
-        {
-            if(a instanceof Pas)
-            {
-                a=((Pas)a).dblNega2();
-            }
-        }
-
-        public void deMorgan()
-        {
-            if(a instanceof Pas)
-            {
-                a=((Pas)a).deMorgan2();
-            }
-        }
-        
-        public void reveler(boolean valeur)
-        {
-            if(a instanceof Symbole)
-            {
-                a=((Symbole)a).reveler(valeur);
-            }
-        }
-        
-        public void simplifier()
-        {
-            if(a instanceof EnonceComplexe)
-            {
-                ((EnonceComplexe)a).simplifier2();
-            }
-        }
-        
-        protected Enonce simplifier2()
-        {
-            return (Enonce)this;
-        }
+    public interface EnonceComplexe extends Enonce{
+        abstract Enonce simplifier();
+    }
+    
+    public interface EnonceComplexeAB extends EnonceComplexe{
+        abstract Enonce getA();
+        abstract Enonce getB();
+    }
+    
+    public interface EnonceComplexeA extends EnonceComplexe{
+        abstract Enonce getA();
     }
     
     //Syntaxe: page 259 du livre
     public interface EnonceAtomique extends Enonce{}
     
     //Double implication logique
-    public class DblImpl extends EnonceComplexe{
+    public class DblImpl implements EnonceComplexeAB{
         private Enonce a;
         private Enonce b;
         
-        private Enonce biconditionnel2()
+        public Enonce biconditionnel()
         {
             return (Enonce)new Et((Enonce)new Impl(a,b),(Enonce)new Impl(a,b));
         }
         
         @Override
-        protected Enonce simplifier2()
+        public Enonce simplifier()
         {
             if(a instanceof ValVerite&&b instanceof ValVerite)
             {
@@ -172,11 +95,11 @@ public class KBPropositionnelle {
     }
     
     //Implication logique
-    public class Impl extends EnonceComplexe{
+    public class Impl implements EnonceComplexeAB{
         private Enonce a;
         private Enonce b;
         
-        private Enonce elimineImpl2()
+        public Enonce elimineImpl()
         {
             return (Enonce)new Ou((Enonce)new Pas(a),b);
         }
@@ -188,7 +111,7 @@ public class KBPropositionnelle {
         }*/
         
         @Override
-        protected Enonce simplifier2()
+        public Enonce simplifier()
         {
             if(a instanceof ValVerite&&b instanceof ValVerite)
             {
@@ -246,16 +169,16 @@ public class KBPropositionnelle {
     }
     
     //Ou logique
-    public class Ou extends EnonceComplexe{
+    public class Ou implements EnonceComplexeAB{
         private Enonce a;
         private Enonce b;
 
-        private Enonce commutativite2()
+        public Enonce commutativite()
         {
             return (Enonce)new Ou(b,a);
         }
 
-        private Enonce distributivite2()
+        public Enonce distributivite()
         {
             if(b instanceof Et)
             {
@@ -265,7 +188,7 @@ public class KBPropositionnelle {
         }
         
         @Override
-        protected Enonce simplifier2()
+        public Enonce simplifier()
         {
             if(a instanceof ValVerite&&b instanceof ValVerite)
             {
@@ -316,16 +239,16 @@ public class KBPropositionnelle {
     }
 
     //Et logique
-    public class Et extends EnonceComplexe{
+    public class Et implements EnonceComplexeAB{
         private Enonce a;
         private Enonce b;
 
-        private Enonce commutativite2()
+        public Enonce commutativite()
         {
             return (Enonce)new Et(b,a);
         }
 
-        private Enonce distributivite2()
+        public Enonce distributivite()
         {
             if(b instanceof Ou)
             {
@@ -335,7 +258,7 @@ public class KBPropositionnelle {
         }
         
         @Override
-        protected Enonce simplifier2()
+        public Enonce simplifier()
         {
             if(a instanceof ValVerite&&b instanceof ValVerite)
             {
@@ -386,10 +309,10 @@ public class KBPropositionnelle {
     }
 
     //Négation logique
-    public class Pas extends EnonceComplexe{
+    public class Pas implements EnonceComplexeA{
         private Enonce a;
         
-        private Enonce deMorgan2()
+        public Enonce deMorgan()
         {
             if(a instanceof Et)
             {
@@ -402,7 +325,7 @@ public class KBPropositionnelle {
             return (Enonce)this;
         }
         
-        private Enonce dblNega2()
+        public Enonce dblNega()
         {
             if(a instanceof Pas)
             {
@@ -412,7 +335,7 @@ public class KBPropositionnelle {
         }
         
         @Override
-        protected Enonce simplifier2()
+        public Enonce simplifier()
         {
             if(a instanceof ValVerite)
             {
@@ -431,12 +354,6 @@ public class KBPropositionnelle {
         {
             return a;
         }
-
-        @Override
-        public Enonce getB()
-        {
-            return a;
-        }
     }
     
     //Symboles
@@ -444,7 +361,7 @@ public class KBPropositionnelle {
     public class Symbole implements EnonceAtomique{
         private String nom;
 
-        private ValVerite reveler(boolean valeur)
+        public ValVerite reveler(boolean valeur)
         {
             return new ValVerite(nom,valeur);
         }
@@ -501,10 +418,14 @@ public class KBPropositionnelle {
     
     private void getSymboles(Enonce enonce,ArrayList<Symbole> symboles)
     {
-        if(enonce instanceof EnonceComplexe)
+        if(enonce instanceof EnonceComplexeAB)
         {
-            getSymboles(((EnonceComplexe)enonce).getA(),symboles);
-            getSymboles(((EnonceComplexe)enonce).getB(),symboles);
+            getSymboles(((EnonceComplexeAB)enonce).getA(),symboles);
+            getSymboles(((EnonceComplexeAB)enonce).getB(),symboles);
+        }
+        else if(enonce instanceof EnonceComplexeA)
+        {
+            getSymboles(((EnonceComplexeAB)enonce).getA(),symboles);
         }
         else if(enonce instanceof Symbole)
         {
@@ -520,12 +441,12 @@ public class KBPropositionnelle {
     //Remplacer tout les symboles dans les énoncés par les valeurs de vérité du modèle
     //Puis, simplifier les nouveaux énoncés jusqu'à obtenir une valeur de vérité
     //Finalement, faire un Et logique entre chacunes des valeurs de vérités obtenus et retourner le résultat
-    private boolean modeleValide(ArrayList<Enonce> KB,ArrayList<ValVerite> modele)
+    private boolean modeleValide(ArrayList<Enonce> enonces,ArrayList<ValVerite> modele)
     {
-        /*for(int i=0;i<KB.size();i++)
+        for(int i=0;i<enonces.size();i++)
         {
             
-        }*/
+        }
         return false;
     }
     
