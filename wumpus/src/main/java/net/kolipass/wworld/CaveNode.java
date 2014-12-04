@@ -13,6 +13,7 @@ public class CaveNode {
     public boolean foundSouthWall;
     public boolean foundEastWall;
     public boolean foundWestWall;
+    //public boolean onceChangeProbability;
 
 
     //////////// world knowledge variables
@@ -30,13 +31,14 @@ public class CaveNode {
     public boolean hasPit;
     public boolean hasObstacle;
     public boolean hasEntrance;
+    
 
 
     public CaveNode(int x, int y) {
 
         // initialize world knowledge and player knowledge about this node.
 
-        pitProbability = 0.5;
+        pitProbability = 0.01;
         wumpusProbability = 0.1;
         supmuwProbability = 0.1;
 
@@ -46,7 +48,7 @@ public class CaveNode {
         foundSouthWall = false;
         foundEastWall = false;
         foundWestWall = false;
-
+        //onceChangeProbability= false;
         hasBreeze = false;
         hasStench = false;
         hasMoo = false;

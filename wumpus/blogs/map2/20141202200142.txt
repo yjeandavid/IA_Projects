@@ -1,0 +1,36 @@
+My curNode: (1;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (2;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (3;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (4;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (5;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (6;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (7;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (8;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (9;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.

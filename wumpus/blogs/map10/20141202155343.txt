@@ -1,0 +1,4 @@
+My curNode: (1;1) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.

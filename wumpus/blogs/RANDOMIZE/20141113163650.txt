@@ -1,0 +1,104 @@
+My curNode: (1;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (2;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (2;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (2;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (2;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (2;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (2;4) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (2;4) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (2;4) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (2;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn left.
+My curNode: (2;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (3;3) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (3;3) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (3;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn left.
+My curNode: (3;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (4;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (5;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (6;2) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (6;2) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (6;2) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (5;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn left.
+My curNode: (5;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (5;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (5;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn left.
+My curNode: (5;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (6;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.

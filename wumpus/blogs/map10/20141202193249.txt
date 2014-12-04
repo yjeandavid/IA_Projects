@@ -1,0 +1,9 @@
+My curNode: (1;1)
+ I go to shortest Safe Path To Unvisited
+goDirection is IDLE. I go home
+My direction is: I
+My action is idle.
+My curNode: (1;1)
+I wants to leave and I am at entrance, climb out!
+My curNode: (1;1)
+I wants to leave and I am at entrance, climb out!

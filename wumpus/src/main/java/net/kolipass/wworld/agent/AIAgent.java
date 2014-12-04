@@ -142,6 +142,7 @@ public class AIAgent extends AbstractAgent {
                 } else {
                     addNewNote(" I go to shortest Safe Path To Unvisited");
                     goDirection = this.shortestSafePathToUnvisited(we);
+                    
                 }
             }
 
@@ -149,7 +150,9 @@ public class AIAgent extends AbstractAgent {
 
             if (goDirection == 'I') {
                 addNewNote("goDirection is IDLE. I go home");
-                this.wantsToGoHome = true;
+                this.wantsToGoHome = true; 
+                
+                
                 goDirection = shortestSafePathToPoint(we, new Point(1, 1));
             }
             addNewNote("My direction is: " + goDirection);
@@ -215,7 +218,7 @@ public class AIAgent extends AbstractAgent {
                 Point point = new Point(j, i);
                 CaveNode node = grid.get(point);
 
-                if (node.wasVisited) {
+                if (node.wasVisited ) {//&& !node.onceChangeProbability
                     checkAreaForPits(we, node);
                 }
             }
@@ -225,6 +228,7 @@ public class AIAgent extends AbstractAgent {
 
     private void checkAreaForPits(WumplusEnvironment we, CaveNode node) {
         Vector<CaveNode> neighbors = we.get4AdjacentNodes(node);
+        
         if (!node.hasBreeze) // neighbors of this node cannot have pits.
         {
 
@@ -237,8 +241,11 @@ public class AIAgent extends AbstractAgent {
             // initially assume that there is a 50% chance that a node adjacent to a
             // breeze has a pit unless it has been deduced to not have a pit.
             for (CaveNode neighbor : neighbors) {
-                if (!neighbor.wasVisited && neighbor.pitProbability > 0.0 && neighbor.pitProbability < 1.0)
-                    neighbor.pitProbability = 0.5;
+                if (!neighbor.wasVisited && neighbor.pitProbability > 0.0 && neighbor.pitProbability < 1.0){
+                    neighbor.pitProbability += 0.33;
+                //node.onceChangeProbability = true;
+            }
+                else if (neighbor.pitProbability >= 1) neighbor.pitProbability = 1;
             }
 
             for (int i = 0; i < 4; i++) {
