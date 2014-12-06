@@ -95,6 +95,8 @@ public class IAAgent extends AbstractAgent {
         
         CaveNode curNode = we.grid.get(new Point(this.x, this.y));
         Vector<CaveNode> neighbors = we.get4AdjacentNodes(curNode);
+        Vector<CaveNode> Mneighbors = we.get8AdjacentNodes(curNode);
+
         
         addNewNote("My curNode: " + curNode.toShortString());
         
@@ -117,19 +119,97 @@ public class IAAgent extends AbstractAgent {
         
         if (curNode.hasStench) {
             
+            Enonce e = new Symbole("S" + this.x + "" + this.y);
+            kb.raconter(e);
+            
+            Enonce e1 = new Ou(new Symbole("W" + neighbors.get(0).x + "" + neighbors.get(0).y), 
+                                new Symbole("W" + neighbors.get(1).x + "" + neighbors.get(1).y));
+            Enonce e2 = new Ou(new Symbole("W" + neighbors.get(2).x + "" + neighbors.get(2).y), 
+                                new Symbole("W" + neighbors.get(3).x + "" + neighbors.get(3).y));
+            e = new DblImpl(e, new Ou(e1, e2));
+            kb.raconter(e);
+            
         } else {
+            
+            kb.raconter(new Pas(new Symbole("S" + this.x + "" + this.y)));
+            kb.raconter(new Pas(new Symbole("W" + neighbors.get(0).x + "" + neighbors.get(0).y)));
+            kb.raconter(new Pas(new Symbole("W" + neighbors.get(1).x + "" + neighbors.get(1).y)));
+            kb.raconter(new Pas(new Symbole("W" + neighbors.get(2).x + "" + neighbors.get(2).y)));
+            kb.raconter(new Pas(new Symbole("W" + neighbors.get(3).x + "" + neighbors.get(3).y)));
             
         }
         
         if (curNode.hasMoo) {
             
+            
+            Enonce e = new Symbole("M" + this.x + "" + this.y);
+            kb.raconter(e);
+            
+            Enonce e1 = new Ou(new Symbole("C" + Mneighbors.get(0).x + "" + Mneighbors.get(0).y), 
+                                new Symbole("C" + Mneighbors.get(1).x + "" + Mneighbors.get(1).y));
+            Enonce e2 = new Ou(new Symbole("C" + Mneighbors.get(2).x + "" + Mneighbors.get(2).y), 
+                                new Symbole("C" + Mneighbors.get(3).x + "" + Mneighbors.get(3).y));
+            Enonce e3 = new Ou(new Symbole("C" + Mneighbors.get(4).x + "" + Mneighbors.get(4).y), 
+                                new Symbole("C" + Mneighbors.get(5).x + "" + Mneighbors.get(5).y));
+            Enonce e4 = new Ou(new Symbole("C" + Mneighbors.get(6).x + "" + Mneighbors.get(6).y), 
+                                new Symbole("C" + Mneighbors.get(7).x + "" + Mneighbors.get(7).y));
+            
+            e = new DblImpl(e, new Ou(new Ou(e1, e2), new Ou (e3,e4)));
+            kb.raconter(e);
+            
         } else {
+            
+            kb.raconter(new Pas(new Symbole("M" + this.x + "" + this.y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(0).x + "" + Mneighbors.get(0).y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(1).x + "" + Mneighbors.get(1).y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(2).x + "" + Mneighbors.get(2).y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(3).x + "" + Mneighbors.get(3).y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(4).x + "" + Mneighbors.get(4).y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(5).x + "" + Mneighbors.get(5).y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(6).x + "" + Mneighbors.get(6).y)));
+            kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(7).x + "" + Mneighbors.get(7).y)));
+            
             
         }
         
         if (curNode.hasGold) {
-            
+            addNewNote("curNode has gold and i grab the gold.");
+            return Action.GRAB;
         }
+        
+        
+         if (this.hasArrow && projectArrowShot(we)) {
+                addNewNote("I has arrow and i shot.");
+                return Action.SHOOT;
+            }
+
+            // go home if both gold and food were found.
+
+            if (this.hasGold && this.hasFood) {
+                addNewNote("I has gold and i has food, i go home.");
+                this.wantsToGoHome = true;
+            }
+
+            // go home if have gold and supmuw has been deduced to be unfriendly.
+
+            if (this.hasGold && this.supmuwFriendlyProbability == 0.0) {
+                addNewNote("I has gold and Supmuw not Friendly, i go home.");
+                this.wantsToGoHome = true;
+            }
+            
+            
+            
+            if (this.wantsToGoHome && this.x == 1 && this.y == 1) {
+                 addNewNote("I wants to leave and I am at entrance, climb out!");
+                 return Action.CLIMB;
+            }
+
+
+            char goDirection = 'I';
+            if (!this.wantsToGoHome) {
+                
+            
+            }
         
         return Action.IDLE;
     }
