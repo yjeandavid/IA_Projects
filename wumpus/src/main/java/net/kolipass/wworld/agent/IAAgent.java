@@ -10,7 +10,12 @@ import java.awt.Point;
 import java.util.Hashtable;
 import java.util.Vector;
 import main.java.net.kolipass.gameEngine.Keyboard;
+import main.java.net.kolipass.logique.propositionnelle.DblImpl;
+import main.java.net.kolipass.logique.propositionnelle.Enonce;
 import main.java.net.kolipass.logique.propositionnelle.KBPropositionnelle;
+import main.java.net.kolipass.logique.propositionnelle.Ou;
+import main.java.net.kolipass.logique.propositionnelle.Pas;
+import main.java.net.kolipass.logique.propositionnelle.Symbole;
 import main.java.net.kolipass.wworld.Action;
 import main.java.net.kolipass.wworld.CaveNode;
 import main.java.net.kolipass.wworld.WumplusEnvironment;
@@ -94,9 +99,20 @@ public class IAAgent extends AbstractAgent {
         addNewNote("My curNode: " + curNode.toShortString());
         
         if (curNode.hasBreeze) {
-            
+            Enonce e = new Symbole("B" + this.x + "" + this.y);
+            kb.raconter(e);
+            Enonce e1 = new Ou(new Symbole("P" + neighbors.get(0).x + "" + neighbors.get(0).y), 
+                                new Symbole("P" + neighbors.get(1).x + "" + neighbors.get(1).y));
+            Enonce e2 = new Ou(new Symbole("P" + neighbors.get(2).x + "" + neighbors.get(2).y), 
+                                new Symbole("P" + neighbors.get(3).x + "" + neighbors.get(3).y));
+            e = new DblImpl(e, new Ou(e1, e2));
+            kb.raconter(e);
         } else {
-            
+            kb.raconter(new Pas(new Symbole("B" + this.x + "" + this.y)));
+            kb.raconter(new Pas(new Symbole("P" + neighbors.get(0).x + "" + neighbors.get(0).y)));
+            kb.raconter(new Pas(new Symbole("P" + neighbors.get(1).x + "" + neighbors.get(1).y)));
+            kb.raconter(new Pas(new Symbole("P" + neighbors.get(2).x + "" + neighbors.get(2).y)));
+            kb.raconter(new Pas(new Symbole("P" + neighbors.get(3).x + "" + neighbors.get(3).y)));
         }
         
         if (curNode.hasStench) {
