@@ -7,6 +7,7 @@
 package main.java.net.kolipass.wworld.agent;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Vector;
 import main.java.net.kolipass.gameEngine.Keyboard;
@@ -179,37 +180,54 @@ public class IAAgent extends AbstractAgent {
         
         
          if (this.hasArrow && projectArrowShot(we)) {
-                addNewNote("I has arrow and i shot.");
-                return Action.SHOOT;
-            }
+            addNewNote("I has arrow and i shot.");
+            return Action.SHOOT;
+        }
 
-            // go home if both gold and food were found.
+        // go home if both gold and food were found.
 
-            if (this.hasGold && this.hasFood) {
-                addNewNote("I has gold and i has food, i go home.");
-                this.wantsToGoHome = true;
-            }
+        if (this.hasGold && this.hasFood) {
+            addNewNote("I has gold and i has food, i go home.");
+            this.wantsToGoHome = true;
+        }
 
-            // go home if have gold and supmuw has been deduced to be unfriendly.
+        // go home if have gold and supmuw has been deduced to be unfriendly.
 
-            if (this.hasGold && this.supmuwFriendlyProbability == 0.0) {
-                addNewNote("I has gold and Supmuw not Friendly, i go home.");
-                this.wantsToGoHome = true;
+        if (this.hasGold && this.supmuwFriendlyProbability == 0.0) {
+            addNewNote("I has gold and Supmuw not Friendly, i go home.");
+            this.wantsToGoHome = true;
+        }
+
+
+
+        if (this.wantsToGoHome && this.x == 1 && this.y == 1) {
+             addNewNote("I wants to leave and I am at entrance, climb out!");
+             return Action.CLIMB;
+        }
+
+
+        char goDirection = 'I';
+        if (!this.wantsToGoHome) {
+            for (CaveNode neighbor : neighbors) {
+                if (!neighbor.wasVisited) {
+                    ArrayList<Enonce> elist = new ArrayList();
+                    elist.add(new Pas(new Symbole("W" + neighbor.x + "" + neighbor.y)));
+                    boolean wumpus = kb.demander(elist);
+                    elist.clear();
+                    elist.add(new Pas(new Symbole("P" + neighbor.x + "" + neighbor.y)));
+                    boolean pit = kb.demander(elist);
+                    elist.clear();
+                    elist.add(new Pas(new Symbole("C" + neighbor.x + "" + neighbor.y)));
+                    boolean supmuw = kb.demander(elist);
+                    
+                    if (!wumpus && !pit && !supmuw) {
+                        
+                    }
+                }
             }
             
-            
-            
-            if (this.wantsToGoHome && this.x == 1 && this.y == 1) {
-                 addNewNote("I wants to leave and I am at entrance, climb out!");
-                 return Action.CLIMB;
-            }
 
-
-            char goDirection = 'I';
-            if (!this.wantsToGoHome) {
-                
-            
-            }
+        }
         
         return Action.IDLE;
     }
