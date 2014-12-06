@@ -1,0 +1,609 @@
+My curNode: (1;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (2;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (3;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (4;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (5;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (6;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (7;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (8;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (9;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (9;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (9;1)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (9;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (9;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (9;4)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (9;5) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (9;5) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (9;5) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (9;4)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn left.
+My curNode: (9;4)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (10;4) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (10;4) hasBreeze 
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (10;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (10;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn left.
+My curNode: (10;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (10;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (10;2)
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (10;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (10;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (10;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (10;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (10;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (9;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (8;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (7;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (6;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (5;3)
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (5;3)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn left.
+My curNode: (5;3)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (5;2)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn left.
+My curNode: (5;2)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (6;2)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (7;2)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (8;2)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (8;2)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (8;3)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (8;4)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (8;5)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (8;6) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (8;6) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (8;6) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (8;5)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (8;5)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (8;5)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn left.
+My curNode: (8;5)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (8;4)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (8;4)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (7;4)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (6;4) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (5;4)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (4;4) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn right.
+My curNode: (4;4) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (4;5) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (4;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (4;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (4;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn left.
+My curNode: (4;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (3;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (2;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (1;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (1;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (1;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (2;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (2;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (2;8) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (2;8) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (3;8)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (3;8)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (3;9) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (3;9) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (4;9) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (4;9) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (4;9) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (3;9) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn left.
+My curNode: (3;9) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (3;8)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (3;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (3;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn left.
+My curNode: (3;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (4;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (5;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (6;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (6;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (6;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (5;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn left.
+My curNode: (5;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (5;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (5;5) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (5;5) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (4;5) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (3;5) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (3;5) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (3;5) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (3;5) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (4;5) hasMoo 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (5;5) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (5;5) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (5;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+I turn right.
+My curNode: (5;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (6;6) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn left.
+My curNode: (6;6) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (6;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn left.
+My curNode: (6;7) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (5;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn right.
+My curNode: (5;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (5;8) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (5;8) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn right.
+My curNode: (5;8) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (5;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (5;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (4;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (3;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (2;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+I turn left.
+My curNode: (2;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (2;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+I turn right.
+My curNode: (2;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: W
+New and last directions equals. I go forward.
+My curNode: (2;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+I turn right.
+My curNode: (2;6)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (2;7)
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (2;8) hasBreeze 
+Cannot deduce Supmuw's friendliness.
+ I go to shortest Safe Path To Unvisited
+My direction is: N
+New and last directions equals. I go forward.
