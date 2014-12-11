@@ -16,6 +16,7 @@ import main.java.net.kolipass.wworld.agent.AbstractAgent;
 import main.java.net.kolipass.wworld.agent.AgentBlog;
 import main.java.net.kolipass.wworld.agent.FileAgentBlog;
 import main.java.net.kolipass.wworld.agent.HumanAgent;
+import main.java.net.kolipass.wworld.agent.IAAgent;
 import main.java.net.kolipass.wworld.agent.MemoAgentBlog;
 
 /**
@@ -62,7 +63,8 @@ public class WumplusEnvironment {
         } else {
             blog = new FileAgentBlog(new MemoAgentBlog(null),
                     "blogs" + File.separator + mapName + File.separator + currentTime() + ".txt");
-            this.agent = new AIAgent(blog);
+            //this.agent = new AIAgent(blog);
+            this.agent = new IAAgent(blog);
         }
     }
 

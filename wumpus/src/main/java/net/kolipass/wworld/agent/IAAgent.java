@@ -212,23 +212,41 @@ public class IAAgent extends AbstractAgent {
                 if (!neighbor.wasVisited) {
                     ArrayList<Enonce> elist = new ArrayList();
                     elist.add(new Pas(new Symbole("W" + neighbor.x + "" + neighbor.y)));
-                    boolean wumpus = kb.demander(elist);
+                    boolean nowumpus = kb.demander(elist);
                     elist.clear();
                     elist.add(new Pas(new Symbole("P" + neighbor.x + "" + neighbor.y)));
-                    boolean pit = kb.demander(elist);
+                    boolean nopit = kb.demander(elist);
                     elist.clear();
                     elist.add(new Pas(new Symbole("C" + neighbor.x + "" + neighbor.y)));
-                    boolean supmuw = kb.demander(elist);
+                    boolean nosupmuw = kb.demander(elist);
                     
-                    if (!wumpus && !pit && !supmuw) {
-                        
+                    if (nowumpus && nopit && nosupmuw) {
+                        if (this.x == neighbor.x && this.y+1 == neighbor.y) {
+                            goDirection = 'N';
+                        } else if (this.x == neighbor.x && this.y-1 == neighbor.y) {
+                            goDirection = 'S';
+                        } else if (this.x+1 == neighbor.x && this.y == neighbor.y) {
+                            goDirection = 'E';
+                        } else if (this.x-1 == neighbor.x && this.y == neighbor.y) {
+                            goDirection = 'W';
+                        }
+                        addNewNote("My direction is: " + goDirection);
+                        if (goDirection == this.direction) {
+                            addNewNote("New and last directions equals. I go forward.");
+                            return Action.GOFORWARD;
+                        } else if (goDirection == getLeftDirection(this.direction)) {
+                            addNewNote("I turn left.");
+                            return Action.TURN_LEFT;
+                        } else if (goDirection == getRightDirection(this.direction) || goDirection == getBackDirection(this.direction)) {
+                            addNewNote("I turn right.");
+                            return Action.TURN_RIGHT;
+                        }
                     }
                 }
             }
-            
 
         }
-        
+        addNewNote("My action is idle.");
         return Action.IDLE;
     }
     
@@ -260,5 +278,41 @@ public class IAAgent extends AbstractAgent {
             }
             target = we.getNextNode(target, direction);
         }
+    }
+    
+    private char getLeftDirection(char curDir) {
+        if (curDir == 'N')
+            return 'W';
+        if (curDir == 'W')
+            return 'S';
+        if (curDir == 'S')
+            return 'E';
+        if (curDir == 'E')
+            return 'N';
+        return 'I';
+    }
+
+    private char getRightDirection(char curDir) {
+        if (curDir == 'N')
+            return 'E';
+        if (curDir == 'W')
+            return 'N';
+        if (curDir == 'S')
+            return 'W';
+        if (curDir == 'E')
+            return 'S';
+        return 'I';
+    }
+
+    private char getBackDirection(char curDir) {
+        if (curDir == 'N')
+            return 'S';
+        if (curDir == 'W')
+            return 'E';
+        if (curDir == 'S')
+            return 'N';
+        if (curDir == 'E')
+            return 'W';
+        return 'I';
     }
 }

@@ -1,0 +1,90 @@
+My curNode: (1;1)
+My direction is: S
+I turn right.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;1)
+My direction is: S
+New and last directions equals. I go forward.
