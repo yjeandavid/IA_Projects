@@ -18,7 +18,7 @@ public class DblImpl extends Enonce.Complexe.AB{
     
     public Enonce biconditionnel()
     {
-        return (Enonce)new Et((Enonce)new Impl(a,b),(Enonce)new Impl(a,b));
+        return (Enonce)new Et((Enonce)new Impl(a,b),(Enonce)new Impl(b,a));
     }
 
     @Override
@@ -57,5 +57,17 @@ public class DblImpl extends Enonce.Complexe.AB{
     public String afficher()
     {
         return "("+a.afficher()+" <=> "+b.afficher()+")";
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof DblImpl))
+        {
+            return false;
+        }
+        else
+        {
+            return a.equals(((DblImpl)obj).a)&&b.equals(((DblImpl)obj).b);
+        }
     }
 }

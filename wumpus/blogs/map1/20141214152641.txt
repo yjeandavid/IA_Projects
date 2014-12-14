@@ -1,0 +1,552 @@
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.
+My curNode: (1;1)
+My action is idle.

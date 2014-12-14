@@ -4,28 +4,55 @@
  */
 package main.java.net.kolipass.logique.propositionnelle;
 
+
+
 /**
  *
  * @author Gabriel
  */
 //Et logique
-public class Et extends Enonce.Complexe.AB{
+
+import java.util.ArrayList;
+
+public class Et extends Enonce.Complexe.N{
         
-    public Et(Enonce a_,Enonce b_)
+    public Et(Enonce... n_)
     {
-        super(a_,b_);
+        super(n_);
     }
 
-    public Enonce commutativite()
+    public Enonce distributivite(int pos)
     {
-        return (Enonce)new Et(b,a);
-    }
-
-    public Enonce distributivite()
-    {
-        if(b instanceof Ou)
+        if(n.get(pos) instanceof Ou)
         {
-            return (Enonce)new Ou((Enonce)new Et(a,((Ou)b).getA()),(Enonce)new Et(a,((Ou)b).getB()));
+            Ou temp=((Ou)n.get(pos));
+            ArrayList<Enonce> listEt=new ArrayList();
+            ArrayList<Enonce> listOu=new ArrayList();
+            
+            for(int i=0;i<temp.getNbEnonces();i++)
+            {
+                listEt.add(temp.getN(i));
+                for(int j=0;j<n.size();j++)
+                {
+                    if(j!=pos)
+                    {
+                        listEt.add(n.get(j));
+                    }
+                }
+                Enonce[] temp2=new Enonce[listEt.size()];
+                for(int j=0;j<listEt.size();j++)
+                {
+                    temp2[j]=listEt.get(j);
+                }
+                listOu.add(new Et(temp2));
+                listEt.clear();
+            }
+            Enonce[] temp2=new Enonce[listOu.size()];
+            for(int j=0;j<listOu.size();j++)
+            {
+                temp2[j]=listOu.get(j);
+            }
+            return (Enonce)new Ou(temp2);
         }
         return (Enonce)this;
     }
@@ -33,38 +60,74 @@ public class Et extends Enonce.Complexe.AB{
     @Override
     public Enonce simplifier()
     {
-        if(a instanceof ValVerite&&b instanceof ValVerite)
+        Enonce simplification=n.get(0);
+        for(int i=1;i<n.size();i++)
         {
-            return (Enonce)new ValVerite("",((ValVerite)a).estVrai()&&((ValVerite)b).estVrai());
-        }
-        else if(a instanceof ValVerite)
-        {
-            if(((ValVerite)a).estVrai())
+            if(simplification instanceof ValVerite&&n.get(i) instanceof ValVerite)
             {
-                return b;
+                simplification=(Enonce)new ValVerite("",((ValVerite)simplification).estVrai()&&((ValVerite)n.get(i)).estVrai());
+            }
+            else if(simplification instanceof ValVerite)
+            {
+                if(((ValVerite)simplification).estVrai())
+                {
+                    simplification=n.get(i);
+                }
+                else
+                {
+                    simplification=(Enonce)new ValVerite("",false);
+                }
+            }
+            else if(n.get(i) instanceof ValVerite)
+            {
+                if(!((ValVerite)n.get(i)).estVrai())
+                {
+                    simplification=(Enonce)new ValVerite("",false);
+                }
             }
             else
             {
-                return (Enonce)new ValVerite("",false);
+                simplification=(Enonce)new Et(simplification,n.get(i));
             }
         }
-        else if(b instanceof ValVerite)
-        {
-            if(((ValVerite)b).estVrai())
-            {
-                return a;
-            }
-            else
-            {
-                return (Enonce)new ValVerite("",false);
-            }
-        }
-        return (Enonce)this;
+        return simplification;
     }
 
     @Override
     public String afficher()
     {
-        return "("+a.afficher()+" && "+b.afficher()+")";
+        String sortie="(";
+        for(int i=0;i<n.size();i++)
+        {
+            sortie+=n.get(i).afficher();
+            if(i+1<n.size())
+            {
+                sortie+=" && ";
+            }
+        }
+        sortie+=")";
+        return sortie;
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof Et))
+        {
+            return false;
+        }
+        else
+        {
+            if(n.size()==((Et)obj).n.size())
+            {
+                boolean egal=true;
+                for(int i=0;i<n.size()&&egal;i++)
+                {
+                    egal&=n.contains(((Et)obj).n.get(i));
+                    egal&=((Et)obj).n.contains(n.get(i));
+                }
+                return egal;
+            }
+            return false;
+        }
     }
 }

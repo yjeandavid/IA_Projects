@@ -21,11 +21,10 @@ public class Impl extends Enonce.Complexe.AB{
         return (Enonce)new Ou((Enonce)new Pas(a),b);
     }
 
-    //À compléter
-    /*public Enonce contraposition()
+    public Enonce contraposition()
     {
-
-    }*/
+        return (Enonce)new Impl((Enonce)new Pas(b),(Enonce)new Pas(a));
+    }
 
     @Override
     public Enonce simplifier()
@@ -70,5 +69,17 @@ public class Impl extends Enonce.Complexe.AB{
     public String afficher()
     {
         return "("+a.afficher()+" => "+b.afficher()+")";
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof Impl))
+        {
+            return false;
+        }
+        else
+        {
+            return a.equals(((Impl)obj).a)&&b.equals(((Impl)obj).b);
+        }
     }
 }

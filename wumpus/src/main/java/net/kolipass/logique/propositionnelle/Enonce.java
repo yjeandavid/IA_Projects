@@ -9,11 +9,26 @@ package main.java.net.kolipass.logique.propositionnelle;
  * @author Gabriel
  */
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 //Syntaxe: page 259 du livre
 public interface Enonce {
     abstract String afficher();
     public interface Complexe extends Enonce{
         abstract Enonce simplifier();
+        
+        public abstract class A implements Enonce.Complexe{
+            protected Enonce a;
+            public A(Enonce a_)
+            {
+                a=a_;
+            }
+            public Enonce getA()
+            {
+                return a;
+            }
+        }
         
         public abstract class AB implements Enonce.Complexe{
             protected Enonce a;
@@ -33,15 +48,21 @@ public interface Enonce {
             }
         }
         
-        public abstract class A implements Enonce.Complexe{
-            protected Enonce a;
-            public A(Enonce a_)
+        public abstract class N implements Enonce.Complexe{
+            protected ArrayList<Enonce> n;
+            public N(Enonce... n_)
             {
-                a=a_;
+                n=new ArrayList(Arrays.asList(n_));
             }
-            public Enonce getA()
+            
+            public int getNbEnonces()
             {
-                return a;
+                return n.size();
+            }
+            
+            public Enonce getN(int pos)
+            {
+                return n.get(pos);
             }
         }
     }

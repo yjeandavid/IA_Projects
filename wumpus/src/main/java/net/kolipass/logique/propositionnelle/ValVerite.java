@@ -42,4 +42,16 @@ public class ValVerite implements Enonce.Atomique{
     {
         return valeur;
     }
+    
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof ValVerite))
+        {
+            return false;
+        }
+        else
+        {
+            return valeur==((ValVerite)obj).valeur;
+        }
+    }
 }

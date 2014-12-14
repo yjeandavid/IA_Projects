@@ -19,11 +19,23 @@ public class Pas extends Enonce.Complexe.A{
     {
         if(a instanceof Et)
         {
-            return (Enonce)new Ou((Enonce)new Pas(((Et)a).getA()),(Enonce)new Pas(((Et)a).getB()));
+            int nbEnonces=((Et)a).getNbEnonces();
+            Enonce[] n=new Enonce[nbEnonces];
+            for(int i=0;i<nbEnonces;i++)
+            {
+                n[i]=new Pas(((Et)a).getN(i));
+            }
+            return (Enonce)new Ou(n);
         }
         else if(a instanceof Ou)
         {
-            return (Enonce)new Et((Enonce)new Pas(((Et)a).getA()),(Enonce)new Pas(((Et)a).getB()));
+            int nbEnonces=((Ou)a).getNbEnonces();
+            Enonce[] n=new Enonce[nbEnonces];
+            for(int i=0;i<nbEnonces;i++)
+            {
+                n[i]=new Pas(((Ou)a).getN(i));
+            }
+            return (Enonce)new Et(n);
         }
         return (Enonce)this;
     }
@@ -51,5 +63,17 @@ public class Pas extends Enonce.Complexe.A{
     public String afficher()
     {
         return "(!"+a.afficher()+")";
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof Pas))
+        {
+            return false;
+        }
+        else
+        {
+            return a.equals(((Pas)obj).a);
+        }
     }
 }
