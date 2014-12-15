@@ -66,7 +66,7 @@ public class MemoAgentBlog extends AgentBlog {
             setPreferredSize(new Dimension(300, 600));
             pack();
             setLocationRelativeTo(null);
-            setBounds(750, 50, 300, 600);
+            setBounds(900, 50, 300, 600);
             setVisible(true);
         }
     }

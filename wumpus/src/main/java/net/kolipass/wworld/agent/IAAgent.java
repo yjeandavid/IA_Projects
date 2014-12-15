@@ -9,6 +9,7 @@ package main.java.net.kolipass.wworld.agent;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.PriorityQueue;
 import java.util.Vector;
 import main.java.net.kolipass.gameEngine.Keyboard;
 import main.java.net.kolipass.logique.propositionnelle.DblImpl;
@@ -19,6 +20,7 @@ import main.java.net.kolipass.logique.propositionnelle.Pas;
 import main.java.net.kolipass.logique.propositionnelle.Symbole;
 import main.java.net.kolipass.wworld.Action;
 import main.java.net.kolipass.wworld.CaveNode;
+import main.java.net.kolipass.wworld.PriorityCaveNode;
 import main.java.net.kolipass.wworld.WumplusEnvironment;
 
 /**
@@ -93,13 +95,18 @@ public class IAAgent extends AbstractAgent {
     
     @Override
     public int getNextAction(WumplusEnvironment we, Keyboard keyboard) {
-        
         CaveNode curNode = we.grid.get(new Point(this.x, this.y));
         Vector<CaveNode> neighbors = we.get4AdjacentNodes(curNode);
         Vector<CaveNode> Mneighbors = we.get8AdjacentNodes(curNode);
-
+        int action = Action.IDLE;
         
         addNewNote("My curNode: " + curNode.toShortString());
+        Enonce e0 = new Pas(new Symbole("P" + curNode.x + "" + curNode.y));
+        kb.raconter(e0);
+        e0 = new Pas(new Symbole("W" + curNode.x + "" + curNode.y));
+        kb.raconter(e0);
+        e0 = new Pas(new Symbole("C" + curNode.x + "" + curNode.y));
+        kb.raconter(e0);
         
         if (curNode.hasBreeze) {
             Enonce e = new Symbole("B" + this.x + "" + this.y);
@@ -119,33 +126,25 @@ public class IAAgent extends AbstractAgent {
         }
         
         if (curNode.hasStench) {
-            
             Enonce e = new Symbole("S" + this.x + "" + this.y);
             kb.raconter(e);
-            
             Enonce e1 = new Ou(new Symbole("W" + neighbors.get(0).x + "" + neighbors.get(0).y), 
                                 new Symbole("W" + neighbors.get(1).x + "" + neighbors.get(1).y));
             Enonce e2 = new Ou(new Symbole("W" + neighbors.get(2).x + "" + neighbors.get(2).y), 
                                 new Symbole("W" + neighbors.get(3).x + "" + neighbors.get(3).y));
             e = new DblImpl(e, new Ou(e1, e2));
             kb.raconter(e);
-            
         } else {
-            
             kb.raconter(new Pas(new Symbole("S" + this.x + "" + this.y)));
             kb.raconter(new Pas(new Symbole("W" + neighbors.get(0).x + "" + neighbors.get(0).y)));
             kb.raconter(new Pas(new Symbole("W" + neighbors.get(1).x + "" + neighbors.get(1).y)));
             kb.raconter(new Pas(new Symbole("W" + neighbors.get(2).x + "" + neighbors.get(2).y)));
             kb.raconter(new Pas(new Symbole("W" + neighbors.get(3).x + "" + neighbors.get(3).y)));
-            
         }
         
         if (curNode.hasMoo) {
-            
-            
             Enonce e = new Symbole("M" + this.x + "" + this.y);
             kb.raconter(e);
-            
             Enonce e1 = new Ou(new Symbole("C" + Mneighbors.get(0).x + "" + Mneighbors.get(0).y), 
                                 new Symbole("C" + Mneighbors.get(1).x + "" + Mneighbors.get(1).y));
             Enonce e2 = new Ou(new Symbole("C" + Mneighbors.get(2).x + "" + Mneighbors.get(2).y), 
@@ -154,12 +153,9 @@ public class IAAgent extends AbstractAgent {
                                 new Symbole("C" + Mneighbors.get(5).x + "" + Mneighbors.get(5).y));
             Enonce e4 = new Ou(new Symbole("C" + Mneighbors.get(6).x + "" + Mneighbors.get(6).y), 
                                 new Symbole("C" + Mneighbors.get(7).x + "" + Mneighbors.get(7).y));
-            
             e = new DblImpl(e, new Ou(new Ou(e1, e2), new Ou (e3,e4)));
             kb.raconter(e);
-            
         } else {
-            
             kb.raconter(new Pas(new Symbole("M" + this.x + "" + this.y)));
             kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(0).x + "" + Mneighbors.get(0).y)));
             kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(1).x + "" + Mneighbors.get(1).y)));
@@ -169,8 +165,6 @@ public class IAAgent extends AbstractAgent {
             kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(5).x + "" + Mneighbors.get(5).y)));
             kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(6).x + "" + Mneighbors.get(6).y)));
             kb.raconter(new Pas(new Symbole("C" + Mneighbors.get(7).x + "" + Mneighbors.get(7).y)));
-            
-            
         }
         
         if (curNode.hasGold) {
@@ -178,33 +172,27 @@ public class IAAgent extends AbstractAgent {
             return Action.GRAB;
         }
         
-        
-         if (this.hasArrow && projectArrowShot(we)) {
+        if (this.hasArrow && projectArrowShot(we)) {
             addNewNote("I has arrow and i shot.");
             return Action.SHOOT;
         }
 
         // go home if both gold and food were found.
-
         if (this.hasGold && this.hasFood) {
             addNewNote("I has gold and i has food, i go home.");
             this.wantsToGoHome = true;
         }
 
         // go home if have gold and supmuw has been deduced to be unfriendly.
-
         if (this.hasGold && this.supmuwFriendlyProbability == 0.0) {
             addNewNote("I has gold and Supmuw not Friendly, i go home.");
             this.wantsToGoHome = true;
         }
 
-
-
         if (this.wantsToGoHome && this.x == 1 && this.y == 1) {
              addNewNote("I wants to leave and I am at entrance, climb out!");
              return Action.CLIMB;
         }
-
 
         char goDirection = 'I';
         if (!this.wantsToGoHome) {
@@ -230,24 +218,46 @@ public class IAAgent extends AbstractAgent {
                         } else if (this.x-1 == neighbor.x && this.y == neighbor.y) {
                             goDirection = 'W';
                         }
-                        addNewNote("My direction is: " + goDirection);
-                        if (goDirection == this.direction) {
-                            addNewNote("New and last directions equals. I go forward.");
-                            return Action.GOFORWARD;
-                        } else if (goDirection == getLeftDirection(this.direction)) {
-                            addNewNote("I turn left.");
-                            return Action.TURN_LEFT;
-                        } else if (goDirection == getRightDirection(this.direction) || goDirection == getBackDirection(this.direction)) {
-                            addNewNote("I turn right.");
-                            return Action.TURN_RIGHT;
-                        }
+                        
+                        break;
                     }
                 }
             }
-
+            if (goDirection == 'I') {
+                CaveNode previousNode = (CaveNode) latestDirections.peek();
+                if (this.x == previousNode.x && this.y+1 == previousNode.y) {
+                    goDirection = 'N';
+                } else if (this.x == previousNode.x && this.y-1 == previousNode.y) {
+                    goDirection = 'S';
+                } else if (this.x+1 == previousNode.x && this.y == previousNode.y) {
+                    goDirection = 'E';
+                } else if (this.x-1 == previousNode.x && this.y == previousNode.y) {
+                    goDirection = 'W';
+                }
+            }
+        } else {
+            addNewNote("goDirection is IDLE. I go home");
+            this.wantsToGoHome = true; 
+            goDirection = shortestSafePathToPoint(we, new Point(1, 1));
         }
-        addNewNote("My action is idle.");
-        return Action.IDLE;
+        
+        if (goDirection != 'I') {
+            addNewNote("My direction is: " + goDirection);
+            if (goDirection == this.direction) {
+                addNewNote("New and last directions equals. I go forward.");
+                action = Action.GOFORWARD;
+            } else if (goDirection == getLeftDirection(this.direction)) {
+                addNewNote("I turn left.");
+                action = Action.TURN_LEFT;
+            } else if (goDirection == getRightDirection(this.direction) || goDirection == getBackDirection(this.direction)) {
+                addNewNote("I turn right.");
+                action = Action.TURN_RIGHT;
+            }
+        } else {
+            addNewNote("My action is idle.");
+        }
+        
+        return action;
     }
     
     private boolean projectArrowShot(WumplusEnvironment we) {
@@ -314,5 +324,129 @@ public class IAAgent extends AbstractAgent {
         if (curDir == 'E')
             return 'W';
         return 'I';
+    }
+    
+    /**
+     * shortestSafePathToUnvisited(WumplusEnvironment we)
+     * determines which direction to go to get to the current least-cost unvisited node.
+     * Returns N S E or W if an unvisited node can be reached with little or no chance of death
+     */
+    private char shortestSafePathToPoint(WumplusEnvironment we, Point point) {
+        // initialize visited nodes list so that we don't revisited nodes we've already visited in this bfs.
+        Hashtable<Point, Boolean> isExhausted = new Hashtable<Point, Boolean>();
+        //	log.d("####################Path to Point " + point + " start A* search ####################################");
+        for (int i = 0; i <= 11; i++) {
+            for (int j = 0; j <= 11; j++) {
+                isExhausted.put(new Point(j, i), false);
+            }
+        }
+
+        // initialize other things
+
+        PriorityQueue<PriorityCaveNode> pq = new PriorityQueue<PriorityCaveNode>();
+        Hashtable<Point, CaveNode> grid = we.grid;
+
+        PriorityCaveNode first = new PriorityCaveNode(grid.get(new Point(this.x, this.y)), 0, new Vector<Character>(), this.direction);
+        pq.add(first);
+
+        // A* Search
+
+        while (!pq.isEmpty()) {
+            //log.d("Entered A* Search");
+            // initialize this step.
+
+            PriorityCaveNode curPNode = pq.remove();
+            CaveNode node = curPNode.node;
+            char curDir = curPNode.directions.lastElement().charValue();
+            int curCost = curPNode.cost;
+
+            Point curPoint = new Point(node.x, node.y);
+
+            // If we have reached a node that was not visited, then we'll return the direction taken to get to it!
+
+            if (node.x == point.x && node.y == point.y) {
+                try {
+                    return curPNode.directions.get(1).charValue();
+                } catch (Exception e) {
+                    return 'I';
+                }
+            }
+
+            // proceed if current node hasn't been visited in the bfs yet and it isn't a wall.
+
+            if (!isExhausted.get(curPoint).booleanValue() && !node.hasObstacle) {
+                char leftDir = getLeftDirection(curDir);
+                char rightDir = getRightDirection(curDir);
+                char backDir = getBackDirection(curDir);
+
+                // attempt to travel in all directions. Account for cost of turning.
+
+                aStarTravel(pq, we, curPNode, curDir, curCost, point);
+                aStarTravel(pq, we, curPNode, leftDir, curCost + 1, point);
+                aStarTravel(pq, we, curPNode, rightDir, curCost + 1, point);
+                aStarTravel(pq, we, curPNode, backDir, curCost + 2, point);
+            }
+            isExhausted.put(curPoint, true);
+        }
+
+        return 'I'; // I for IDLE : it was not possible to safely reach an unvisited node
+    }
+    
+    /**
+     * performs a step through an A* search for the agent
+     */
+
+    private void aStarTravel(PriorityQueue<PriorityCaveNode> pq, WumplusEnvironment we, PriorityCaveNode pNode, char direction, int curCost, Point destinationPoint) {
+        CaveNode node = pNode.node;
+
+        CaveNode nextNode = we.getNextNode(node, direction);
+
+        // determine cost of moving foward into the next node.
+
+        double chanceOfFriendlySupmuw = nextNode.supmuwProbability * this.supmuwFriendlyProbability;
+        double chanceOfMurderousSupmuw = nextNode.supmuwProbability * (1 - this.supmuwFriendlyProbability);
+        if (this.supmuwKilled)
+            chanceOfMurderousSupmuw = 0.0;
+
+        double chanceOfWumpusDeath = (nextNode.wumpusProbability);
+        if (wumpusKilled)
+            chanceOfWumpusDeath = 0.0;
+
+        double chanceOfDeath = 1.0 - ((1.0 - nextNode.pitProbability) * (1.0 - chanceOfWumpusDeath) * (1.0 - chanceOfMurderousSupmuw));
+        if (chanceOfDeath == 1.0)
+            return;
+
+        double chanceOfGold = 1.0 / we.unvisitedNodes.size();
+        if (this.hasGold)
+            chanceOfGold = 0.0;
+
+        if (this.hasFood)
+            chanceOfFriendlySupmuw = 0.0;
+
+        int moveForwardCost = (int) (1 + chanceOfDeath * 1000 + chanceOfGold * -1000 + chanceOfFriendlySupmuw * -100);
+        //log.d("chanceDeath: " + (chanceOfDeath) + " Gold: " + (chanceOfGold) + " FriendSupmuw: " + chanceOfFriendlySupmuw);
+        //log.d("chancePit: " + (nextNode.pitProbability) + " Wumpus: " + (nextNode.wumpusProbability) + " UnFriendSupmuw: " + chanceOfMurderousSupmuw);
+
+        // add weight to unvisited nodes
+
+        if (nextNode.wasVisited && destinationPoint == null) {
+            //	log.d("was visited");
+            moveForwardCost += 100;
+        }
+        if (destinationPoint != null) {
+            //	log.d("heading to point " + destinationPoint);
+            moveForwardCost += Math.abs(nextNode.x - destinationPoint.x) + Math.abs(nextNode.y - destinationPoint.y);
+            if (!nextNode.wasVisited) {
+                moveForwardCost += 100;
+            }
+        }
+
+        // add the next node to our priority queue if the agent isn't likely to die by doing so.
+
+        if (moveForwardCost < 500 + 1) {
+            //log.d("cost to move " + direction + " to " + nextNode.x + "," + nextNode.y + " : " + (curCost + moveForwardCost) + " : " + curCost + " " + moveForwardCost);
+            PriorityCaveNode nextPNode = new PriorityCaveNode(nextNode, curCost + moveForwardCost, pNode.directions, direction);
+            pq.add(nextPNode);
+        }
     }
 }

@@ -1,0 +1,3 @@
+My curNode: (1;1)
+My direction is: N
+I turn left.

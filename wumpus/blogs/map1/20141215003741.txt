@@ -1,0 +1,6 @@
+My curNode: (1;1)
+My direction is: N
+I turn left.
+My curNode: (1;1)
+My direction is: N
+New and last directions equals. I go forward.

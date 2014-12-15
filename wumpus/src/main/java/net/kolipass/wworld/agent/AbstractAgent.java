@@ -5,6 +5,7 @@ import main.java.net.kolipass.gameEngine.Keyboard;
 import main.java.net.kolipass.wworld.*;
 
 import java.awt.*;
+import java.util.Stack;
 
 /**
  * @author Kruti Mehta, Chris Leatherwood
@@ -31,7 +32,7 @@ public abstract class AbstractAgent {
     public int y;
 
     public char direction;
-
+    public Stack latestDirections;
 
     /**
      * Constructor.The agent can be allowed to have more number of
@@ -48,6 +49,7 @@ public abstract class AbstractAgent {
         x = 1;
         y = 1;
         direction = 'E';
+        latestDirections = new Stack();
 
 
     }
@@ -171,8 +173,11 @@ public abstract class AbstractAgent {
 
             nextNode.pitProbability = 0.0;
             nextNode.wumpusProbability = 0.0;
-
-
+            if (!latestDirections.contains(curNode) && !latestDirections.contains(nextNode))
+                latestDirections.add(curNode);
+            else if (!latestDirections.contains(curNode) && latestDirections.contains(nextNode)) 
+                latestDirections.pop();
+                
             return "MOVED";
         }
     }
