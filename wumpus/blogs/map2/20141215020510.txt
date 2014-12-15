@@ -1,0 +1,16 @@
+My curNode: (1;1)
+My direction is: N
+I turn left.
+My curNode: (1;1)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;2)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;3)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;4)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;5) hasMoo 

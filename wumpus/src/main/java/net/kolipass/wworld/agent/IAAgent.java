@@ -224,15 +224,19 @@ public class IAAgent extends AbstractAgent {
                 }
             }
             if (goDirection == 'I') {
-                CaveNode previousNode = (CaveNode) latestDirections.peek();
-                if (this.x == previousNode.x && this.y+1 == previousNode.y) {
-                    goDirection = 'N';
-                } else if (this.x == previousNode.x && this.y-1 == previousNode.y) {
-                    goDirection = 'S';
-                } else if (this.x+1 == previousNode.x && this.y == previousNode.y) {
-                    goDirection = 'E';
-                } else if (this.x-1 == previousNode.x && this.y == previousNode.y) {
-                    goDirection = 'W';
+                if (!latestDirections.isEmpty()) {
+                    CaveNode previousNode = (CaveNode) latestDirections.peek();
+                    if (this.x == previousNode.x && this.y+1 == previousNode.y) {
+                        goDirection = 'N';
+                    } else if (this.x == previousNode.x && this.y-1 == previousNode.y) {
+                        goDirection = 'S';
+                    } else if (this.x+1 == previousNode.x && this.y == previousNode.y) {
+                        goDirection = 'E';
+                    } else if (this.x-1 == previousNode.x && this.y == previousNode.y) {
+                        goDirection = 'W';
+                    }
+                } else {
+                    this.wantsToGoHome = true;
                 }
             }
         } else {
