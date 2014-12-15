@@ -111,11 +111,11 @@ public class IAAgent extends AbstractAgent {
         if (curNode.hasBreeze) {
             Enonce e = new Symbole("B" + this.x + "" + this.y);
             kb.raconter(e);
-            Enonce e1 = new Ou(new Symbole("P" + neighbors.get(0).x + "" + neighbors.get(0).y), 
-                                new Symbole("P" + neighbors.get(1).x + "" + neighbors.get(1).y));
-            Enonce e2 = new Ou(new Symbole("P" + neighbors.get(2).x + "" + neighbors.get(2).y), 
-                                new Symbole("P" + neighbors.get(3).x + "" + neighbors.get(3).y));
-            e = new DblImpl(e, new Ou(e1, e2));
+            Enonce e1 = new Symbole("P" + neighbors.get(0).x + "" + neighbors.get(0).y); 
+            Enonce e2 = new Symbole("P" + neighbors.get(1).x + "" + neighbors.get(1).y);
+            Enonce e3 = new Symbole("P" + neighbors.get(2).x + "" + neighbors.get(2).y); 
+            Enonce e4 = new Symbole("P" + neighbors.get(3).x + "" + neighbors.get(3).y);
+            e = new DblImpl(e, new Ou(e1, e2, e3, e4));
             kb.raconter(e);
         } else {
             kb.raconter(new Pas(new Symbole("B" + this.x + "" + this.y)));
@@ -128,11 +128,11 @@ public class IAAgent extends AbstractAgent {
         if (curNode.hasStench) {
             Enonce e = new Symbole("S" + this.x + "" + this.y);
             kb.raconter(e);
-            Enonce e1 = new Ou(new Symbole("W" + neighbors.get(0).x + "" + neighbors.get(0).y), 
-                                new Symbole("W" + neighbors.get(1).x + "" + neighbors.get(1).y));
-            Enonce e2 = new Ou(new Symbole("W" + neighbors.get(2).x + "" + neighbors.get(2).y), 
-                                new Symbole("W" + neighbors.get(3).x + "" + neighbors.get(3).y));
-            e = new DblImpl(e, new Ou(e1, e2));
+            Enonce e1 = new Symbole("W" + neighbors.get(0).x + "" + neighbors.get(0).y); 
+            Enonce e2 = new Symbole("W" + neighbors.get(1).x + "" + neighbors.get(1).y);
+            Enonce e3 = new Symbole("W" + neighbors.get(2).x + "" + neighbors.get(2).y); 
+            Enonce e4 = new Symbole("W" + neighbors.get(3).x + "" + neighbors.get(3).y);
+            e = new DblImpl(e, new Ou(e1, e2, e3, e4));
             kb.raconter(e);
         } else {
             kb.raconter(new Pas(new Symbole("S" + this.x + "" + this.y)));
@@ -145,15 +145,15 @@ public class IAAgent extends AbstractAgent {
         if (curNode.hasMoo) {
             Enonce e = new Symbole("M" + this.x + "" + this.y);
             kb.raconter(e);
-            Enonce e1 = new Ou(new Symbole("C" + Mneighbors.get(0).x + "" + Mneighbors.get(0).y), 
-                                new Symbole("C" + Mneighbors.get(1).x + "" + Mneighbors.get(1).y));
-            Enonce e2 = new Ou(new Symbole("C" + Mneighbors.get(2).x + "" + Mneighbors.get(2).y), 
-                                new Symbole("C" + Mneighbors.get(3).x + "" + Mneighbors.get(3).y));
-            Enonce e3 = new Ou(new Symbole("C" + Mneighbors.get(4).x + "" + Mneighbors.get(4).y), 
-                                new Symbole("C" + Mneighbors.get(5).x + "" + Mneighbors.get(5).y));
-            Enonce e4 = new Ou(new Symbole("C" + Mneighbors.get(6).x + "" + Mneighbors.get(6).y), 
-                                new Symbole("C" + Mneighbors.get(7).x + "" + Mneighbors.get(7).y));
-            e = new DblImpl(e, new Ou(new Ou(e1, e2), new Ou (e3,e4)));
+            Enonce e1 = new Symbole("C" + Mneighbors.get(0).x + "" + Mneighbors.get(0).y);
+            Enonce e2 = new Symbole("C" + Mneighbors.get(1).x + "" + Mneighbors.get(1).y);
+            Enonce e3 = new Symbole("C" + Mneighbors.get(2).x + "" + Mneighbors.get(2).y); 
+            Enonce e4 = new Symbole("C" + Mneighbors.get(3).x + "" + Mneighbors.get(3).y);
+            Enonce e5 = new Symbole("C" + Mneighbors.get(4).x + "" + Mneighbors.get(4).y); 
+            Enonce e6 = new Symbole("C" + Mneighbors.get(5).x + "" + Mneighbors.get(5).y);
+            Enonce e7 = new Symbole("C" + Mneighbors.get(6).x + "" + Mneighbors.get(6).y); 
+            Enonce e8 = new Symbole("C" + Mneighbors.get(7).x + "" + Mneighbors.get(7).y);;
+            e = new DblImpl(e, new Ou(e1,e2,e3,e4,e5,e6,e7,e8));
             kb.raconter(e);
         } else {
             kb.raconter(new Pas(new Symbole("M" + this.x + "" + this.y)));

@@ -59,9 +59,10 @@ public class KBPropositionnelle {
             }
         }
         clauses.add((new Pas(a)).dblNega());
-        
         nouveau.clear();
-        while(true)
+        int limite=2;
+        int increm=0;
+        while(increm<limite)
         {
             for(int i=0;i<clauses.size();i++)
             {
@@ -100,7 +101,9 @@ public class KBPropositionnelle {
             {
                 return false;
             }
+            increm++;
         }
+        return false;
     }
     
     private ArrayList<Enonce> CNF(Enonce cour)
