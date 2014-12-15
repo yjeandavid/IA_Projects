@@ -1,0 +1,23 @@
+					README
+
+1- Membres de l'équipe:
+
+	Christian Télémaque
+	TELC10058803
+	telemaque.christian@courrier.uqam.ca
+
+	Yapo Claude-Clément
+	YAPC01129002
+	yapo.claude-clement@courrier.uqam.ca
+
+	Gabriel Jourdenais Hamel
+	JOUG08108901
+	jourdenais_hamel.gabriel@courrier.uqam.ca
+
+
+2- Compilation
+	javac Log.java
+	javac ConfigWumpus.java Log.java
+	javac gameEngine\* ConfigWumpus.java Log.java
+	javac logique\proposotionnelle\*
+	

@@ -1,0 +1,34 @@
+My curNode: (1;1)
+My direction is: N
+I turn left.
+My curNode: (1;1)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;2)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;3)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;4)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;5)
+My direction is: N
+New and last directions equals. I go forward.
+My curNode: (1;6) hasStench 
+My direction is: S
+I turn right.
+My curNode: (1;6) hasStench 
+My direction is: S
+I turn right.
+My curNode: (1;6) hasStench 
+My direction is: S
+New and last directions equals. I go forward.
+My curNode: (1;5)
+My direction is: E
+I turn left.
+My curNode: (1;5)
+My direction is: E
+New and last directions equals. I go forward.
+My curNode: (2;5) hasStench 

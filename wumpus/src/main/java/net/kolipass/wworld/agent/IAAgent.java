@@ -169,6 +169,7 @@ public class IAAgent extends AbstractAgent {
         
         if (curNode.hasGold) {
             addNewNote("curNode has gold and i grab the gold.");
+            this.wantsToGoHome = true;
             return Action.GRAB;
         }
         
