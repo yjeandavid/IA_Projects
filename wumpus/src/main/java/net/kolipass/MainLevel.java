@@ -397,6 +397,7 @@ public class MainLevel extends Level {
         hasFoodSprite.isSelected = agent.hasFood;
 
         if (wumplusEnvironment.wumpus.isDead) {
+            stenchSprites.clear();
             wumpusSprite.setAnimation("dead");
         }
         if (wumplusEnvironment.supmuw.isDead) {

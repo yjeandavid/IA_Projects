@@ -1,0 +1,6 @@
+My curNode: (1;1) hasMoo 
+My action is idle.
+My curNode: (1;1) hasMoo 
+I wants to leave and I am at entrance, climb out!
+My curNode: (1;1) hasMoo 
+I wants to leave and I am at entrance, climb out!

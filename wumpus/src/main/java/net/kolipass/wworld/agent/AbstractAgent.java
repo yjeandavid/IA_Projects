@@ -50,8 +50,8 @@ public abstract class AbstractAgent {
         y = 1;
         direction = 'E';
         latestDirections = new Stack();
-
-
+        
+        
     }
 
 

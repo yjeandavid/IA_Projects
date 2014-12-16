@@ -44,17 +44,12 @@ public class IAAgent extends AbstractAgent {
     private KBPropositionnelle kb = null;
 
     // we initially know nothing of the wumpus or supmuw's location.
-    private int eastmostStench = -1;
-    private int westmostStench = 12;
-    private int northmostStench = -1;
-    private int southmostStench = 12;
+    private Point firstStenchFound = null;
 
-
-    private int eastmostMoo = -1;
-    private int westmostMoo = 12;
-    private int northmostMoo = -1;
-    private int southmostMoo = 12;
-
+    private Point firstMooFound = null;
+    private Point secondMooFound = null;
+    private Point thirdMooFound = null;
+    
     public IAAgent (AgentBlog agentBlog) {
         this.agentBlog = agentBlog;
         kb = new KBPropositionnelle();
@@ -64,29 +59,325 @@ public class IAAgent extends AbstractAgent {
     public String move(WumplusEnvironment we) {
         CaveNode curNode = we.grid.get(new Point(this.x, this.y));
         CaveNode nextNode = we.getNextNode(curNode, direction);
+        Vector<CaveNode> neighbors = we.get4AdjacentNodes(nextNode);
+        Vector<CaveNode> Mneighbors = we.get8AdjacentNodes(nextNode);
 
         if (nextNode.hasStench) {
-            if (nextNode.x < westmostStench)
-                westmostStench = nextNode.x;
-            if (nextNode.x > eastmostStench)
-                eastmostStench = nextNode.x;
-            if (nextNode.y < southmostStench)
-                southmostStench = nextNode.y;
-            if (nextNode.y > northmostStench)
-                northmostStench = nextNode.y;
+            if (!wumpusFound)
+                findWumpus(we, nextNode);
+            
+            if (nextNode.hasObstacle) {
+                Enonce e = new Symbole("S" + nextNode.x + "" + nextNode.y);
+                kb.raconter(e);
+                Enonce e1 = new Symbole("W" + neighbors.get(0).x + "" + neighbors.get(0).y); 
+                Enonce e2 = new Symbole("W" + neighbors.get(1).x + "" + neighbors.get(1).y);
+                Enonce e3 = new Symbole("W" + neighbors.get(2).x + "" + neighbors.get(2).y); 
+                Enonce e4 = new Symbole("W" + neighbors.get(3).x + "" + neighbors.get(3).y);
+                e = new DblImpl(e, new Ou(e1, e2, e3, e4));
+                kb.raconter(e);
+            }
+        } else {
+            if (nextNode.hasObstacle) {
+                kb.raconter(new Pas(new Symbole("S" + nextNode.x + "" + nextNode.y)));
+                for (CaveNode neighbor : neighbors) {
+                    if (neighbor != null)
+                        kb.raconter(new Pas(new Symbole("W" + neighbor.x + "" + neighbor.y)));
+                }
+            }
         }
 
         if (nextNode.hasMoo) {
-            if (nextNode.x < westmostMoo)
-                westmostMoo = nextNode.x;
-            if (nextNode.x > eastmostMoo)
-                eastmostMoo = nextNode.x;
-            if (nextNode.y < southmostMoo)
-                southmostMoo = nextNode.y;
-            if (nextNode.y > northmostMoo)
-                northmostMoo = nextNode.y;
+            if (!supmuwFound)
+                findSupmuw(we, nextNode);
+            
+            if (nextNode.hasObstacle) {
+                Enonce e = new Symbole("M" + nextNode.x + "" + nextNode.y);
+                kb.raconter(e);
+                ArrayList<Enonce> es = new ArrayList<>();
+                for (CaveNode Mneighbor : Mneighbors) {
+                    if (Mneighbor != null)
+                        es.add(new Symbole("C" + Mneighbor.x + "" + Mneighbor.y));
+                }
+                /*Enonce e1 = new Symbole("C" + Mneighbors.get(0).x + "" + Mneighbors.get(0).y);
+                Enonce e2 = new Symbole("C" + Mneighbors.get(1).x + "" + Mneighbors.get(1).y);
+                Enonce e3 = new Symbole("C" + Mneighbors.get(2).x + "" + Mneighbors.get(2).y); 
+                Enonce e4 = new Symbole("C" + Mneighbors.get(3).x + "" + Mneighbors.get(3).y);
+                Enonce e5 = new Symbole("C" + Mneighbors.get(4).x + "" + Mneighbors.get(4).y); 
+                Enonce e6 = new Symbole("C" + Mneighbors.get(5).x + "" + Mneighbors.get(5).y);
+                Enonce e7 = new Symbole("C" + Mneighbors.get(6).x + "" + Mneighbors.get(6).y); 
+                Enonce e8 = new Symbole("C" + Mneighbors.get(7).x + "" + Mneighbors.get(7).y);*/
+                if (es.size() == 5) {
+                    e = new DblImpl(e, new Ou(es.get(0),es.get(1),es.get(2),es.get(3),es.get(4)));
+                } else {
+                    e = new DblImpl(e, new Ou(es.get(0),es.get(1),es.get(2),es.get(3),es.get(4),es.get(5),es.get(6),
+                                                es.get(7)));
+                }
+                kb.raconter(e);
+            }
+        } else {
+            if (nextNode.hasObstacle) {
+                kb.raconter(new Pas(new Symbole("M" + nextNode.x + "" + nextNode.y)));
+                for (CaveNode Mneighbor : Mneighbors) {
+                    if (Mneighbor != null)
+                        kb.raconter(new Pas(new Symbole("C" + Mneighbor.x + "" + Mneighbor.y)));
+                }
+            }
         }
+        
+        if (nextNode.hasBreeze && nextNode.hasObstacle) {
+            Enonce e = new Symbole("B" + nextNode.x + "" + nextNode.y);
+            kb.raconter(e);
+            Enonce e1 = new Symbole("P" + neighbors.get(0).x + "" + neighbors.get(0).y); 
+            Enonce e2 = new Symbole("P" + neighbors.get(1).x + "" + neighbors.get(1).y);
+            Enonce e3 = new Symbole("P" + neighbors.get(2).x + "" + neighbors.get(2).y); 
+            Enonce e4 = new Symbole("P" + neighbors.get(3).x + "" + neighbors.get(3).y);
+            e = new DblImpl(e, new Ou(e1, e2, e3, e4));
+            kb.raconter(e);
+        } else if (nextNode.hasObstacle) {
+            kb.raconter(new Pas(new Symbole("B" + nextNode.x + "" + nextNode.y)));
+            for (CaveNode neighbor : neighbors) {
+                if (neighbor != null)
+                    kb.raconter(new Pas(new Symbole("P" + neighbor.x + "" + neighbor.y)));
+            }
+        }
+        
         return super.move(we);
+    }
+    
+    private void findWumpus(WumplusEnvironment we, CaveNode curNode) {
+        if (firstStenchFound == null) {
+            firstStenchFound = new Point(curNode.x, curNode.y);
+        } else {
+            if (firstStenchFound.x == curNode.x && firstStenchFound.y > curNode.y) {
+                wumpusFound = true;
+                knownWumpusX = firstStenchFound.x;
+                knownWumpusY = firstStenchFound.y - 1;
+            } else if (firstStenchFound.x == curNode.x && firstStenchFound.y < curNode.y) {
+                wumpusFound = true;
+                knownWumpusX = firstStenchFound.x;
+                knownWumpusY = firstStenchFound.y + 1;
+            } else if (firstStenchFound.x > curNode.x && firstStenchFound.y == curNode.y) {
+                wumpusFound = true;
+                knownWumpusX = firstStenchFound.x - 1;
+                knownWumpusY = firstStenchFound.y;
+            } else if (firstStenchFound.x < curNode.x && firstStenchFound.y == curNode.y) {
+                wumpusFound = true;
+                knownWumpusX = firstStenchFound.x + 1;
+                knownWumpusY = firstStenchFound.y;
+            } else if (firstStenchFound.x > curNode.x && firstStenchFound.y > curNode.y) {
+                CaveNode bottomNode = we.grid.get(new Point(curNode.x+1, curNode.y));
+                CaveNode topNode = we.grid.get(new Point(curNode.x, curNode.y+1));
+                if (bottomNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = topNode.x;
+                    knownWumpusY = topNode.y;
+                } else if (topNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = bottomNode.x;
+                    knownWumpusY = bottomNode.y;
+                }
+            } else if (firstStenchFound.x > curNode.x && firstStenchFound.y < curNode.y) {
+                CaveNode bottomNode = we.grid.get(new Point(curNode.x, curNode.y-1));
+                CaveNode topNode = we.grid.get(new Point(curNode.x+1, curNode.y));
+                if (bottomNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = topNode.x;
+                    knownWumpusY = topNode.y;
+                } else if (topNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = bottomNode.x;
+                    knownWumpusY = bottomNode.y;
+                }
+            } else if (firstStenchFound.x < curNode.x && firstStenchFound.y < curNode.y) {
+                CaveNode bottomNode = we.grid.get(new Point(curNode.x, curNode.y-1));
+                CaveNode topNode = we.grid.get(new Point(curNode.x-1, curNode.y));
+                if (bottomNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = topNode.x;
+                    knownWumpusY = topNode.y;
+                } else if (topNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = bottomNode.x;
+                    knownWumpusY = bottomNode.y;
+                }
+            } else if (firstStenchFound.x < curNode.x && firstStenchFound.y > curNode.y) {
+                CaveNode bottomNode = we.grid.get(new Point(curNode.x-1, curNode.y));
+                CaveNode topNode = we.grid.get(new Point(curNode.x, curNode.y+1));
+                if (bottomNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = topNode.x;
+                    knownWumpusY = topNode.y;
+                } else if (topNode.wasVisited) {
+                    wumpusFound = true;
+                    knownWumpusX = bottomNode.x;
+                    knownWumpusY = bottomNode.y;
+                }
+            }
+            
+            
+            if (firstMooFound != null && wumpusFound) {
+                int ecart = firstMooFound.x - knownWumpusX > 0 ? firstMooFound.x - knownWumpusX : knownWumpusX - firstMooFound.x;
+                if (1 <= ecart && ecart <= 2) {
+                    supmuwFriendlyProbability = 0.0;
+                } else if (ecart > 2) {
+                    supmuwFriendlyProbability = 1.0;
+                } else  {
+                    ecart = firstMooFound.y - knownWumpusY > 0 ? firstMooFound.y - knownWumpusY : knownWumpusY - firstMooFound.y;
+                    if (1 <= ecart && ecart <= 2) {
+                        supmuwFriendlyProbability = 0.0;
+                    } else if (ecart > 2) {
+                        supmuwFriendlyProbability = 1.0;
+                    }
+                }
+            }
+        }
+    }
+    
+    private void findSupmuw(WumplusEnvironment we, CaveNode curNode) {
+        if (firstMooFound == null) {
+            firstMooFound = new Point(curNode.x, curNode.y);
+        } else if (secondMooFound == null) {
+            secondMooFound = new Point(curNode.x, curNode.y);
+        } else if (thirdMooFound == null) {
+            if (firstMooFound.x == secondMooFound.x && secondMooFound.x == curNode.x) {
+                thirdMooFound = new Point(curNode.x, curNode.y);
+            } else if (firstMooFound.y == secondMooFound.y && secondMooFound.y == curNode.y) {
+                thirdMooFound = new Point(curNode.x, curNode.y);
+            } else if (firstMooFound.x != secondMooFound.x && secondMooFound.x != curNode.x
+                    && curNode.x != firstMooFound.x && firstMooFound.y != secondMooFound.y
+                    && secondMooFound.y != curNode.y && curNode.y != firstMooFound.y) {
+                thirdMooFound = new Point(curNode.x, curNode.y);
+            }
+        }
+        
+        if (firstMooFound != null && secondMooFound != null && thirdMooFound != null) {
+            if (firstMooFound.x == secondMooFound.x && secondMooFound.x == thirdMooFound.x) {
+                knownSupmuwY = (firstMooFound.y + secondMooFound.y + thirdMooFound.y) / 3;
+                Vector<CaveNode> neighbors = we.get4AdjacentNodes(we.grid.get(new Point(firstMooFound.x,
+                                                                    firstMooFound.y)));
+                CaveNode eastNode = neighbors.get(1);
+                CaveNode westNode = neighbors.get(3);
+                if (eastNode.wasVisited && eastNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwX = eastNode.x;
+                } else if (!eastNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwX = westNode.x;
+                } else {
+                    if (westNode.wasVisited && westNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwX = westNode.x;
+                    } else if (!westNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwX = eastNode.x;
+                    }
+                }
+                
+                neighbors = we.get4AdjacentNodes(we.grid.get(new Point(secondMooFound.x, secondMooFound.y)));
+                eastNode = neighbors.get(1);
+                westNode = neighbors.get(3);
+                if (eastNode.wasVisited && eastNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwX = eastNode.x;
+                } else if (!eastNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwX = westNode.x;
+                } else {
+                    if (westNode.wasVisited && westNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwX = westNode.x;
+                    } else if (!westNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwX = eastNode.x;
+                    }
+                }
+                
+                neighbors = we.get4AdjacentNodes(we.grid.get(new Point(thirdMooFound.x, thirdMooFound.y)));
+                eastNode = neighbors.get(1);
+                westNode = neighbors.get(3);
+                if (eastNode.wasVisited && eastNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwX = eastNode.x;
+                } else if (!eastNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwX = westNode.x;
+                } else {
+                    if (westNode.wasVisited && westNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwX = westNode.x;
+                    } else if (!westNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwX = eastNode.x;
+                    }
+                }
+                
+            } else if (firstMooFound.y == secondMooFound.y && secondMooFound.y == thirdMooFound.y) {
+                knownSupmuwX = (firstMooFound.x + secondMooFound.x + thirdMooFound.x) / 3;
+                Vector<CaveNode> neighbors = we.get4AdjacentNodes(we.grid.get(new Point(firstMooFound.x,
+                                                                    firstMooFound.y)));
+                CaveNode northNode = neighbors.get(0);
+                CaveNode southNode = neighbors.get(2);
+                if (northNode.wasVisited && northNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwY = northNode.y;
+                } else if (!northNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwY = southNode.y;
+                } else {
+                    if (southNode.wasVisited && southNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwY = southNode.y;
+                    } else if (!southNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwY = northNode.y;
+                    }
+                }
+                
+                neighbors = we.get4AdjacentNodes(we.grid.get(new Point(secondMooFound.x, secondMooFound.y)));
+                northNode = neighbors.get(0);
+                southNode = neighbors.get(2);
+                if (northNode.wasVisited && northNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwY = northNode.y;
+                } else if (!northNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwY = southNode.y;
+                } else {
+                    if (southNode.wasVisited && southNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwY = southNode.y;
+                    } else if (!southNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwY = northNode.y;
+                    }
+                }
+                
+                neighbors = we.get4AdjacentNodes(we.grid.get(new Point(thirdMooFound.x, thirdMooFound.y)));
+                northNode = neighbors.get(0);
+                southNode = neighbors.get(2);
+                if (northNode.wasVisited && northNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwY = northNode.y;
+                } else if (!northNode.hasMoo) {
+                    supmuwFound = true;
+                    knownSupmuwY = southNode.y;
+                } else {
+                    if (southNode.wasVisited && southNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwY = southNode.y;
+                    } else if (!southNode.hasMoo) {
+                        supmuwFound = true;
+                        knownSupmuwY = northNode.y;
+                    }
+                }
+            } else if (firstMooFound.x != secondMooFound.x && secondMooFound.x != thirdMooFound.x 
+                    && thirdMooFound.x != firstMooFound.x && firstMooFound.y != secondMooFound.y
+                    && secondMooFound.y != thirdMooFound.y && thirdMooFound.y != firstMooFound.y) {
+                supmuwFound = true;
+                knownSupmuwX = (firstMooFound.x + secondMooFound.x + thirdMooFound.x) / 3;
+                knownSupmuwY = (firstMooFound.y + secondMooFound.y + thirdMooFound.y) / 3;
+            }
+        }
     }
     
     private void addNewNote(String note) {
@@ -169,8 +460,15 @@ public class IAAgent extends AbstractAgent {
         
         if (curNode.hasGold) {
             addNewNote("curNode has gold and i grab the gold.");
-            this.wantsToGoHome = true;
+           //if (!supmuwFound)
+                this.wantsToGoHome = true;
+            
             return Action.GRAB;
+        }
+        
+        if (this.hasFood) {
+            this.supmuwFound = true;
+            this.supmuwFriendlyProbability = 1.0;
         }
         
         if (this.hasArrow && projectArrowShot(we)) {
@@ -201,13 +499,19 @@ public class IAAgent extends AbstractAgent {
                 if (!neighbor.wasVisited) {
                     ArrayList<Enonce> elist = new ArrayList();
                     elist.add(new Pas(new Symbole("W" + neighbor.x + "" + neighbor.y)));
-                    boolean nowumpus = kb.demander(elist);
+                    boolean nowumpus = true;
+                    if (!wumpusKilled) {
+                        nowumpus= kb.demander(elist);
+                    }
                     elist.clear();
                     elist.add(new Pas(new Symbole("P" + neighbor.x + "" + neighbor.y)));
                     boolean nopit = kb.demander(elist);
                     elist.clear();
-                    elist.add(new Pas(new Symbole("C" + neighbor.x + "" + neighbor.y)));
-                    boolean nosupmuw = kb.demander(elist);
+                    boolean nosupmuw = true;
+                    if (supmuwFriendlyProbability != 1.0 && !supmuwKilled) {
+                        elist.add(new Pas(new Symbole("C" + neighbor.x + "" + neighbor.y)));
+                        nosupmuw = kb.demander(elist);
+                    }
                     
                     if (nowumpus && nopit && nosupmuw) {
                         if (this.x == neighbor.x && this.y+1 == neighbor.y) {
@@ -241,9 +545,14 @@ public class IAAgent extends AbstractAgent {
                 }
             }
         } else {
-            addNewNote("goDirection is IDLE. I go home");
-            this.wantsToGoHome = true; 
-            goDirection = shortestSafePathToPoint(we, new Point(1, 1));
+            /*if (this.hasGold && !this.hasFood && this.supmuwFriendlyProbability == 1.0 && supmuwFound) {
+                addNewNote("I want food, I'm looking for supmuw for food.");
+                goDirection = shortestSafePathToPoint(we, new Point(knownSupmuwX, knownSupmuwY));
+                this.wantsToGoHome = true;
+            } else {*/
+                addNewNote("goDirection is IDLE. I go home");
+                goDirection = shortestSafePathToPoint(we, new Point(1, 1));
+           // }
         }
         
         if (goDirection != 'I') {
@@ -275,6 +584,10 @@ public class IAAgent extends AbstractAgent {
             if (target.x == this.knownWumpusX && target.y == this.knownWumpusY) {
                 addNewNote("shoot the wumpus!");
                 wumpusKilled = true;
+                Vector<CaveNode> neighbors = we.get4AdjacentNodes(target);
+                for (CaveNode neighbor : neighbors) {
+                    neighbor.hasStench = false;
+                }
                 return true;
             }
             if (target.x == this.knownSupmuwX && target.y == this.knownSupmuwY) {

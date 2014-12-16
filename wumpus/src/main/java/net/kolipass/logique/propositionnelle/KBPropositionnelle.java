@@ -24,6 +24,8 @@ public class KBPropositionnelle {
     public boolean demander(ArrayList<Enonce> a)
     {
         //return TTEntails(KB,a);
+        if (KB.contains(a.get(0)))
+            return true;
         return PL_Resolution(KB,a.get(0));
     }
     
